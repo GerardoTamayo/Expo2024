@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <link type="text/css" rel="stylesheet" href="../recursos/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+</head>
+
+<body>
+    <div class="container-fluid">
+        <div class="row flex-nowrap" id="inicio">
+            <div class="col py-3" id="main">
+                <h3 id="mainTitle">Clientes</h3>
+                <div class="row py-5">
+                    <form class="col-sm-12 col-md-6" id="searchForm">
+                        <div class="row">
+                            <a class="text-black text-decoration-none p-2"><span>Buscar por nombre o Dui:</span></a>
+                            <div class="col-6 w-50 input-group">
+                                <div class="input-group-text"><i class="bi bi-search"></i></div>
+                                <input type="search" class="form-control" name="search" placeholder="Buscar" required>
+                            </div>
+                            <div class="col-6">
+                                <button type="submit" class="btn btn-success">
+                                    <i class="bi bi-search"></i>
+                                </button>
+                                <button type="reset" class="btn btn-secondary">
+                                    <i class="bi bi-x-square-fill"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                    <div class="col-sm-12 col-md-6 text-end mt-4">
+                        <button type="button" class="btn btn-outline-primary" aria-expanded="false"
+                            data-bs-toggle="modal" data-bs-target="#guardar_cliente"><i
+                                class="bi bi-file-earmark-plus-fill"></i>
+                            Agregar</button>
+                    </div>
+                </div>
+
+                <table class="table table-bordered" id="footer">
+                    <!-- Cabeza de la tabla para mostrar la cantidad de registros y los títulos de las columnas -->
+                    <thead>
+                        <tr>
+                            <td colspan="7" id="rowsFound"></td>
+                        </tr>
+                        <tr>
+                            <th>NOMBRE</th>
+                            <th>APELLIDO</th>
+                            <th>TELÉFONO</th>
+                            <th>DUI</th>
+                            <th>DIRECCIÓN</th>
+                            <th>CORREO ELECTRÓNICO</th>
+                            <th>ACCIONES</th>
+                        </tr>
+                        <tr>
+                            <td>Gerardo Javier</td>
+                            <td>Tamayo Menendez</td>
+                            <td>72212777</td>
+                            <td>1234567-9</td>
+                            <td>Avenida Aguilares 218, San Salvador, El Salvador</td>
+                            <td>20220669@ricalodne.edu.sv</td>
+                            <td>
+                                <button type="button" class="btn btn-outline-danger"><i
+                                        class="bi bi-trash-fill"></i></button>
+                                <button type="button" class="btn btn-outline-dark" aria-expanded="false"
+                                    data-bs-toggle="modal" data-bs-target="#actualizar_cliente"><i
+                                        class="bi bi-pencil-square"></i></button>
+                            </td>
+                        </tr>
+                    </thead>
+                    <!-- Cuerpo de la tabla para mostrar un registro por fila -->
+                    <tbody id="tableBody"></tbody>
+                </table>
+                <!-- Componente Modal para guardar un registro -->
+                <div class="modal fade" id="guardar_cliente" data-bs-backdrop="static" data-bs-keyboard="false"
+                    tabindex="-1" aria-labelledby="modalTitle" aria-hidden="true">
+                    <div class="modal-dialog modal-lg modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="modalTitle"></h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <!-- Formulario para crear o actualizar un registro -->
+                            <form id="saveForm">
+                                <div class="modal-body row g-3">
+                                    <!-- Campo oculto para asignar el id del registro al momento de modificar -->
+                                    <input type="hidden" id="idProducto" name="idProducto">
+                                    <div class="col-sm-12 col-md-6">
+                                        <label for="nombreProducto" class="form-label"><i
+                                                class="bi bi-file-earmark-text"></i>
+                                            Nombre</label>
+                                        <input id="nombreProducto" type="text" name="nombreProducto"
+                                            class="form-control" required>
+                                    </div>
+                                    <div class="col-sm-12 col-md-6">
+                                        <label for="precioProducto" class="form-label"><i
+                                                class="bi bi-currency-dollar"></i>
+                                            Precio (US$)</label>
+                                        <input id="precioProducto" type="number" name="precioProducto" min="0.01"
+                                            step="0.01" class="form-control" required>
+                                    </div>
+                                    <div class="col-sm-12 col-md-6">
+                                        <label for="marcaProducto" class="form-label"><i
+                                                class="bi bi-bookmark-fill"></i>
+                                            Marca</label>
+                                        <select id="marcaProducto" name="marcaProducto" class="form-select" required>
+                                        </select>
+                                    </div>
+                                    <div class="col-sm-12 col-md-6">
+                                        <label for="categoriaProducto" class="form-label"><i
+                                                class="bi bi-bookmarks-fill"></i>
+                                            Categoría</label>
+                                        <select id="categoriaProducto" name="categoriaProducto" class="form-select"
+                                            required>
+                                        </select>
+                                    </div>
+                                    <div class="col-sm-12 col-md-6">
+                                        <label for="imagenProducto" class="form-label"><i class="bi bi-card-image"></i>
+                                            Imagen</label>
+                                        <input id="imagenProducto" type="file" name="imagenProducto"
+                                            class="form-control" accept=".png, .jpg">
+                                    </div>
+                                    <div class="col-sm-12 col-md-12">
+                                        <label for="descripcionProducto" class="form-label"><i
+                                                class="bi bi-file-earmark-text"></i> Descripción</label>
+                                        <input id="descripcionProducto" type="text" name="descripcionProducto"
+                                            class="form-control" required>
+                                    </div>
+                                </div>
+                                <div class="modal-footer container justify-content-center">
+                                    <button type="submit" class="btn btn-primary"><i class="bi bi-floppy2"></i></button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <!-- Componente Modal para actualizar un registro -->
+                <div class="modal fade" id="actualizar_cliente" data-bs-backdrop="static" data-bs-keyboard="false"
+                    tabindex="-1" aria-labelledby="modalTitle" aria-hidden="true">
+                    <div class="modal-dialog modal-lg modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="modalTitle"></h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <!-- Formulario para crear o actualizar un registro -->
+                            <form id="saveForm">
+                                <div class="modal-body row g-3">
+                                    <!-- Campo oculto para asignar el id del registro al momento de modificar -->
+                                    <input type="hidden" id="idProducto" name="idProducto">
+                                    <div class="col-sm-12 col-md-6">
+                                        <label for="nombreProducto" class="form-label"><i
+                                                class="bi bi-file-earmark-text"></i>
+                                            Nombre</label>
+                                        <input id="nombreProducto" type="text" name="nombreProducto"
+                                            class="form-control" required>
+                                    </div>
+                                    <div class="col-sm-12 col-md-6">
+                                        <label for="precioProducto" class="form-label"><i
+                                                class="bi bi-currency-dollar"></i>
+                                            Precio (US$)</label>
+                                        <input id="precioProducto" type="number" name="precioProducto" min="0.01"
+                                            step="0.01" class="form-control" required>
+                                    </div>
+                                    <div class="col-sm-12 col-md-6">
+                                        <label for="marcaProducto" class="form-label"><i
+                                                class="bi bi-bookmark-fill"></i>
+                                            Marca</label>
+                                        <select id="marcaProducto" name="marcaProducto" class="form-select" required>
+                                        </select>
+                                    </div>
+                                    <div class="col-sm-12 col-md-6">
+                                        <label for="categoriaProducto" class="form-label"><i
+                                                class="bi bi-bookmarks-fill"></i>
+                                            Categoría</label>
+                                        <select id="categoriaProducto" name="categoriaProducto" class="form-select"
+                                            required>
+                                        </select>
+                                    </div>
+                                    <div class="col-sm-12 col-md-6">
+                                        <label for="imagenProducto" class="form-label"><i class="bi bi-card-image"></i>
+                                            Imagen</label>
+                                        <input id="imagenProducto" type="file" name="imagenProducto"
+                                            class="form-control" accept=".png, .jpg">
+                                    </div>
+                                    <div class="col-sm-12 col-md-12">
+                                        <label for="descripcionProducto" class="form-label"><i
+                                                class="bi bi-file-earmark-text"></i> Descripción</label>
+                                        <input id="descripcionProducto" type="text" name="descripcionProducto"
+                                            class="form-control" required>
+                                    </div>
+                                </div>
+                                <div class="modal-footer container justify-content-center">
+                                    <button type="submit" class="btn btn-primary"><i class="bi bi-floppy2"></i></button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- IMPORTACIÓN DE ARCHIVOS JAVASCRIPT -->
+    <!-- Llamada al framework y librería de mensajes -->
+    <script type="text/javascript" src="../../recursos/js/bootstrap.bundle.min.js"></script>
+    <script type="text/javascript" src="../../recursos/js/sweetalert.min.js"></script>
+    <script src="../controladores/utilidades/plantilla.js"></script>
+</body>
+
+</html>
