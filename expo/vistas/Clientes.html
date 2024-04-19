@@ -1,20 +1,27 @@
 <!DOCTYPE html>
+<!-- Declaración del idioma para el documento -->
 <html lang="es">
 
 <head>
+    <!-- Titulo del documento -->
+    <title></title>
+    <!-- Metadatos de la página web -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title></title>
+    <!-- Llamada a las hojas de estilos del framework e iconos -->
     <link type="text/css" rel="stylesheet" href="../recursos/css/bootstrap.min.css">
     <link type="text/css" rel="stylesheet"
         href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 </head>
 
 <body>
+        <!-- Contenido del documento -->
     <div class="container-fluid">
         <div class="row flex-nowrap" id="inicio">
             <div class="col py-3" id="main">
-                <h3 id="mainTitle">Clientes</h3>
+        <!-- Título del contenido principal -->
+                <h3 id="mainTitle"></h3>
+            <!-- Formulario de búsqueda -->
                 <div class="row py-5">
                     <form class="col-sm-12 col-md-6" id="searchForm">
                         <div class="row">
@@ -34,13 +41,14 @@
                         </div>
                     </form>
                     <div class="col-sm-12 col-md-6 text-end mt-4">
-                        <button type="button" class="btn btn-outline-primary" aria-expanded="false"
-                            data-bs-toggle="modal" data-bs-target="#guardar_cliente"><i
+                        <!-- Botón para abrir una caja de diálogo al momento de crear un nuevo registro -->
+                        <button type="button" class="btn btn-outline-primary" onclick="openCreate()"><i
                                 class="bi bi-file-earmark-plus-fill"></i>
                             Agregar</button>
                     </div>
                 </div>
 
+        <!-- Tabla para mostrar los registros existentes -->
                 <table class="table table-bordered" id="footer">
                     <!-- Cabeza de la tabla para mostrar la cantidad de registros y los títulos de las columnas -->
                     <thead>
@@ -66,8 +74,7 @@
                             <td>
                                 <button type="button" class="btn btn-outline-danger"><i
                                         class="bi bi-trash-fill"></i></button>
-                                <button type="button" class="btn btn-outline-dark" aria-expanded="false"
-                                    data-bs-toggle="modal" data-bs-target="#actualizar_cliente"><i
+                                <button type="button" class="btn btn-outline-dark" onclick="openUpdate()"><i
                                         class="bi bi-pencil-square"></i></button>
                             </td>
                         </tr>
@@ -77,16 +84,16 @@
                 </table>
                 <!-- Componente Modal para guardar un registro -->
                 <div class="modal fade" id="guardar_cliente" data-bs-backdrop="static" data-bs-keyboard="false"
-                    tabindex="-1" aria-labelledby="modalTitle" aria-hidden="true">
+                    tabindex="-1" aria-labelledby="titulo_modal" aria-hidden="true">
                     <div class="modal-dialog modal-lg modal-dialog-centered">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h1 class="modal-title fs-5" id="modalTitle"></h1>
+                                <h1 class="modal-title fs-5" id="titulo_modal"></h1>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal"
                                     aria-label="Close"></button>
                             </div>
-                            <!-- Formulario para crear o actualizar un registro -->
-                            <form id="saveForm">
+                            <!-- Formulario para crear un registro -->
+                            <form id="formulario_guardar">
                                 <div class="modal-body row g-3">
                                     <!-- Campo oculto para asignar el id del registro al momento de modificar -->
                                     <input type="hidden" id="idProducto" name="idProducto">
@@ -156,16 +163,16 @@
                 </div>
                 <!-- Componente Modal para actualizar un registro -->
                 <div class="modal fade" id="actualizar_cliente" data-bs-backdrop="static" data-bs-keyboard="false"
-                    tabindex="-1" aria-labelledby="modalTitle" aria-hidden="true">
+                    tabindex="-1" aria-labelledby="titulo_modal2" aria-hidden="true">
                     <div class="modal-dialog modal-lg modal-dialog-centered">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h1 class="modal-title fs-5" id="modalTitle"></h1>
+                                <h1 class="modal-title fs-5" id="titulo_modal2"></h1>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal"
                                     aria-label="Close"></button>
                             </div>
-                            <!-- Formulario para crear o actualizar un registro -->
-                            <form id="saveForm">
+                            <!-- Formulario para actualizar un registro -->
+                            <form id="formulario_actualizar">
                                 <div class="modal-body row g-3">
                                     <!-- Campo oculto para asignar el id del registro al momento de modificar -->
                                     <input type="hidden" id="idProducto" name="idProducto">
@@ -240,7 +247,10 @@
     <!-- Llamada al framework y librería de mensajes -->
     <script type="text/javascript" src="../recursos/js/bootstrap.bundle.min.js"></script>
     <script type="text/javascript" src="../recursos/js/sweetalert.min.js"></script>
+    <!-- Llamada de la plantilla de la pagina -->
     <script type="text/javascript" src="../controladores/utilidades/plantilla.js"></script>
+    <!-- Llamada al controlador de la pagina -->
+    <script type="text/javascript" src="../controladores/administrador/clientes.js"></script>
 </body>
 
 </html>
