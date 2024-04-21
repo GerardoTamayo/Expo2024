@@ -4,7 +4,7 @@ const UPDATE_MODAL = new bootstrap.Modal('#actualizar_cliente');
 MODAL_TITLE = document.getElementById('titulo_modal');
 MODAL_TITLE2 = document.getElementById('titulo_modal2');
 // titulo de la pagina
-MAIN_TITLE.textContent = 'Compras';
+MAIN_TITLE.textContent = 'Administrar Compras';
 
 // modal para agregar datos
 const openCreate = () => {
