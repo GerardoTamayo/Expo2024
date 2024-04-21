@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<!-- Declaración del idioma para el documento -->
 <html lang="es">
 
 <head>
@@ -14,8 +15,173 @@
 </head>
 
 <body>
+    <!-- Contenido del documento -->
+    <div class="container-fluid">
+        <div class="row flex-nowrap" id="inicio">
+            <div class="col py-3" id="main">
+                <!-- Título del contenido principal -->
+                <h3 id="mainTitle"></h3>
+                <!-- Formulario de búsqueda -->
+                <div class="row py-5">
+                    <form class="col-sm-12 col-md-6" id="searchForm">
+                        <div class="row">
+                            <a class="text-black text-decoration-none p-2"><span>Buscar venta:</span></a>
+                            <div class="col-6 w-50 input-group">
+                                <div class="input-group-text"><i class="bi bi-search"></i></div>
+                                <input type="search" class="form-control" name="search" placeholder="Buscar" required>
+                            </div>
+                            <div class="col-6">
+                                <button type="submit" class="btn btn-success">
+                                    <i class="bi bi-search"></i>
+                                </button>
+                                <button type="reset" class="btn btn-secondary">
+                                    <i class="bi bi-x-square-fill"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                    <div class="col-sm-12 col-md-6 text-end mt-4">
+                        <!-- Botón para abrir una caja de diálogo al momento de crear un nuevo registro -->
+                        <button type="button" class="btn btn-outline-primary" onclick="openCreate()"><i
+                                class="bi bi-file-earmark-plus-fill"></i>
+                            Agregar</button>
+                    </div>
+                </div>
 
-
+                <!-- Tabla para mostrar los registros existentes -->
+                <table class="table table-bordered" id="footer">
+                    <!-- Cabeza de la tabla para mostrar la cantidad de registros y los títulos de las columnas -->
+                    <thead>
+                        <tr>
+                            <td colspan="7" id="rowsFound"></td>
+                        </tr>
+                        <tr>
+                            <th>FECHA VENTA</th>
+                            <th>OBSERVACION VENTA</th>
+                            <th>CLIENTE</th>
+                            <th>ACCIONES</th>
+                        </tr>
+                        <tr>
+                            <td>25-11-24</td>
+                            <td>Lorem ipsum</td>
+                            <td>Lorem ipsum</td>
+                            <td>
+                                <button type="button" class="btn btn-outline-danger"><i
+                                        class="bi bi-trash-fill"></i></button>
+                                <button type="button" class="btn btn-outline-dark" onclick="openUpdate()"><i
+                                        class="bi bi-pencil-square"></i></button>
+                            </td>
+                        </tr>
+                    </thead>
+                    <!-- Cuerpo de la tabla para mostrar un registro por fila -->
+                    <tbody id="tableBody"></tbody>
+                </table>
+                <!-- Componente Modal para guardar un registro -->
+                <div class="modal fade" id="guardar_cliente" data-bs-backdrop="static" data-bs-keyboard="false"
+                    tabindex="-1" aria-labelledby="titulo_modal" aria-hidden="true">
+                    <div class="modal-dialog modal-lg modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="titulo_modal"></h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <!-- Formulario para crear un registro -->
+                            <form id="formulario_guardar">
+                                <div class="modal-body row g-3">
+                                    <!-- Campo oculto para asignar el id del registro al momento de modificar -->
+                                    <input type="hidden" id="idProducto" name="idProducto">
+                                    <div class="col-sm-12 col-md-6 col-md-6">
+                                        <label for="nombreCliente" class="form-label">
+                                            Fecha venta</label>
+                                        <div class="input-group">
+                                            <i class="input-group-text bi bi-person-fill"></i>
+                                            <input id="nombreProducto" type="text" name="nombreCliente"
+                                                class="form-control" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12 col-md-6 col-md-6">
+                                        <label for="nombreCliente" class="form-label">
+                                           Observacion venta</label>
+                                        <div class="input-group">
+                                            <i class="input-group-text bi bi-telephone-fill"></i>
+                                            <input id="compraProducto" type="number" name="precioCompra" class="form-control"
+                                                required>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12 col-md-6 col-md-6">
+                                        <label for="nombreCliente" class="form-label">
+                                            Cliente</label>
+                                        <div class="input-group">
+                                            <i class="input-group-text bi bi-person-vcard-fill"></i>
+                                            <input id="descripvionProducto" type="text" name="descripcion"
+                                                class="form-control" required>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer container">
+                                    <button type="submit" class="btn btn-primary"><i
+                                            class="bi bi-file-earmark-plus-fill"></i>
+                                        Agregar</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <!-- Componente Modal para actualizar un registro -->
+                <div class="modal fade" id="actualizar_cliente" data-bs-backdrop="static" data-bs-keyboard="false"
+                    tabindex="-1" aria-labelledby="titulo_modal2" aria-hidden="true">
+                    <div class="modal-dialog modal-lg modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="titulo_modal2"></h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <!-- Formulario para actualizar un registro -->
+                            <form id="formulario_actualizar">
+                                <div class="modal-body row g-3">
+                                    <!-- Campo oculto para asignar el id del registro al momento de modificar -->
+                                    <input type="hidden" id="idProducto" name="idProducto">
+                                    <div class="col-sm-12 col-md-6 col-md-6">
+                                        <label for="nombreCliente" class="form-label">
+                                            Fecha venta</label>
+                                        <div class="input-group">
+                                            <i class="input-group-text bi bi-person-fill"></i>
+                                            <input id="nombreProducto" type="text" name="nombreCliente"
+                                                class="form-control" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12 col-md-6 col-md-6">
+                                        <label for="nombreCliente" class="form-label">
+                                           Observacion venta</label>
+                                        <div class="input-group">
+                                            <i class="input-group-text bi bi-telephone-fill"></i>
+                                            <input id="compraProducto" type="number" name="precioCompra" class="form-control"
+                                                required>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12 col-md-6 col-md-6">
+                                        <label for="nombreCliente" class="form-label">
+                                            Cliente</label>
+                                        <div class="input-group">
+                                            <i class="input-group-text bi bi-person-vcard-fill"></i>
+                                            <input id="descripvionProducto" type="text" name="descripcion"
+                                                class="form-control" required>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer container">
+                                    <button type="submit" class="btn btn-primary"><i class="bi bi-pencil-square"></i>
+                                        Editar</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- IMPORTACIÓN DE ARCHIVOS JAVASCRIPT -->
     <!-- Llamada al framework y librería de mensajes -->
@@ -24,7 +190,7 @@
     <!-- Llamada de la plantilla de la pagina -->
     <script type="text/javascript" src="../controladores/utilidades/plantilla.js"></script>
     <!-- Llamada al controlador de la pagina -->
-    <script type="text/javascript" src="../controladores/administrador/clientes.js"></script>
+    <script type="text/javascript" src="../controladores/administrador/ventas.js"></script>
 </body>
 
 </html>
