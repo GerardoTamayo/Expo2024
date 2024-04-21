@@ -61,7 +61,6 @@
                             <th>TELÉFONO</th>
                             <th>DUI</th>
                             <th>DIRECCIÓN</th>
-                            <th>CORREO ELECTRÓNICO</th>
                             <th>ACCIONES</th>
                         </tr>
                         <tr>
@@ -70,7 +69,6 @@
                             <td>72212777</td>
                             <td>1234567-9</td>
                             <td>Avenida Aguilares 218, San Salvador, El Salvador</td>
-                            <td>20220669@ricalodne.edu.sv</td>
                             <td>
                                 <button type="button" class="btn btn-outline-danger"><i
                                         class="bi bi-trash-fill"></i></button>
@@ -96,58 +94,58 @@
                             <form id="formulario_guardar">
                                 <div class="modal-body row g-3">
                                     <!-- Campo oculto para asignar el id del registro al momento de modificar -->
-                                    <input type="hidden" id="idProducto" name="idProducto">
+                                    <input type="hidden" id="id_cliente" name="id_cliente">
                                     <div class="col-sm-12 col-md-6 col-md-6">
-                                        <label for="nombreCliente" class="form-label">
+                                        <label for="nombre_cliente" class="form-label">
                                             Nombre</label>
                                         <div class="input-group">
                                             <i class="input-group-text bi bi-person-fill"></i>
-                                            <input id="nombreProducto" type="text" name="nombreCliente"
+                                            <input id="nombre_cliente" type="text" name="nombre_cliente"
                                                 class="form-control" required>
                                         </div>
                                     </div>
                                     <div class="col-sm-12 col-md-6 col-md-6">
-                                        <label for="nombreCliente" class="form-label">
+                                        <label for="apellido_cliente" class="form-label">
                                             Apellido</label>
                                         <div class="input-group">
                                             <i class="input-group-text bi bi-person-fill"></i>
-                                            <input id="nombreProducto" type="text" name="nombreCliente"
+                                            <input id="apellido_cliente" type="text" name="apellido_cliente"
                                                 class="form-control" required>
                                         </div>
                                     </div>
                                     <div class="col-sm-12 col-md-6 col-md-6">
-                                        <label for="nombreCliente" class="form-label">
+                                        <label for="telefono_cliente" class="form-label">
                                             Teléfono</label>
                                         <div class="input-group">
                                             <i class="input-group-text bi bi-telephone-fill"></i>
-                                            <input id="nombreProducto" type="text" name="telefono" class="form-control"
+                                            <input id="telefono_cliente" type="text" name="telefono"
+                                                class="form-control" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12 col-md-6 col-md-6">
+                                        <label for="correo_cliente" class="form-label">
+                                            Correo electrónico</label>
+                                        <div class="input-group">
+                                            <i class="input-group-text bi bi-envelope-at-fill"></i>
+                                            <input id="correo_cliente" type="email" name="correo_cliente"
+                                                class="form-control" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12 col-md-6 col-md-6">
+                                        <label for="dui_cliente" class="form-label">
+                                            Dui</label>
+                                        <div class="input-group">
+                                            <i class="input-group-text bi bi-person-vcard-fill"></i>
+                                            <input id="dui_cliente" type="text" name="dui_cliente" class="form-control"
                                                 required>
                                         </div>
                                     </div>
                                     <div class="col-sm-12 col-md-6 col-md-6">
-                                        <label for="nombreCliente" class="form-label">
-                                            Correo electrónico</label>
-                                        <div class="input-group">
-                                            <i class="input-group-text bi bi-envelope-at-fill"></i>
-                                            <input id="nombreProducto" type="email" name="nombreCliente"
-                                                class="form-control" required>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-12 col-md-6 col-md-6">
-                                        <label for="nombreCliente" class="form-label">
-                                            Dui</label>
-                                        <div class="input-group">
-                                            <i class="input-group-text bi bi-person-vcard-fill"></i>
-                                            <input id="nombreProducto" type="text" name="nombreCliente"
-                                                class="form-control" required>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-12 col-md-6 col-md-6">
-                                        <label for="nombreCliente" class="form-label">
+                                        <label for="direccion_cliente" class="form-label">
                                             Dirección</label>
                                         <div class="input-group">
                                             <i class="input-group-text bi bi-house-add-fill"></i>
-                                            <input id="nombreProducto" type="text" name="nombreCliente"
+                                            <input id="direccion_cliente" type="text" name="direccion_cliente"
                                                 class="form-control" required>
                                         </div>
                                     </div>
@@ -177,56 +175,56 @@
                                     <!-- Campo oculto para asignar el id del registro al momento de modificar -->
                                     <input type="hidden" id="idProducto" name="idProducto">
                                     <div class="col-sm-12 col-md-6 col-md-6">
-                                        <label for="nombreCliente" class="form-label">
+                                        <label for="nombre_cliente2" class="form-label">
                                             Nombre</label>
                                         <div class="input-group">
                                             <i class="input-group-text bi bi-person-fill"></i>
-                                            <input id="nombreProducto" type="text" name="nombreCliente"
+                                            <input id="nombre_cliente2" type="text" name="nombre_cliente2"
                                                 class="form-control" required>
                                         </div>
                                     </div>
                                     <div class="col-sm-12 col-md-6 col-md-6">
-                                        <label for="nombreCliente" class="form-label">
+                                        <label for="apellido_cliente2" class="form-label">
                                             Apellido</label>
                                         <div class="input-group">
                                             <i class="input-group-text bi bi-person-fill"></i>
-                                            <input id="nombreProducto" type="text" name="nombreCliente"
+                                            <input id="apellido_cliente2" type="text" name="apellido_cliente2"
                                                 class="form-control" required>
                                         </div>
                                     </div>
                                     <div class="col-sm-12 col-md-6 col-md-6">
-                                        <label for="nombreCliente" class="form-label">
+                                        <label for="telefono_cliente2" class="form-label">
                                             Teléfono</label>
                                         <div class="input-group">
                                             <i class="input-group-text bi bi-telephone-fill"></i>
-                                            <input id="nombreProducto" type="text" name="telefono" class="form-control"
+                                            <input id="telefono_cliente2" type="text" name="telefono"
+                                                class="form-control" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12 col-md-6 col-md-6">
+                                        <label for="correo_cliente2" class="form-label">
+                                            Correo electrónico</label>
+                                        <div class="input-group">
+                                            <i class="input-group-text bi bi-envelope-at-fill"></i>
+                                            <input id="correo_cliente2" type="email" name="correo_cliente2"
+                                                class="form-control" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12 col-md-6 col-md-6">
+                                        <label for="dui_cliente2" class="form-label">
+                                            Dui</label>
+                                        <div class="input-group">
+                                            <i class="input-group-text bi bi-person-vcard-fill"></i>
+                                            <input id="dui_cliente2" type="text" name="dui_cliente2" class="form-control"
                                                 required>
                                         </div>
                                     </div>
                                     <div class="col-sm-12 col-md-6 col-md-6">
-                                        <label for="nombreCliente" class="form-label">
-                                            Correo electrónico</label>
-                                        <div class="input-group">
-                                            <i class="input-group-text bi bi-envelope-at-fill"></i>
-                                            <input id="nombreProducto" type="email" name="nombreCliente"
-                                                class="form-control" required>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-12 col-md-6 col-md-6">
-                                        <label for="nombreCliente" class="form-label">
-                                            Dui</label>
-                                        <div class="input-group">
-                                            <i class="input-group-text bi bi-person-vcard-fill"></i>
-                                            <input id="nombreProducto" type="text" name="nombreCliente"
-                                                class="form-control" required>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-12 col-md-6 col-md-6">
-                                        <label for="nombreCliente" class="form-label">
+                                        <label for="direccion_cliente2" class="form-label">
                                             Dirección</label>
                                         <div class="input-group">
                                             <i class="input-group-text bi bi-house-add-fill"></i>
-                                            <input id="nombreProducto" type="text" name="nombreCliente"
+                                            <input id="direccion_cliente2" type="text" name="direccion_cliente2"
                                                 class="form-control" required>
                                         </div>
                                     </div>
@@ -244,6 +242,8 @@
     </div>
 
     <!-- IMPORTACIÓN DE ARCHIVOS JAVASCRIPT -->
+    <!-- libreria para las marcaras de los input -->
+    <script type="text/javascript" src="../recursos/js/vanillaTextMask.js"></script>
     <!-- Llamada al framework y librería de mensajes -->
     <script type="text/javascript" src="../recursos/js/bootstrap.bundle.min.js"></script>
     <script type="text/javascript" src="../recursos/js/sweetalert.min.js"></script>

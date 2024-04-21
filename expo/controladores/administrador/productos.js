@@ -1,6 +1,6 @@
 // Constantes para establecer los elementos del componente Modal.
-const SAVE_MODAL = new bootstrap.Modal('#guardar_cliente');
-const UPDATE_MODAL = new bootstrap.Modal('#actualizar_cliente');
+const SAVE_MODAL = new bootstrap.Modal('#guardar_producto');
+const UPDATE_MODAL = new bootstrap.Modal('#actualizar_producto');
 MODAL_TITLE = document.getElementById('titulo_modal');
 MODAL_TITLE2 = document.getElementById('titulo_modal2');
 // titulo de la pagina
@@ -10,7 +10,7 @@ MAIN_TITLE.textContent = 'Administrar Productos';
 const openCreate = () => {
     // Se muestra la caja de diálogo con su título.
     SAVE_MODAL.show();
-    MODAL_TITLE.textContent = 'Agregar Productos';
+    MODAL_TITLE.textContent = 'Agregar Producto';
     // Se prepara el formulario.
     formulario_guardar.reset();
 }
@@ -19,7 +19,7 @@ const openCreate = () => {
 const openUpdate = () => {
     // Se muestra la caja de diálogo con su título.
     UPDATE_MODAL.show();
-    MODAL_TITLE2.textContent = 'Actualizar Productos';
+    MODAL_TITLE2.textContent = 'Actualizar Producto';
     // Se prepara el formulario.
     formulario_actualizar.reset();
 }

@@ -74,54 +74,42 @@
                     <!-- Cuerpo de la tabla para mostrar un registro por fila -->
                     <tbody id="tableBody"></tbody>
                 </table>
-                <!-- Componente Modal para guardar un registro -->
-                <div class="modal fade" id="guardar_cliente" data-bs-backdrop="static" data-bs-keyboard="false"
-                    tabindex="-1" aria-labelledby="titulo_modal" aria-hidden="true">
-                    <div class="modal-dialog modal-lg modal-dialog-centered">
+                <div class="modal fade" id="guardar_tipo" data-bs-backdrop="static" data-bs-keyboard="false"
+                    tabindex="-1" aria-labelledby="titulo_modal1" aria-hidden="true">
+                    <div class="modal-dialog modal-md modal-dialog-centered">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h1 class="modal-title fs-5" id="titulo_modal"></h1>
+                                <h1 class="modal-title fs-5" id="titulo_modal1"></h1>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal"
                                     aria-label="Close"></button>
                             </div>
-                            <!-- Formulario para crear un registro -->
-                            <form id="formulario_guardar">
-                                <div class="modal-body row g-3">
+                            <!-- Formulario para actualizar un registro -->
+                            <form id="formulario_actualizar">
+                                <div class="modal-body row g-3 justify-content-center">
                                     <!-- Campo oculto para asignar el id del registro al momento de modificar -->
                                     <input type="hidden" id="idProducto" name="idProducto">
-                                    <div class="col-sm-12 col-md-6 col-md-6">
-                                        <label for="nombreCliente" class="form-label">
-                                            #</label>
-                                        <div class="input-group">
-                                            <i class="input-group-text bi bi-person-fill"></i>
-                                            <input id="nombreProducto" type="text" name="nombreCliente"
-                                                class="form-control" required>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-12 col-md-6 col-md-6">
-                                        <label for="nombreCliente" class="form-label">
+                                    <div class="col-sm-12 col-md-6">
+                                        <label for="tipo_usuario" class="form-label">
                                             Tipo de usuario</label>
                                         <div class="input-group">
                                             <i class="input-group-text bi bi-person-fill"></i>
-                                            <input id="nombreProducto" type="text" name="nombreCliente"
+                                            <input id="tipo_usuario" type="text" name="tipo_usuario"
                                                 class="form-control" required>
                                         </div>
                                     </div>
-                                    
                                 </div>
                                 <div class="modal-footer container">
-                                    <button type="submit" class="btn btn-primary"><i
-                                            class="bi bi-file-earmark-plus-fill"></i>
-                                        Agregar</button>
+                                    <button type="submit" class="btn btn-primary"><i class="bi bi-pencil-square"></i>
+                                        Editar</button>
                                 </div>
                             </form>
                         </div>
                     </div>
                 </div>
                 <!-- Componente Modal para actualizar un registro -->
-                <div class="modal fade" id="actualizar_cliente" data-bs-backdrop="static" data-bs-keyboard="false"
+                <div class="modal fade" id="actualizar_tipo" data-bs-backdrop="static" data-bs-keyboard="false"
                     tabindex="-1" aria-labelledby="titulo_modal2" aria-hidden="true">
-                    <div class="modal-dialog modal-lg modal-dialog-centered">
+                    <div class="modal-dialog modal-md modal-dialog-centered">
                         <div class="modal-content">
                             <div class="modal-header">
                                 <h1 class="modal-title fs-5" id="titulo_modal2"></h1>
@@ -130,24 +118,15 @@
                             </div>
                             <!-- Formulario para actualizar un registro -->
                             <form id="formulario_actualizar">
-                                <div class="modal-body row g-3">
+                                <div class="modal-body row g-3 justify-content-center">
                                     <!-- Campo oculto para asignar el id del registro al momento de modificar -->
                                     <input type="hidden" id="idProducto" name="idProducto">
-                                    <div class="col-sm-12 col-md-6 col-md-6">
-                                        <label for="nombreCliente" class="form-label">
-                                            #</label>
-                                        <div class="input-group">
-                                            <i class="input-group-text bi bi-person-fill"></i>
-                                            <input id="nombreProducto" type="text" name="nombreCliente"
-                                                class="form-control" required>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-12 col-md-6 col-md-6">
-                                        <label for="nombreCliente" class="form-label">
+                                    <div class="col-sm-12 col-md-6">
+                                        <label for="tipo_usuario" class="form-label">
                                             Tipo de usuario</label>
                                         <div class="input-group">
                                             <i class="input-group-text bi bi-person-fill"></i>
-                                            <input id="nombreProducto" type="text" name="nombreCliente"
+                                            <input id="tipo_usuario" type="text" name="tipo_usuario"
                                                 class="form-control" required>
                                         </div>
                                     </div>
