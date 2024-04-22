@@ -1,17 +1,24 @@
 // Constantes para establecer los elementos del componente Modal.
-const SAVE_MODAL = new bootstrap.Modal('#guardar_proveedor');
-const UPDATE_MODAL = new bootstrap.Modal('#actualizar_proveedor');
+const SAVE_MODAL = new bootstrap.Modal('#guardar_usuario');
+const UPDATE_MODAL = new bootstrap.Modal('#actualizar_usuario');
+ID_CLIENTE2 = document.getElementById('id_usuario'),
+NOMBRE_CLIENTE2 = document.getElementById('nombre_cliente2'),
+APELLIDO_CLIENTE2 = document.getElementById('apellido_cliente2'),
+TELEFONO_CLIENTE2 = document.getElementById('telefono_cliente2'),
+DUI_CLIENTE2 = document.getElementById('dui_cliente2'),
+DIRECCION_CLIENTE2 = document.getElementById('direccion_cliente2'),
+CORREO_CLIENTE2 = document.getElementById('correo_cliente2');
 // Titulos de las modals
 MODAL_TITLE = document.getElementById('titulo_modal');
 MODAL_TITLE2 = document.getElementById('titulo_modal2');
 // titulo de la pagina
-MAIN_TITLE.textContent = 'Administrar Vendedores';
+MAIN_TITLE.textContent = 'Usuarios';
 
 // modal para agregar datos
 const openCreate = () => {
     // Se muestra la caja de diálogo con su título.
     SAVE_MODAL.show();
-    MODAL_TITLE.textContent = 'Agregar Vendedor';
+    MODAL_TITLE.textContent = 'Agregar Usuario';
     // Se prepara el formulario.
     formulario_guardar.reset();
 }
@@ -20,7 +27,7 @@ const openCreate = () => {
 const openUpdate = () => {
     // Se muestra la caja de diálogo con su título.
     UPDATE_MODAL.show();
-    MODAL_TITLE2.textContent = 'Actualizar Vendedor';
+    MODAL_TITLE2.textContent = 'Actualizar Usuarios';
     // Se prepara el formulario.
     formulario_actualizar.reset();
     DUI_CLIENTE2.disabled = true;
@@ -28,12 +35,18 @@ const openUpdate = () => {
 
 // Llamada a la función para establecer la mascara del campo teléfono.
 vanillaTextMask.maskInput({
-    inputElement: document.getElementById('telefono_proveedor'),
+    inputElement: document.getElementById('telefono_cliente'),
     mask: [/\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/]
 });
 
 // Llamada a la función para establecer la mascara del campo teléfono para actualizar.
 vanillaTextMask.maskInput({
-    inputElement: document.getElementById('telefono_proveedor2'),
+    inputElement: document.getElementById('telefono_cliente2'),
     mask: [/\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/]
+});
+
+// Llamada a la función para establecer la mascara del campo DUI.
+vanillaTextMask.maskInput({
+    inputElement: document.getElementById('dui_cliente'),
+    mask: [/\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, '-', /\d/]
 });
