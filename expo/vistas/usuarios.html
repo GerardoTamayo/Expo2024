@@ -67,7 +67,7 @@
                             <td>Gerardo Javier</td>
                             <td>Tamayo Menendez</td>
                             <td>Menedez</td>
-                            <td>Rical2021</td>
+                            <td>*********</td>
                             <td>lorem@gmail.com</td>
                             <td>
                                 <button type="button" class="btn btn-outline-danger"><i
@@ -81,7 +81,7 @@
                     <tbody id="tableBody"></tbody>
                 </table>
                 <!-- Componente Modal para guardar un registro -->
-                <div class="modal fade" id="guardar_cliente" data-bs-backdrop="static" data-bs-keyboard="false"
+                <div class="modal fade" id="guardar_usuario" data-bs-backdrop="static" data-bs-keyboard="false"
                     tabindex="-1" aria-labelledby="titulo_modal" aria-hidden="true">
                     <div class="modal-dialog modal-lg modal-dialog-centered">
                         <div class="modal-content">
@@ -94,49 +94,49 @@
                             <form id="formulario_guardar">
                                 <div class="modal-body row g-3">
                                     <!-- Campo oculto para asignar el id del registro al momento de modificar -->
-                                    <input type="hidden" id="id_cliente" name="id_cliente">
+                                    <input type="hidden" id="id_usuario" name="id_usuario">
                                     <div class="col-sm-12 col-md-6 col-md-6">
-                                        <label for="nombre_cliente" class="form-label">
+                                        <label for="nombre_usuario" class="form-label">
                                             Nombre</label>
                                         <div class="input-group">
                                             <i class="input-group-text bi bi-person-fill"></i>
-                                            <input id="nombre_cliente" type="text" name="nombre_cliente"
+                                            <input id="nombre_usuario" type="text" name="nombre_usuario"
                                                 class="form-control" required>
                                         </div>
                                     </div>
                                     <div class="col-sm-12 col-md-6 col-md-6">
-                                        <label for="apellido_cliente" class="form-label">
+                                        <label for="apellido_usuario" class="form-label">
                                             Apellido</label>
                                         <div class="input-group">
                                             <i class="input-group-text bi bi-person-fill"></i>
-                                            <input id="apellido_cliente" type="text" name="apellido_cliente"
+                                            <input id="apellido_usuario" type="text" name="apellido_usuario"
                                                 class="form-control" required>
                                         </div>
                                     </div>
                                     <div class="col-sm-12 col-md-6 col-md-6">
-                                        <label for="telefono_cliente" class="form-label">
+                                        <label for="usuario_usuario" class="form-label">
                                             Usuario</label>
                                         <div class="input-group">
-                                            <i class="input-group-text bi bi-telephone-fill"></i>
-                                            <input id="usuario" type="text" name="usuario"
+                                            <i class="input-group-text bi bi-person-fill"></i>
+                                            <input id="usuario_usuario" type="text" name="usuario_usuario"
                                                 class="form-control" required>
                                         </div>
                                     </div>
                                     <div class="col-sm-12 col-md-6 col-md-6">
-                                        <label for="dui_cliente" class="form-label">
+                                        <label for="clave_usuario" class="form-label">
                                             Clave usuario</label>
                                         <div class="input-group">
                                             <i class="input-group-text bi bi-person-vcard-fill"></i>
-                                            <input id="clave_usuario" type="text" name="clave_usuario" class="form-control"
-                                                required>
+                                            <input id="clave_usuario" type="password" name="clave_usuario"
+                                                class="form-control" required>
                                         </div>
                                     </div>
                                     <div class="col-sm-12 col-md-6 col-md-6">
-                                        <label for="correo_cliente" class="form-label">
+                                        <label for="correo_usuario" class="form-label">
                                             Correo electrónico</label>
                                         <div class="input-group">
                                             <i class="input-group-text bi bi-envelope-at-fill"></i>
-                                            <input id="correo_cliente" type="email" name="correo_cliente"
+                                            <input id="correo_usuario" type="email" name="correo_usuario"
                                                 class="form-control" required>
                                         </div>
                                     </div>
@@ -151,7 +151,7 @@
                     </div>
                 </div>
                 <!-- Componente Modal para actualizar un registro -->
-                <div class="modal fade" id="actualizar_cliente" data-bs-backdrop="static" data-bs-keyboard="false"
+                <div class="modal fade" id="actualizar_usuario" data-bs-backdrop="static" data-bs-keyboard="false"
                     tabindex="-1" aria-labelledby="titulo_modal2" aria-hidden="true">
                     <div class="modal-dialog modal-lg modal-dialog-centered">
                         <div class="modal-content">
@@ -164,49 +164,49 @@
                             <form id="formulario_actualizar">
                                 <div class="modal-body row g-3">
                                     <!-- Campo oculto para asignar el id del registro al momento de modificar -->
-                                    <input type="hidden" id="idProducto" name="idProducto">
+                                    <input type="hidden" id="id_usuario" name="id_usuario">
                                     <div class="col-sm-12 col-md-6 col-md-6">
-                                        <label for="nombre_cliente" class="form-label">
+                                        <label for="nombre_usuario" class="form-label">
                                             Nombre</label>
                                         <div class="input-group">
                                             <i class="input-group-text bi bi-person-fill"></i>
-                                            <input id="nombre_cliente" type="text" name="nombre_cliente"
+                                            <input id="nombre_usuario" type="text" name="nombre_usuario"
                                                 class="form-control" required>
                                         </div>
                                     </div>
                                     <div class="col-sm-12 col-md-6 col-md-6">
-                                        <label for="apellido_cliente" class="form-label">
+                                        <label for="apellido_usuario" class="form-label">
                                             Apellido</label>
                                         <div class="input-group">
                                             <i class="input-group-text bi bi-person-fill"></i>
-                                            <input id="apellido_cliente" type="text" name="apellido_cliente"
+                                            <input id="apellido_usuario" type="text" name="apellido_usuario"
                                                 class="form-control" required>
                                         </div>
                                     </div>
                                     <div class="col-sm-12 col-md-6 col-md-6">
-                                        <label for="telefono_cliente" class="form-label">
+                                        <label for="usuario_usuario" class="form-label">
                                             Usuario</label>
                                         <div class="input-group">
-                                            <i class="input-group-text bi bi-telephone-fill"></i>
-                                            <input id="usuario" type="text" name="usuario"
+                                            <i class="input-group-text bi bi-person-fill"></i>
+                                            <input id="usuario_usuario" type="text" name="usuario_usuario"
                                                 class="form-control" required>
                                         </div>
                                     </div>
                                     <div class="col-sm-12 col-md-6 col-md-6">
-                                        <label for="dui_cliente" class="form-label">
+                                        <label for="clave_usuario" class="form-label">
                                             Clave usuario</label>
                                         <div class="input-group">
                                             <i class="input-group-text bi bi-person-vcard-fill"></i>
-                                            <input id="clave_usuario" type="text" name="clave_usuario" class="form-control"
-                                                required>
+                                            <input id="clave_usuario2" type="password" name="clave_usuario"
+                                                class="form-control" required>
                                         </div>
                                     </div>
                                     <div class="col-sm-12 col-md-6 col-md-6">
-                                        <label for="correo_cliente" class="form-label">
+                                        <label for="correo_usuario" class="form-label">
                                             Correo electrónico</label>
                                         <div class="input-group">
                                             <i class="input-group-text bi bi-envelope-at-fill"></i>
-                                            <input id="correo_cliente" type="email" name="correo_cliente"
+                                            <input id="correo_usuario" type="email" name="correo_usuario"
                                                 class="form-control" required>
                                         </div>
                                     </div>
@@ -224,8 +224,6 @@
     </div>
 
     <!-- IMPORTACIÓN DE ARCHIVOS JAVASCRIPT -->
-    <!-- libreria para las marcaras de los input -->
-    <script type="text/javascript" src="../recursos/js/vanillaTextMask.js"></script>
     <!-- Llamada al framework y librería de mensajes -->
     <script type="text/javascript" src="../recursos/js/bootstrap.bundle.min.js"></script>
     <script type="text/javascript" src="../recursos/js/sweetalert.min.js"></script>

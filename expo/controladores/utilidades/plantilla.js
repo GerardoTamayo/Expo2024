@@ -63,7 +63,7 @@ Inicio.insertAdjacentHTML('beforebegin', `
         </ul>
         <hr>
         <div>
-            <a href="#" class="d-flex align-items-center text-black text-decoration-none py-3">
+            <a href="/expo/vistas/index.html" class="d-flex align-items-center text-black text-decoration-none py-3">
                 <i class="fs-4 bi-box-arrow-left"></i><span class="d-none d-sm-inline mx-1">Cerrar
                     sesion</span>
             </a>
