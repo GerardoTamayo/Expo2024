@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <!-- Titulo del documento -->
+    <title></title>
+    <!-- Metadatos de la página web -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Llamada a las hojas de estilos del framework e iconos -->
+    <link type="text/css" rel="stylesheet" href="../recursos/css/bootstrap.min.css">
+    <link type="text/css" rel="stylesheet" href="../recursos/css/estilos.css">
+
+</head>
+
+<body>
+    <main>
+        <div class="bg-white p-5 rounded ">
+            <div class="text-end">
+                <img src="/recursos/imagenes/login.png" class="mx-auto d-block" width="80">
+            </div>
+            <h2 class="fw-bold text-center py-5 titulo">Inicio de sesión</h2>
+            <!--LOGIN-->
+            <div class="contenedor">
+                <div action="#">
+                    <form id="loginForm">
+                        <div class="mb-4"></div>
+                        <div class="col-sm-12 col-md-6 offset-md-3 col-lg-4 offset-lg-4"></div>
+                        <input type="email" class="form-control" name="email" placeholder="Correo Electrónico">
+
+                        <div class="mb-4"></div>
+                        <div class="col-sm-12 col-md-6 offset-md-3 col-lg-4 offset-lg-4"></div>
+                        <input type="password" class="form-control" name="password" placeholder="Contraseña">
+
+                        <div class="mb-4" h></div>
+                        <div class="d-grip">
+                            <button type="submit" class="btn btn-light"><a href="../vistas/productos.html">Iniciar
+                                    Sesión</a></button>
+                        </div>
+                    </form>
+                    <div class="my-3 col-md-6">
+                        <button class="btn btn-light" type="button" data-bs-toggle="modal" data-bs-target="#recuperar">
+                            ¿Has olvidado tu contraseña?
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal para enviar codigo -->
+        <div class="modal fade" id="recuperar" tabindex="-1" aria-labelledby="recuperarLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg modal-dialog-centered"> <!-- Cambiar modal-xl según tu necesidad -->
+                <div class="modal-content py-5">
+                    <div class="modal-header">
+                        <h5 class="modal-title mx-auto" id="recuperarLabel">Recuperación de Contraseña</h5>
+                    </div>
+                    <div class="modal-body">
+                        <div class="card mb-3 d-flex">
+                            <div class="row g-0">
+                                <div class="col-md-8">
+                                    <div class="card-body">
+                                        <div>
+                                            <input type="email" class="form-control" name="email"
+                                                placeholder="Correo Electrónico">
+                                        </div>
+                                        <div class="py-4"></div>
+                                        <div>
+                                            <input type="text" class="form-control" name="text" placeholder="Codigo">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 card-body">
+                                    <div>
+                                        <button type="submit" class="btn btn-success">Enviar</button>
+                                    </div>
+                                    <div class="py-4"></div>
+                                    <div>
+                                        <button type="submit" class="btn btn-success" data-bs-toggle="modal"
+                                            data-bs-target="#reestablecer">Confirmar</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- Modal para reestablecer contraseña-->
+        <div class="modal fade" id="reestablecer" tabindex="-1" aria-labelledby="reestablecerLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header mx-auto">
+                        <img src="/recursos/imagenes/login.png" class="mx-auto d-block" width="150" height="150">
+                    </div>
+                    <div class="modal-body">
+                        <div class="card mb-3 d-flex">
+                            <div class="row g-0">
+                                <div class="col-md-8">
+                                    <div class="card-body">
+                                        <div>
+                                            <input type="password" class="form-control" name="password"
+                                                placeholder="Ingresar Contraseña">
+                                        </div>
+                                        <div class="py-4"></div>
+                                        <div>
+                                            <input type="password" class="form-control" name="password"
+                                                placeholder="Confirmar contraseña">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 card-body">
+                                    <div>
+                                        <h5 class="modal-title" id="recuperarLabel">Reestablecer contraseña</h5>
+                                    </div>
+                                    <div class="py-4"></div>
+                                    <div>
+                                        <button type="submit" class="btn btn-success">Confirmar</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+
+
+    <!-- IMPORTACIÓN DE ARCHIVOS JAVASCRIPT -->
+    <!-- Llamada al framework y librería de mensajes -->
+    <script type="text/javascript" src="../recursos/js/bootstrap.bundle.min.js"></script>
+    <script type="text/javascript" src="../recursos/js/sweetalert.min.js"></script>
+    <!-- llamada al controlador de la pagina -->
+    <script type="text/javascript" src="../controladores/administrador/index.js"></script>
+</body>
+
+</html>

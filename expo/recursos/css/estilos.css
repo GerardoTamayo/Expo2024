@@ -1,0 +1,172 @@
+form label {
+    max-width: 10rem;
+    /* Puedes ajustar este valor según tu preferencia */
+    display: inline-block;
+    /* Esto garantiza que el ancho máximo se aplique correctamente */
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f2f2f2;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.text-end {
+    display: flex;
+    flex-direction: column;
+}
+
+.imagen {
+    width: 330px;
+    align-self: center;
+}
+
+form label {
+    max-width: 10rem;
+    /* Puedes ajustar este valor según tu preferencia */
+    display: inline-block;
+    /* Esto garantiza que el ancho máximo se aplique correctamente */
+}
+
+.login-container {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.input-group {
+    margin-bottom: 15px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+input[type="text"],
+input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
+
+button {
+    width: 100%;
+    padding: 10px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+/* Agrega espacios entre los elementos */
+.space-between {
+    display: flex;
+    justify-content: space-between;
+}
+
+/* Agrega espacios alrededor de los elementos */
+.space-around {
+    display: flex;
+    justify-content: space-around;
+}
+
+/* Agrega espacio alrededor del contenido de los elementos */
+.padding {
+    padding: 10px;
+}
+
+/* Agrega espacio a la izquierda del contenido */
+.padding-left {
+    padding-left: 10px;
+}
+
+/* Agrega espacio a la derecha del contenido */
+.padding-right {
+    padding-right: 10px;
+}
+
+/* Agrega espacio arriba del contenido */
+.padding-top {
+    padding-top: 10px;
+}
+
+/* Agrega espacio abajo del contenido */
+.padding-bottom {
+    padding-bottom: 10px;
+}
+
+/* Agrega espacio a todos los lados del contenido */
+.padding-all {
+    padding: 10px;
+}
+
+/* Agrega margen entre los elementos */
+.margin {
+    margin: 10px;
+}
+
+/* Agrega margen a la izquierda de los elementos */
+.margin-left {
+    margin-left: 10px;
+}
+
+/* Agrega margen a la derecha de los elementos */
+.margin-right {
+    margin-right: 10px;
+}
+
+/* Agrega margen arriba de los elementos */
+.margin-top {
+    margin-top: 10px;
+}
+
+/* Agrega margen abajo de los elementos */
+.margin-bottom {
+    margin-bottom: 10px;
+}
+
+/* Agrega margen a todos los lados de los elementos */
+.margin-all {
+    margin: 10px;
+}
+
+main {
+    display: block;
+}
+
+.contenedor {
+    max-width: 35rem;
+    margin: 0 auto;
+}
+
+.conte {
+    max-width: 35rem;
+    margin: 0 auto;
+}
+
+.titulo {
+    color: green;
+}
+
+.boton {
+    background-color: green;
+    color: white;
+}
