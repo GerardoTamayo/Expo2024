@@ -25,6 +25,11 @@ const openUpdate = () => {
     formulario_actualizar.reset();
 }
 
+const openDelete = async () => {
+    // Llamada a la función para mostrar un mensaje de confirmación, capturando la respuesta en una constante.
+    const RESPONSE = await confirmarAction('¿Desea eliminar este vendedor de forma permanente?');
+}
+
 // Llamada a la función para establecer la mascara del campo teléfono.
 vanillaTextMask.maskInput({
     inputElement: document.getElementById('telefono_proveedor'),

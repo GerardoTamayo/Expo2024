@@ -26,3 +26,8 @@ const openUpdate = () => {
     formulario_actualizar.reset();
     CLAVE_USUARIO.disabled = true;
 }
+
+const openDelete = async () => {
+    // Llamada a la función para mostrar un mensaje de confirmación, capturando la respuesta en una constante.
+    const RESPONSE = await confirmarAction('¿Desea eliminar este usuario de forma permanente?');
+}

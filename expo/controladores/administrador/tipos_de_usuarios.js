@@ -23,3 +23,8 @@ const openUpdate = () => {
     // Se prepara el formulario.
     formulario_actualizar.reset();
 }
+
+const openDelete = async () => {
+    // Llamada a la función para mostrar un mensaje de confirmación, capturando la respuesta en una constante.
+    const RESPONSE = await confirmarAction('¿Desea eliminar este tipo de usuario de forma permanente?');
+}
