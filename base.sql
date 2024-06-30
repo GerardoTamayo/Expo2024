@@ -25,7 +25,7 @@ CREATE TABLE tb_proveedores (
 CREATE TABLE tb_marcas (
     id_marca INT AUTO_INCREMENT PRIMARY KEY,
     nombre_marca VARCHAR(25) NOT NULL,
-    imagen VARCHAR(25)
+    imagen VARCHAR(25) NULL DEFAULT 'default.png'
 );
 
 CREATE TABLE tb_tipousuarios (
@@ -47,10 +47,6 @@ CREATE TABLE tb_productos (
     id_producto INT AUTO_INCREMENT PRIMARY KEY,
     nombre_producto VARCHAR(50) NOT NULL,
     fecha_vencimiento DATETIME NOT NULL,
-    precio_compra DECIMAL(10, 2) NOT NULL,
-    CONSTRAINT chk_precio_compra CHECK (precio_compra >= 0),
-    precio_venta DECIMAL(10, 2) NOT NULL,
-    CONSTRAINT chk_precio_venta CHECK (precio_venta >= 0),
     descripcion VARCHAR(100) NOT NULL,
     existencias_producto INT NOT NULL,
     CONSTRAINT chk_existencias_producto CHECK (existencias_producto >= 0),

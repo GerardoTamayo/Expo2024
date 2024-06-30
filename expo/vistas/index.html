@@ -19,34 +19,70 @@
             <div class="text-end">
                 <img src="../recursos/imagenes/login.png" class="mx-auto d-block" width="80">
             </div>
-            <h2 class="fw-bold text-center py-5 titulo">Inicio de sesión</h2>
+            <h2 class="fw-bold text-center py-5 titulo" id="mainTitle">Inicio de sesión</h2>
             <!--LOGIN-->
-            <div class="contenedor">
-                <div action="#">
-                    <form id="loginForm">
+            <form class="d-none" id="loginForm">
+                <div class="contenedor">
+                    <div action="#">
                         <div class="mb-4"></div>
                         <div class="col-sm-12 col-md-6 offset-md-3 col-lg-4 offset-lg-4"></div>
-                        <input type="email" class="form-control" name="email" placeholder="Correo Electrónico">
+                        <input type="email" class="form-control" name="correo" placeholder="Correo Electrónico">
 
                         <div class="mb-4"></div>
                         <div class="col-sm-12 col-md-6 offset-md-3 col-lg-4 offset-lg-4"></div>
-                        <input type="password" class="form-control" name="password" placeholder="Contraseña">
+                        <input type="password" class="form-control" name="contra" placeholder="Contraseña">
 
                         <div class="mb-4" h></div>
                         <div class="d-grip">
-                            <button type="submit" class="btn btn-light"><a href="../vistas/productos.html">Iniciar
-                                    Sesión</a></button>
+                            <button type="submit" class="btn btn-light">Iniciar
+                                Sesión</button>
                         </div>
-                    </form>
-                    <div class="my-3 col-md-6">
-                        <button class="btn btn-light" type="button" data-bs-toggle="modal" data-bs-target="#recuperar">
-                            ¿Has olvidado tu contraseña?
-                        </button>
+                        <div class="my-3 col-md-6">
+                            <button class="btn btn-light" type="button" data-bs-toggle="modal"
+                                data-bs-target="#recuperar">
+                                ¿Has olvidado tu contraseña?
+                            </button>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </div>
+            </form>
 
+            <!-- Formulario para crear el primer uso -->
+            <form class="d-none" id="registrarse">
+                <div class="row g-3">
+                    <div class="col-sm-12 col-md-6">
+                        <label for="nombreAdministrador" class="form-label">Nombre</label>
+                        <input id="nombreAdministrador" type="text" name="nombreAdministrador" class="form-control"
+                            required>
+                    </div>
+                    <div class="col-sm-12 col-md-6">
+                        <label for="apellidoAdministrador" class="form-label">Apellido</label>
+                        <input id="apellidoAdministrador" type="text" name="apellidoAdministrador" class="form-control"
+                            required>
+                    </div>
+                    <div class="col-sm-12 col-md-6">
+                        <label for="correoAdministrador" class="form-label">Correo</label>
+                        <input id="correoAdministrador" type="email" name="correoAdministrador" class="form-control"
+                            required>
+                    </div>
+                    <div class="col-sm-12 col-md-6">
+                        <label for="claveAdministrador" class="form-label">Contraseña</label>
+                        <input id="claveAdministrador" type="password" name="claveAdministrador" class="form-control"
+                            required>
+                    </div>
+                    <div class="col-sm-12 col-md-6">
+                        <label for="confirmarClave" class="form-label">Confirmar contraseña</label>
+                        <input id="confirmarClave" type="password" name="confirmarClave" class="form-control" required>
+                    </div>
+                    <div class="text-center">
+                        <button type="reset" class="btn btn-outline-danger"><i class="bi bi-x-square-fill"></i>
+                            Cancelar</button>
+                        <button type="submit" class="btn btn-outline-primary"><i class="bi bi-floppy-fill"></i>
+                            Guardar</button>
+                    </div>
+                </div>
+            </form>
+        </div>
         <!-- Modal para enviar codigo -->
         <div class="modal fade" id="recuperar" tabindex="-1" aria-labelledby="recuperarLabel" aria-hidden="true">
             <div class="modal-dialog modal-lg modal-dialog-centered"> <!-- Cambiar modal-xl según tu necesidad -->
@@ -133,6 +169,7 @@
     <!-- Llamada al framework y librería de mensajes -->
     <script type="text/javascript" src="../recursos/js/bootstrap.bundle.min.js"></script>
     <script type="text/javascript" src="../recursos/js/sweetalert.min.js"></script>
+    <script type="text/javascript" src="../controladores/utilidades/componentes.js"></script>
     <!-- llamada al controlador de la pagina -->
     <script type="text/javascript" src="../controladores/administrador/index.js"></script>
 </body>

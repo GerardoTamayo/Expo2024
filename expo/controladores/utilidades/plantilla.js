@@ -13,62 +13,60 @@ const loadTemplate = async () => {
                 </a>
                 <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
                     <li class="nav-item">
-                        <a href="/expo/vistas/productos.html" class="nav-link align-middle px-0 text-dark">
+                        <a href="productos.html" class="nav-link align-middle px-0 text-dark">
                             <i class="fs-4 bi-house"></i> <span class="ms-1 d-none d-sm-inline">Productos</span>
                         </a>
                     </li>
                     <li>
-                        <a href="/expo/vistas/presentaciones.html" class="nav-link px-0 align-middle text-dark">
+                        <a href="presentaciones.html" class="nav-link px-0 align-middle text-dark">
                             <i class="fs-4 bi-table"></i> <span class="ms-1 d-none d-sm-inline">Presentaciones</span></a>
                     </li>
                     <li>
-                        <a href="/expo/vistas/categorias.html" class="nav-link px-0 align-middle text-dark">
+                        <a href="categorias.html" class="nav-link px-0 align-middle text-dark">
                             <i class="fs-4 bi-pin-angle-fill"></i> <span class="ms-1 d-none d-sm-inline">Categorias</span>
                         </a>
                     </li>
                     <li>
-                        <a href="/expo/vistas/marcas.html" class="nav-link px-0 align-middle text-dark">
+                        <a href="marcas.html" class="nav-link px-0 align-middle text-dark">
                             <i class="fs-4 bi-tags-fill"></i> <span class="ms-1 d-none d-sm-inline">Marcas</span>
                         </a>
                     </li>
                     <li>
-                        <a href="/expo/vistas/usuarios.html" class="nav-link px-0 align-middle text-dark">
+                        <a href="usuarios.html" class="nav-link px-0 align-middle text-dark">
                             <i class="fs-4 bi-people"></i> <span class="ms-1 d-none d-sm-inline">Usuarios</span>
                         </a>
                     </li>
                     <li>
-                        <a href="/expo/vistas/tipos_de_usuarios.html" class="nav-link px-0 align-middle text-dark">
+                        <a href="tipos_de_usuarios.html" class="nav-link px-0 align-middle text-dark">
                             <i class="fs-4 bi-people"></i> <span class="ms-1 d-none d-sm-inline">Tipos de
                                 usuarios</span>
                         </a>
                     </li>
                     <li>
-                        <a href="/expo/vistas/clientes.html" class="nav-link px-0 align-middle text-dark">
+                        <a href="clientes.html" class="nav-link px-0 align-middle text-dark">
                             <i class="fs-4 bi-people"></i> <span class="ms-1 d-none d-sm-inline">Clientes</span>
                         </a>
                     </li>
                     <li>
-                        <a href="/expo/vistas/compras.html" class="nav-link px-0 align-middle text-dark">
+                        <a href="compras.html" class="nav-link px-0 align-middle text-dark">
                             <i class="fs-4 bi-receipt"></i> <span class="ms-1 d-none d-sm-inline">Compras</span>
                         </a>
                     </li>
                     <li>
-                        <a href="/expo/vistas/ventas.html" class="nav-link px-0 align-middle text-dark">
+                        <a href="ventas.html" class="nav-link px-0 align-middle text-dark">
                             <i class="fs-4 bi-currency-dollar"></i> <span class="ms-1 d-none d-sm-inline">Ventas</span>
                         </a>
                     </li>
                     <li>
-                        <a href="/expo/vistas/vendedores.html" class="nav-link px-0 align-middle text-dark">
+                        <a href="vendedores.html" class="nav-link px-0 align-middle text-dark">
                             <i class="fs-4 bi-person-badge-fill"></i> <span class="ms-1 d-none d-sm-inline">Vendedores</span>
                         </a>
                     </li>
                 </ul>
                 <hr>
                 <div>
-                    <a href="/expo/vistas/index.html" class="d-flex align-items-center text-black text-decoration-none py-3">
-                        <i class="fs-4 bi-box-arrow-left"></i><span class="d-none d-sm-inline mx-1">Cerrar
-                            sesion</span>
-                    </a>
+                    <button type="button" class="btn btn-info" onclick="logOut()">Cerrar sesión <i
+                        class="bi bi-box-arrow-left"></i></button>
                 </div>
             </div>
         </div>
