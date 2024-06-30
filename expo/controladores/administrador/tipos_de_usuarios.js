@@ -1,8 +1,6 @@
 // Constantes para establecer los elementos del componente Modal.
 const SAVE_MODAL = new bootstrap.Modal('#guardar_tipo');
-const UPDATE_MODAL = new bootstrap.Modal('#actualizar_tipo');
 MODAL_TITLE = document.getElementById('titulo_modal1');
-MODAL_TITLE2 = document.getElementById('titulo_modal2');
 
 document.addEventListener('DOMContentLoaded', () => {
     // Llamada a la función para mostrar el encabezado y pie del documento.

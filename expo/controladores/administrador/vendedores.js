@@ -110,11 +110,61 @@ const openCreate = () => {
     SAVE_FORM.reset();
 }
 
+/*
+*   Función asíncrona para preparar el formulario al momento de actualizar un registro.
+*   Parámetros: id (identificador del registro seleccionado).
+*   Retorno: ninguno.
+*/
+const openUpdate = async (id) => {
+    // Se define una constante tipo objeto con los datos del registro seleccionado.
+    const FORM = new FormData();
+    FORM.append('id_proveedor', id);
+    // Petición para obtener los datos del registro solicitado.
+    const DATA = await fetchData(VENDEDOR_API, 'readOne', FORM);
+    // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
+    if (DATA.status) {
+        // Se muestra la caja de diálogo con su título.
+        SAVE_MODAL.show();
+        MODAL_TITLE.textContent = 'Actualizar vendedor';
+        // Se prepara el formulario.
+        SAVE_FORM.reset();
+        // Se inicializan los campos con los datos.
+        const ROW = DATA.dataset;
+        ID_PROVEEDOR.value = ROW.id_proveedor;
+        NOMBRE_PROVEEDOR.value = ROW.nombre_proveedor;
+        APELLIDO_PROVEEDOR.value = ROW.apellido_proveedor;
+        TELEFONO_PROVEEDOR.value = ROW.telefono_proveedor;
+        CORREO_PROVEEDOR.value = ROW.correo_proveedor;
+    } else {
+        sweetAlert(2, DATA.error, false);
+    }
+}
 
-
-const openDelete = async () => {
+/*
+*   Función asíncrona para eliminar un registro.
+*   Parámetros: id (identificador del registro seleccionado).
+*   Retorno: ninguno.
+*/
+const openDelete = async (id) => {
     // Llamada a la función para mostrar un mensaje de confirmación, capturando la respuesta en una constante.
-    const RESPONSE = await confirmarAction('¿Desea eliminar este vendedor de forma permanente?');
+    const RESPONSE = await confirmAction('¿Desea eliminar el proveedor de forma permanente?');
+    // Se verifica la respuesta del mensaje.
+    if (RESPONSE) {
+        // Se define una constante tipo objeto con los datos del registro seleccionado.
+        const FORM = new FormData();
+        FORM.append('id_proveedor', id);
+        // Petición para eliminar el registro seleccionado.
+        const DATA = await fetchData(VENDEDOR_API, 'deleteRow', FORM);
+        // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
+        if (DATA.status) {
+            // Se muestra un mensaje de éxito.
+            await sweetAlert(1, DATA.message, true);
+            // Se carga nuevamente la tabla para visualizar los cambios.
+            fillTable();
+        } else {
+            sweetAlert(2, DATA.error, false);
+        }
+    }
 }
 
 // Llamada a la función para establecer la mascara del campo teléfono.

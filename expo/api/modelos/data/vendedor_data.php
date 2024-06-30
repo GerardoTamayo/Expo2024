@@ -31,7 +31,7 @@ class VendedorData extends VendedorHandler
             $this->data_error = 'El nombre debe ser un valor alfabético';
             return false;
         } elseif (Validator::validateLength($value, $min, $max)) {
-            $this->nombre_proveedor = $value;
+            $this->nombre = $value;
             return true;
         } else {
             $this->data_error = 'El nombre debe tener una longitud entre ' . $min . ' y ' . $max;
@@ -45,7 +45,7 @@ class VendedorData extends VendedorHandler
             $this->data_error = 'El apellido debe ser un valor alfabético';
             return false;
         } elseif (Validator::validateLength($value, $min, $max)) {
-            $this->apellido_proveedor = $value;
+            $this->apellido = $value;
             return true;
         } else {
             $this->data_error = 'El apellido debe tener una longitud entre ' . $min . ' y ' . $max;
@@ -56,7 +56,7 @@ class VendedorData extends VendedorHandler
     public function setTelefono($value)
     {
         if (Validator::validatePhone($value)) {
-            $this->telefono_proveedor = $value;
+            $this->telefono = $value;
             return true;
         } else {
             $this->data_error = 'El teléfono debe tener el formato (2, 6, 7)###-####';
@@ -70,7 +70,7 @@ class VendedorData extends VendedorHandler
             $this->data_error = 'El correo no es válido';
             return false;
         } elseif (Validator::validateLength($value, $min, $max)) {
-            $this->correo_proveedor = $value;
+            $this->correo = $value;
             return true;
         } else {
             $this->data_error = 'El correo debe tener una longitud entre ' . $min . ' y ' . $max;

@@ -59,8 +59,6 @@
                         <tr>
                             <th>PRODUCTO</th>
                             <th>FECHA VENCIMIENTO</th>
-                            <th>PRECIO COMPRA</th>
-                            <th>PRECIO VENTA</th>
                             <th>DESCRIPCIÓN</th>
                             <th>EXISTENCIAS</th>
                             <th>ACCIONES</th>
@@ -68,8 +66,6 @@
                         <tr>
                             <td>Maiz americano</td>
                             <td>25/11/24</td>
-                            <td>$60</td>
-                            <td>$80</td>
                             <td>Apreciado por su alto valor energético, palatabilidad.</td>
                             <td>100</td>
                             <td>
@@ -113,24 +109,6 @@
                                         <div class="input-group">
                                             <i class="input-group-text bi bi-calendar-date-fill"></i>
                                             <input id="fecha_producto" type="date" name="fecha_producto"
-                                                class="form-control" required>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-12 col-md-6 col-md-6">
-                                        <label for="compra_producto" class="form-label">
-                                            Precio compra</label>
-                                        <div class="input-group">
-                                            <i class="input-group-text bi bi-cash-coin"></i>
-                                            <input id="compra_producto" type="number" name="compra_producto"
-                                                class="form-control" required>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-12 col-md-6 col-md-6">
-                                        <label for="venta_producto" class="form-label">
-                                            Precio venta</label>
-                                        <div class="input-group">
-                                            <i class="input-group-text bi bi-cash-coin"></i>
-                                            <input id="venta_producto" type="number" name="venta_producto"
                                                 class="form-control" required>
                                         </div>
                                     </div>
@@ -183,112 +161,7 @@
                                 <div class="modal-footer container">
                                     <button type="submit" class="btn btn-primary"><i
                                             class="bi bi-file-earmark-plus-fill"></i>
-                                        Agregar</button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-                <!-- Componente Modal para actualizar un registro -->
-                <div class="modal fade" id="actualizar_producto" data-bs-backdrop="static" data-bs-keyboard="false"
-                    tabindex="-1" aria-labelledby="titulo_modal2" aria-hidden="true">
-                    <div class="modal-dialog modal-lg modal-dialog-centered">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h1 class="modal-title fs-5" id="titulo_modal2"></h1>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                    aria-label="Close"></button>
-                            </div>
-                            <!-- Formulario para actualizar un registro -->
-                            <form id="formulario_actualizar">
-                                <div class="modal-body row g-3">
-                                    <!-- Campo oculto para asignar el id del registro al momento de modificar -->
-                                    <input type="hidden" id="id_producto" name="id_producto">
-                                    <div class="col-sm-12 col-md-6 col-md-6">
-                                        <label for="nombre_producto" class="form-label">
-                                            Nombre</label>
-                                        <div class="input-group">
-                                            <i class="input-group-text bi bi-database-fill"></i>
-                                            <input id="nombre_producto" type="text" name="nombre_producto"
-                                                class="form-control" required>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-12 col-md-6 col-md-6">
-                                        <label for="fecha_producto" class="form-label">
-                                            Fecha vencimiento</label>
-                                        <div class="input-group">
-                                            <i class="input-group-text bi bi-calendar-date-fill"></i>
-                                            <input id="fecha_producto" type="date" name="fecha_producto"
-                                                class="form-control" required>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-12 col-md-6 col-md-6">
-                                        <label for="compra_producto" class="form-label">
-                                            Precio compra</label>
-                                        <div class="input-group">
-                                            <i class="input-group-text bi bi-cash-coin"></i>
-                                            <input id="compra_producto" type="number" name="compra_producto"
-                                                class="form-control" required>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-12 col-md-6 col-md-6">
-                                        <label for="venta_producto" class="form-label">
-                                            Precio venta</label>
-                                        <div class="input-group">
-                                            <i class="input-group-text bi bi-cash-coin"></i>
-                                            <input id="venta_producto" type="number" name="venta_producto"
-                                                class="form-control" required>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-12 col-md-6 col-md-6">
-                                        <label for="descripcion_producto" class="form-label">
-                                            Descripción</label>
-                                        <div class="input-group">
-                                            <i class="input-group-text bi bi-file-text-fill"></i>
-                                            <input id="descripcion_producto" type="text" name="descripcion_producto"
-                                                class="form-control" required>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-12 col-md-6 col-md-6">
-                                        <label for="presentacion_producto" class="form-label">
-                                            Tipo de Presentación</label>
-                                        <div class="input-group">
-                                            <i class="input-group-text bi bi-bookmark-plus-fill"></i>
-                                            <select id="presentacion_producto" type="text" name="presentacion_producto"
-                                                class="form-select" required></select>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-12 col-md-6 col-md-6">
-                                        <label for="categoria_producto" class="form-label">
-                                            Categoria</label>
-                                        <div class="input-group">
-                                            <i class="input-group-text  bi bi-pin-angle-fill"></i>
-                                            <select id="categoria_producto" type="text" name="categoria_producto"
-                                                class="form-select" required></select>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-12 col-md-6 col-md-6">
-                                        <label for="marca_producto" class="form-label">
-                                            Marca</label>
-                                        <div class="input-group">
-                                            <i class="input-group-text bi bi-tags-fill"></i>
-                                            <select id="marca_producto" type="text" name="marca_producto"
-                                                class="form-select" required></select>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-12 col-md-6 col-md-6">
-                                        <label for="compra_producto" class="form-label">
-                                            Existencias</label>
-                                        <div class="input-group">
-                                            <i class="input-group-text bi bi-plus-slash-minus"></i>
-                                            <input id="compra_producto" type="number" name="compra_producto"
-                                                class="form-control" required>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="modal-footer container">
-                                    <button type="submit" class="btn btn-primary"><i class="bi bi-pencil-square"></i>
-                                        Editar</button>
+                                        Guardar</button>
                                 </div>
                             </form>
                         </div>

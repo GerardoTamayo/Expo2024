@@ -1,6 +1,5 @@
 // Constantes para establecer los elementos del componente Modal.
 const SAVE_MODAL = new bootstrap.Modal('#guardar_cliente');
-const UPDATE_MODAL = new bootstrap.Modal('#actualizar_cliente');
 ID_CLIENTE2 = document.getElementById('id_cliente2'),
 NOMBRE_CLIENTE2 = document.getElementById('nombre_cliente2'),
 APELLIDO_CLIENTE2 = document.getElementById('apellido_cliente2'),

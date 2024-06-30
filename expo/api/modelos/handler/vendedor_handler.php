@@ -23,11 +23,10 @@ class VendedorHandler
     public function searchRows()
     {
         $value = '%' . Validator::getSearchValue() . '%';
-        $sql = 'SELECT id_usuario, nombre_usuario, apellido_usuario, correo_usuario, id_tipo, tipo_usuario
-                FROM tb_usuarios
-                INNER JOIN tb_tipousuarios USING (id_tipo)
-                WHERE nombre_usuario LIKE ? OR apellido_usuario LIKE ?
-                ORDER BY id_usuario';
+        $sql = 'SELECT id_proveedor, nombre_proveedor, apellido_proveedor, telefono_proveedor, correo_proveedor
+                FROM tb_proveedores
+                WHERE nombre_proveedor LIKE ? OR telefono_proveedor LIKE ?
+                ORDER BY id_proveedor';
         $params = array($value, $value);
         return Database::getRows($sql, $params);
     }
