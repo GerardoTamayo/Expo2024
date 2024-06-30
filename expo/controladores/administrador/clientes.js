@@ -11,14 +11,19 @@ CORREO_CLIENTE2 = document.getElementById('correo_cliente2');
 // Titulos de las modals
 MODAL_TITLE = document.getElementById('titulo_modal');
 MODAL_TITLE2 = document.getElementById('titulo_modal2');
-// titulo de la pagina
-MAIN_TITLE.textContent = 'Administrar Clientes';
+
+document.addEventListener('DOMContentLoaded', () => {
+    // Llamada a la función para mostrar el encabezado y pie del documento.
+    loadTemplate();
+    // Se establece el título del contenido principal.
+    MAIN_TITLE.textContent = 'Administrar clientes';
+})
 
 // modal para agregar datos
 const openCreate = () => {
     // Se muestra la caja de diálogo con su título.
     SAVE_MODAL.show();
-    MODAL_TITLE.textContent = 'Agregar Cliente';
+    MODAL_TITLE.textContent = 'Agregar cliente';
     // Se prepara el formulario.
     formulario_guardar.reset();
 }
@@ -27,7 +32,7 @@ const openCreate = () => {
 const openUpdate = () => {
     // Se muestra la caja de diálogo con su título.
     UPDATE_MODAL.show();
-    MODAL_TITLE2.textContent = 'Actualizar Cliente';
+    MODAL_TITLE2.textContent = 'Actualizar cliente';
     // Se prepara el formulario.
     formulario_actualizar.reset();
     DUI_CLIENTE2.disabled = true;

@@ -3,14 +3,19 @@ const SAVE_MODAL = new bootstrap.Modal('#guardar_tipo');
 const UPDATE_MODAL = new bootstrap.Modal('#actualizar_tipo');
 MODAL_TITLE = document.getElementById('titulo_modal1');
 MODAL_TITLE2 = document.getElementById('titulo_modal2');
-// titulo de la pagina
-MAIN_TITLE.textContent = 'Tipo de presentacion';
+
+document.addEventListener('DOMContentLoaded', () => {
+    // Llamada a la función para mostrar el encabezado y pie del documento.
+    loadTemplate();
+    // Se establece el título del contenido principal.
+    MAIN_TITLE.textContent = 'Administrar presentaciones';
+})
 
 // modal para agregar datos
 const openCreate = () => {
     // Se muestra la caja de diálogo con su título.
     SAVE_MODAL.show();
-    MODAL_TITLE.textContent = 'Agregar Tipo de presentacion';
+    MODAL_TITLE.textContent = 'Agregar tipo de presentacion';
     // Se prepara el formulario.
     formulario_guardar.reset();
 }
@@ -19,7 +24,7 @@ const openCreate = () => {
 const openUpdate = () => {
     // Se muestra la caja de diálogo con su título.
     UPDATE_MODAL.show();
-    MODAL_TITLE2.textContent = 'Actualizar Tipo de presentacion';
+    MODAL_TITLE2.textContent = 'Actualizar tipo de presentacion';
     // Se prepara el formulario.
     formulario_actualizar.reset();
 }

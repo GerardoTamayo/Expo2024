@@ -3,14 +3,19 @@ const SAVE_MODAL = new bootstrap.Modal('#guardar_marca');
 const UPDATE_MODAL = new bootstrap.Modal('#actualizar_marca');
 MODAL_TITLE = document.getElementById('titulo_modal1');
 MODAL_TITLE2 = document.getElementById('titulo_modal2');
-// titulo de la pagina
-MAIN_TITLE.textContent = 'Administrar Marcas';
+
+document.addEventListener('DOMContentLoaded', () => {
+    // Llamada a la función para mostrar el encabezado y pie del documento.
+    loadTemplate();
+    // Se establece el título del contenido principal.
+    MAIN_TITLE.textContent = 'Administrar marcas';
+})
 
 // modal para agregar datos
 const openCreate = () => {
     // Se muestra la caja de diálogo con su título.
     SAVE_MODAL.show();
-    MODAL_TITLE.textContent = 'Agregar Marca';
+    MODAL_TITLE.textContent = 'Agregar marca';
     // Se prepara el formulario.
     formulario_guardar.reset();
 }
@@ -19,7 +24,7 @@ const openCreate = () => {
 const openUpdate = () => {
     // Se muestra la caja de diálogo con su título.
     UPDATE_MODAL.show();
-    MODAL_TITLE2.textContent = 'Actualizar Marca';
+    MODAL_TITLE2.textContent = 'Actualizar marca';
     // Se prepara el formulario.
     formulario_actualizar.reset();
 }
