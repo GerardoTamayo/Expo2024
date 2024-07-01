@@ -37,7 +37,8 @@ if (isset($_GET['action'])) {
                 $_POST = Validator::validateForm($_POST);
                 if (
                     !$venta->setFecha($_POST['fecha_venta']) or
-                    !$venta->setObservacion($_POST['Observación_venta']) or
+                    !$venta->setObservacion($_POST['observacion_venta']) or
+                    !$venta->setEstado(isset($_POST['estado_venta'])? 1 : 0) or
                     !$venta->setIdProveedor($_POST['id_cliente'])
                 ) {
                     $result['error'] = $venta->getDataError();
@@ -54,7 +55,7 @@ if (isset($_GET['action'])) {
                 } elseif ($result['dataset'] = $venta->readOne1()) {
                     $result['status'] = 1;
                 } else {
-                    $result['error'] = 'Categoría inexistente';
+                    $result['error'] = 'Venta inexistente';
                 }
                 break;
             case 'updateRow':
@@ -62,7 +63,8 @@ if (isset($_GET['action'])) {
                 if (
                     !$venta->setId($_POST['id_venta']) or
                     !$venta->setFecha($_POST['fecha_venta']) or
-                    !$venta->setObservacion($_POST['Observación_venta']) or
+                    !$venta->setObservacion($_POST['observacion_venta']) or
+                    !$venta->setEstado(isset($_POST['estado_venta'])? 1 : 0) or
                     !$venta->setIdProveedor($_POST['id_cliente'])
                 ) {
                     $result['error'] = $venta->getDataError();

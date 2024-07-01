@@ -15,32 +15,30 @@ class VentaData extends VentaHandler
     /*
      *  Métodos para validar y asignar valores de los atributos.
      */
-    // Validación y asignación del ID de Pedido.
+    // Validación y asignación del ID de venta.
     public function setId($value)
     {
         if (Validator::validateNaturalNumber($value)) {
             $this->id_venta = $value;
             return true;
         } else {
-            $this->data_error = 'El identificador del pedido es incorrecto';
+            $this->data_error = 'El identificador de la venta es incorrecto';
             return false;
         }
     }
 
 
     // Validación y asignación del estado del pedido.
-    public function setEstado($value, $min = 2, $max = 50)
+    public function setEstado($value)
     {
-        if (!Validator::validateAlphabetic($value)) {
-            $this->data_error = 'El nombre debe ser un valor alfabético';
-            return false;
-        } elseif (Validator::validateLength($value, $min, $max)) {
+        if (Validator::validateBoolean($value)) {
             $this->estado_venta = $value;
             return true;
         } else {
-            $this->data_error = 'El nombre debe tener una longitud entre ' . $min . ' y ' . $max;
+            $this->data_error = 'El estado es incorrecto';
             return false;
         }
+           
     }
 
     /*

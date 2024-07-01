@@ -35,7 +35,7 @@
                                 <button type="submit" class="btn btn-success">
                                     <i class="bi bi-search"></i>
                                 </button>
-                                <button type="reset" class="btn btn-secondary">
+                                <button type="reset" class="btn btn-secondary" onclick="fillTable()">
                                     <i class="bi bi-x-square-fill"></i>
                                 </button>
                             </div>
@@ -104,12 +104,10 @@
                                         <label for="estado_compra" class="form-label">
                                             Estado compra</label>
                                         <div class="input-group">
-                                            <i class="input-group-text bi bi-dropbox"></i>
-                                            <select id="estado_compra" type="number" name="estado_compra"
-                                                class="form-select" required>
-                                                <option value="0">Cancelado</option>
-                                                <option value="1">No cancelado</option>
-                                            </select>
+                                            <div class="input-group">
+                                                <i class="input-group-text bi bi-dropbox"></i>
+                                                <input id="estado_compra" type="checkbox" name="estado_compra">
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="col-sm-12 col-md-6 col-md-6">

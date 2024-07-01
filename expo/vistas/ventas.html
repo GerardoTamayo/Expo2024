@@ -34,7 +34,7 @@
                                 <button type="submit" class="btn btn-success">
                                     <i class="bi bi-search"></i>
                                 </button>
-                                <button type="reset" class="btn btn-secondary">
+                                <button type="reset" class="btn btn-secondary" onclick="fillTable()">
                                     <i class="bi bi-x-square-fill"></i>
                                 </button>
                             </div>
@@ -58,6 +58,7 @@
                         <tr>
                             <th>FECHA VENTA</th>
                             <th>OBSERVACIÓN VENTA</th>
+                            <th>ESTADO</th>
                             <th>CLIENTE</th>
                             <th>ACCIONES</th>
                         </tr>
@@ -90,11 +91,11 @@
                                         </div>
                                     </div>
                                     <div class="col-sm-12 col-md-6 col-md-6">
-                                        <label for="nombreCliente" class="form-label">
+                                        <label for="observacion_venta" class="form-label">
                                             Observación venta</label>
                                         <div class="input-group">
                                             <i class="input-group-text bi bi-file-earmark-text-fill"></i>
-                                            <input id="Observación_venta" type="text" name="Observación_venta"
+                                            <input id="observacion_venta" type="text" name="observacion_venta"
                                                 class="form-control" required>
                                         </div>
                                     </div>
@@ -104,6 +105,14 @@
                                         <div class="input-group">
                                             <i class="input-group-text bi bi-person-fill"></i>
                                             <select id="id_cliente" type="text" name="id_cliente" class="form-select"></select>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12 col-md-6 col-md-6">
+                                        <label for="estado_venta" class="form-label">
+                                            Estado venta</label>
+                                        <div class="input-group">
+                                            <i class="input-group-text bi bi-dropbox"></i>
+                                            <input id="estado_venta" type="checkbox" name="estado_venta">
                                         </div>
                                     </div>
                                 </div>

@@ -12,6 +12,11 @@ const loadTemplate = async () => {
                     <span class="fs-5 d-none d-sm-inline">Menu</span>
                 </a>
                 <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
+                                    <li>
+                        <a href="dashboard.html" class="nav-link px-0 align-middle text-dark">
+                            <i class="fs-4 bi-person-badge-fill"></i> <span class="ms-1 d-none d-sm-inline">Dashboard</span>
+                        </a>
+                    </li>
                     <li class="nav-item">
                         <a href="productos.html" class="nav-link align-middle px-0 text-dark">
                             <i class="fs-4 bi-house"></i> <span class="ms-1 d-none d-sm-inline">Productos</span>

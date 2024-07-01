@@ -15,6 +15,7 @@ const SAVE_FORM = document.getElementById('formulario_guardar'),
     OBSERVACION_VENTA = document.getElementById('observacion_venta'),
     ESTADO_VENTA = document.getElementById('estado_venta'),
     VENDEDOR_VENTA = document.getElementById('id_vendedor'),
+    ID_CLIENTE = document.getElementById('id_cliente'),
     FECHA_VENTA = document.getElementById('fecha_venta');
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -81,13 +82,13 @@ const fillTable = async (form = null) => {
                 <tr>
                     <td>${row.FECHA}</td>
                     <td>${row.OBSERVACION}</td>
-                    <td>${row.ESTADO}</td>
+                    <td>${row.ESTADO_FINAL}</td>
                     <td>${row.CLIENTE}</td>
                     <td>
-                        <button type="button" class="btn btn-outline-info" onclick="openUpdate(${row.ID_VENTA})">
+                        <button type="button" class="btn btn-outline-info" onclick="openUpdate(${row.ID})">
                             <i class="bi bi-pencil-square"></i>
                         </button>
-                        <button type="button" class="btn btn-outline-danger" onclick="openDelete(${row.ID_VENTA})">
+                        <button type="button" class="btn btn-outline-danger" onclick="openDelete(${row.ID})">
                             <i class="bi bi-trash-fill"></i>
                         </button>
                     </td>
@@ -111,9 +112,50 @@ const openCreate = () => {
     fillSelect(CLIENTE_API, 'readAll', 'id_cliente');
 }
 
+const openUpdate = async (id) => {
+    // Se define una constante tipo objeto con los datos del registro seleccionado.
+    const FORM = new FormData();
+    FORM.append('id_venta', id);
+    // Petición para obtener los datos del registro solicitado.
+    const DATA = await fetchData(VENTA_API, 'readOne', FORM);
+    // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
+    if (DATA.status) {
+        // Se muestra la caja de diálogo con su título.
+        SAVE_MODAL.show();
+        MODAL_TITLE.textContent = 'Actualizar venta';
+        // Se prepara el formulario.
+        SAVE_FORM.reset();
+        // Se inicializan los campos con los datos.
+        const ROW = DATA.dataset;
+        ID_VENTA.value = ROW.id_venta;
+        FECHA_VENTA.value = ROW.fecha_venta;
+        OBSERVACION_VENTA.value = ROW.observacion_venta;
+        ESTADO_VENTA.checked = ROW.estado_venta;
+        fillSelect(CLIENTE_API, 'readAll', 'id_cliente', ROW.id_cliente);
+    } else {
+        sweetAlert(2, DATA.error, false);
+    }
+}
 
 
-const openDelete = async () => {
+const openDelete = async (id) => {
     // Llamada a la función para mostrar un mensaje de confirmación, capturando la respuesta en una constante.
-    const RESPONSE = await confirmarAction('¿Desea eliminar esta compra de forma permanente?');
+    const RESPONSE = await confirmAction('¿Desea eliminar este cliente de forma permanente?');
+    // Se verifica la respuesta del mensaje.
+    if (RESPONSE) {
+        // Se define una constante tipo objeto con los datos del registro seleccionado.
+        const FORM = new FormData();
+        FORM.append('id_venta', id);
+        // Petición para eliminar el registro seleccionado.
+        const DATA = await fetchData(VENTA_API, 'deleteRow', FORM);
+        // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
+        if (DATA.status) {
+            // Se muestra un mensaje de éxito.
+            await sweetAlert(1, DATA.message, true);
+            // Se carga nuevamente la tabla para visualizar los cambios.
+            fillTable();
+        } else {
+            sweetAlert(2, DATA.error, false);
+        }
+    }
 }

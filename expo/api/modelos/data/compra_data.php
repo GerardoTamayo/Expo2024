@@ -29,10 +29,16 @@ class CompraData extends CompraHandler
 
 
     // Validación y asignación del estado del pedido.
-    public function setEstado($value, $min = 2, $max = 50)
+    public function setEstado($value)
     {
-            $this->estado_compra = $value;
+        if (Validator::validateBoolean($value)) {
+            $this->estado_venta = $value;
             return true;
+        } else {
+            $this->data_error = 'El estado es incorrecto';
+            return false;
+        }
+           
     }
 
     /*

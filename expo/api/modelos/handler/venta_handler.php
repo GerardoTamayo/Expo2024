@@ -12,7 +12,7 @@ class VentaHandler
     protected $id_venta = null;
     protected $id_detalle_venta = null;
     protected $cantidad_venta = null;
-    protected $precio_venta= null;
+    protected $precio_venta = null;
     protected $id_producto = null;
     protected $fecha_venta = null;
     protected $observacion_venta = null;
@@ -40,32 +40,44 @@ class VentaHandler
     // Función para leer todos los pedido
     public function readAll1()
     {
-        $sql = 'SELECT id_venta AS ID, fecha_venta AS FECHA, observacion_venta AS OBSERVACION, estado_venta AS ESTADO, id_cliente AS CLIENTE FROM tb_ventas;';
+        $sql = 'SELECT id_venta AS ID, 
+fecha_venta AS FECHA, 
+observacion_venta AS OBSERVACION, 
+estado_venta AS ESTADO, 
+id_cliente,
+nombre_cliente AS CLIENTE,
+    CASE 
+        WHEN estado_venta = 1 THEN "Cancelado"
+        WHEN estado_venta = 0 THEN "No cancelado"
+        ELSE "Otro estado"
+    END AS ESTADO_FINAL
+ FROM tb_ventas
+INNER JOIN tb_clientes USING(id_cliente)
+ ORDER BY FECHA;';
         return Database::getRows($sql);
     }
 
     public function readOne1()
     {
-        $sql = 'SELECT id_venta, fecha_venta, observacion_venta, estado_venta, id_cliente
+        $sql = 'SELECT id_venta, fecha_venta, observacion_venta, estado_venta, id_cliente, nombre_cliente
                 FROM tb_ventas
-                WHERE id_venta = ?';
+INNER JOIN tb_clientes USING(id_cliente)
+ WHERE id_venta = ?;';
         $params = array($this->id_venta);
         return Database::getRow($sql, $params);
     }
 
     public function createRow1()
     {
-        $this->estado_venta = 1;
         $sql = 'INSERT INTO tb_ventas(fecha_venta, observacion_venta, estado_venta, id_cliente)
                 VALUES(?, ?, ?, ?)';
-        $params = array($this->fecha_venta, $this->observacion_venta, $this->estado_venta,  $this->id_cliente);
+        $params = array($this->fecha_venta, $this->observacion_venta, $this->estado_venta, $this->id_cliente);
         return Database::executeRow($sql, $params);
     }
 
     // Función para actualizar marca.
     public function updateRow1()
     {
-        $this->estado_venta = 1;
         $sql = 'UPDATE tb_ventas
                     SET fecha_venta = ? , observacion_venta = ? , estado_venta = ? , id_cliente = ?
                     WHERE id_venta = ?';
@@ -82,12 +94,12 @@ class VentaHandler
         return Database::executeRow($sql, $params);
     }
 
-        //Función para cambiar el estado de la Venta.
+    //Función para cambiar el estado de la Venta.
     public function changeState()
     {
-            $sql = 'UPDATE tb_ventas SET estado_venta = NOT estado_venta WHERE id_venta = ?;';
-            $params = array($this->id_venta);
-            return Database::executeRow($sql, $params);
+        $sql = 'UPDATE tb_ventas SET estado_venta = NOT estado_venta WHERE id_venta = ?;';
+        $params = array($this->id_venta);
+        return Database::executeRow($sql, $params);
     }
 
     // Función para leer todos los pedido

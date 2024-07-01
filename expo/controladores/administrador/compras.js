@@ -81,7 +81,7 @@ const fillTable = async (form = null) => {
                 <tr>
                     <td>${row.FECHA}</td>
                     <td>${row.CORRELATIVO}</td>
-                    <td>${row.ESTADO}</td>
+                    <td>${row.ESTADO_DESC}</td>
                     <td>${row.PROVEEDOR}</td>
                     <td>
                         <button type="button" class="btn btn-outline-info" onclick="openUpdate(${row.id_compra})">

@@ -45,14 +45,16 @@ class CompraHandler
     fecha_compra AS FECHA, 
     numero_correlativo AS "CORRELATIVO", 
     estado_compra AS ESTADO, 
-    id_proveedor AS PROVEEDOR, 
+    id_proveedor, 
+    nombre_proveedor AS PROVEEDOR,
     CASE 
         WHEN estado_compra = 1 THEN "Cancelada"
         WHEN estado_compra = 0 THEN "No cancelada"
         ELSE "Otro estado"
     END AS ESTADO_DESC
 FROM tb_compras
-ORDER BY FECHA;;';
+INNER JOIN tb_proveedores USING(id_proveedor)
+ORDER BY FECHA;';
         return Database::getRows($sql);
     }
 

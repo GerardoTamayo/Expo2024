@@ -38,7 +38,7 @@ if (isset($_GET['action'])) {
                 if (
                     !$compra->setFecha($_POST['fecha_compra']) or
                     !$compra->setCorrelativo($_POST['numero_correlativo']) or
-                    !$compra->setEstado($_POST['estado_compra']) or
+                    !$compra->setEstado(isset($_POST['estado_compra'])? 1 : 0) or
                     !$compra->setIdProveedor($_POST['id_vendedor'])
                 ) {
                     $result['error'] = $compra->getDataError();
@@ -64,7 +64,7 @@ if (isset($_GET['action'])) {
                     !$compra->setId($_POST['id_compra']) or
                     !$compra->setFecha($_POST['fecha_compra']) or
                     !$compra->setCorrelativo($_POST['numero_correlativo']) or
-                    !$compra->setEstado($_POST['estado_compra']) or
+                    !$compra->setEstado(isset($_POST['estado_compra'])? 1 : 0) or
                     !$compra->setIdProveedor($_POST['id_vendedor'] )
                 ) {
                     $result['error'] = $compra->getDataError();
