@@ -34,7 +34,7 @@
                                 <button type="submit" class="btn btn-success">
                                     <i class="bi bi-search"></i>
                                 </button>
-                                <button type="reset" class="btn btn-secondary">
+                                <button type="reset" class="btn btn-secondary" onclick="fillTable()">
                                     <i class="bi bi-x-square-fill"></i>
                                 </button>
                             </div>
@@ -60,16 +60,6 @@
                             <th>CATEGORIA</th>
                             <th>ACCIONES</th>
                         </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>Detergente</td>
-                            <td>
-                                <button type="button" class="btn btn-outline-danger" onclick="openDelete()"><i
-                                        class="bi bi-trash-fill"></i></button>
-                                <button type="button" class="btn btn-outline-dark" onclick="openUpdate()"><i
-                                        class="bi bi-pencil-square"></i></button>
-                            </td>
-                        </tr>
                     </thead>
                     <!-- Cuerpo de la tabla para mostrar un registro por fila -->
                     <tbody id="tableBody"></tbody>
@@ -88,7 +78,7 @@
                             <form id="formulario_guardar">
                                 <div class="modal-body row g-3 justify-content-center">
                                     <!-- Campo oculto para asignar el id del registro al momento de modificar -->
-                                    <input type="hidden" id="id_categoria" name="id_categoria">
+                                    <input type="number" class="d-none" id="id_categoria" name="id_categoria">
                                     <div class="col-sm-12 col-md-8">
                                         <label for="categoria" class="form-label">
                                             Categoria</label>

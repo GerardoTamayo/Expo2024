@@ -63,18 +63,6 @@
                             <th>EXISTENCIAS</th>
                             <th>ACCIONES</th>
                         </tr>
-                        <tr>
-                            <td>Maiz americano</td>
-                            <td>25/11/24</td>
-                            <td>Apreciado por su alto valor energético, palatabilidad.</td>
-                            <td>100</td>
-                            <td>
-                                <button type="button" class="btn btn-outline-danger" onclick="openDelete()"><i
-                                        class="bi bi-trash-fill"></i></button>
-                                <button type="button" class="btn btn-outline-dark" onclick="openUpdate()"><i
-                                        class="bi bi-pencil-square"></i></button>
-                            </td>
-                        </tr>
                     </thead>
                     <!-- Cuerpo de la tabla para mostrar un registro por fila -->
                     <tbody id="tableBody"></tbody>
@@ -93,7 +81,7 @@
                             <form id="formulario_guardar">
                                 <div class="modal-body row g-3">
                                     <!-- Campo oculto para asignar el id del registro al momento de modificar -->
-                                    <input type="hidden" id="id_producto" name="id_producto">
+                                    <input type="number" class="d-none" id="id_producto" name="id_producto">
                                     <div class="col-sm-12 col-md-6 col-md-6">
                                         <label for="nombre_producto" class="form-label">
                                             Nombre</label>
@@ -149,11 +137,11 @@
                                         </div>
                                     </div>
                                     <div class="col-sm-12 col-md-6 col-md-6">
-                                        <label for="compra_producto" class="form-label">
+                                        <label for="existencias_producto" class="form-label">
                                             Existencias</label>
                                         <div class="input-group">
                                             <i class="input-group-text bi bi-plus-slash-minus"></i>
-                                            <input id="compra_producto" type="number" name="compra_producto"
+                                            <input id="existencias_producto" type="number" name="existencias_producto" min="1"
                                                 class="form-control" required>
                                         </div>
                                     </div>

@@ -48,7 +48,6 @@
                             Agregar</button>
                     </div>
                 </div>
-
                 <!-- Tabla para mostrar los registros existentes -->
                 <table class="table table-bordered" id="footer">
                     <!-- Cabeza de la tabla para mostrar la cantidad de registros y los títulos de las columnas -->
@@ -81,7 +80,7 @@
                             <form id="formulario_guardar">
                                 <div class="modal-body row g-3">
                                     <!-- Campo oculto para asignar el id del registro al momento de modificar -->
-                                    <input type="hidden" id="id_proveedor" name="id_proveedor">
+                                    <input type="number" class="d-none" id="id_proveedor" name="id_proveedor">
                                     <div class="col-sm-12 col-md-6 col-md-6">
                                         <label for="nombre_proveedor" class="form-label">
                                             Nombre</label>
