@@ -103,7 +103,7 @@ class ProductoData extends ProductoHandler
     public function setPresentacion($value)
     {
         if (Validator::validateNaturalNumber($value)) {
-            $this->marca = $value;
+            $this->tipo_presentacion = $value;
             return true;
         } else {
             $this->data_error = 'El identificador de la presentación es incorrecto';
@@ -111,16 +111,16 @@ class ProductoData extends ProductoHandler
         }
     }
 
-    public function setFilename()
-    {
-        if ($data = $this->readFilename()) {
-            $this->filename = $data['imagen'];
-            return true;
-        } else {
-            $this->data_error = 'Producto inexistente';
-            return false;
-        }
-    }
+    // public function setFilename()
+    // {
+    //     if ($data = $this->readFilename()) {
+    //         $this->filename = $data['imagen'];
+    //         return true;
+    //     } else {
+    //         $this->data_error = 'Producto inexistente';
+    //         return false;
+    //     }
+    // }
 
     /*
      *  Métodos para obtener el valor de los atributos adicionales.

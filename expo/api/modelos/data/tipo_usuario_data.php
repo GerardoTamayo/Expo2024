@@ -18,7 +18,7 @@ class TipoUsuariosData extends TiposUsuariosHandler
     public function setId($value)
     {
         if (Validator::validateNaturalNumber($value)) {
-            $this->id = $value;
+            $this->id_tipo = $value;
             return true;
         } else {
             $this->data_error = 'El identificador del tipo de usuario es incorrecto';
@@ -33,7 +33,7 @@ class TipoUsuariosData extends TiposUsuariosHandler
             $this->data_error = 'El Tipo de usuario debe ser un valor alfabético';
             return false;
         } elseif (Validator::validateLength($value, $min, $max)) {
-            $this->Tipo = $value;
+            $this->tipo_usuario = $value;
             return true;
         } else {
             $this->data_error = 'El Tipo de usuario debe tener una longitud entre ' . $min . ' y ' . $max;

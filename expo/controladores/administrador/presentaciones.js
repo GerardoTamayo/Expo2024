@@ -18,8 +18,8 @@ document.addEventListener('DOMContentLoaded', () => {
     loadTemplate();
     // Se establece el título del contenido principal.
     MAIN_TITLE.textContent = 'Administrar presentaciones';
-        // Llamada a la función para llenar la tabla con los registros existentes.
-        fillTable();
+    // Llamada a la función para llenar la tabla con los registros existentes.
+    fillTable();
 })
 
 // Método del evento para cuando se envía el formulario de buscar.

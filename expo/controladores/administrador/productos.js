@@ -19,6 +19,7 @@ const SAVE_FORM = document.getElementById('formulario_guardar'),
     EXISTENCIA_PRODUCTO = document.getElementById('existencias_producto'),
     MARCA_PRODUCTO = document.getElementById('marca_producto'),
     PRESENTACION_PRODUCTO = document.getElementById('presentacion_producto')
+    FECHA_PRODUCTO = document.getElementById('fecha_producto')
     CATEGORIA_PRODUCTO = document.getElementById('categoria_producto');
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -111,25 +112,69 @@ const openCreate = () => {
     SAVE_MODAL.show();
     MODAL_TITLE.textContent = 'Agregar producto';
     // Se prepara el formulario.
-    formulario_guardar.reset();
+    SAVE_FORM.reset();
     fillSelect(CATEGORIA_API, 'readAll', 'categoria_producto');
     fillSelect(MARCA_API, 'readAll', 'marca_producto');
     fillSelect(PRESENTACION_API, 'readAll', 'presentacion_producto');
 }
 
-// modal para actualizar datos
-const openUpdate = () => {
-    // Se muestra la caja de diálogo con su título.
-    UPDATE_MODAL.show();
-    MODAL_TITLE2.textContent = 'Actualizar producto';
-    // Se prepara el formulario.
-    formulario_actualizar.reset();
-    fillSelect(CATEGORIA_API, 'readAll', 'categoria_producto');
-    fillSelect(MARCA_API, 'readAll', 'marca_producto');
-    fillSelect(PRESENTACION_API, 'readAll', 'presentacion_producto');
+/*
+*   Función asíncrona para preparar el formulario al momento de actualizar un registro.
+*   Parámetros: id (identificador del registro seleccionado).
+*   Retorno: ninguno.
+*/
+const openUpdate = async (id) => {
+    console.log(id);
+    // Se define un objeto con los datos del registro seleccionado.
+    const FORM = new FormData();
+    FORM.append('id_producto', id);
+    // Petición para obtener los datos del registro solicitado.
+    const DATA = await fetchData(PRODUCTO_API, 'readOne', FORM);
+    // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
+    if (DATA.status) {
+        // Se muestra la caja de diálogo con su título.
+        SAVE_MODAL.show();
+        MODAL_TITLE.textContent = 'Actualizar producto';
+        // Se prepara el formulario.
+        SAVE_FORM.reset();
+        // Se inicializan los campos con los datos.
+        const ROW = DATA.dataset;
+        ID_PRODUCTO.value = ROW.id_producto;
+        NOMBRE_PRODUCTO.value = ROW.nombre_producto;
+        FECHA_PRODUCTO.value = ROW.fecha_vencimiento;
+        DESCRIPCION_PRODUCTO.value = ROW.descripcion;
+        EXISTENCIA_PRODUCTO.value = ROW.existencias_producto;
+        fillSelect(CATEGORIA_API, 'readAll', 'categoria_producto', ROW.id_categoria);
+        fillSelect(MARCA_API, 'readAll', 'marca_producto', ROW.id_marca);
+        fillSelect(PRESENTACION_API, 'readAll', 'presentacion_producto', ROW.id_tipo_presentacion);
+    } else {
+        sweetAlert(2, DATA.error, false);
+    }
 }
 
-const openDelete = async () => {
+/*
+*   Función asíncrona para eliminar un registro.
+*   Parámetros: id (identificador del registro seleccionado).
+*   Retorno: ninguno.
+*/
+const openDelete = async (id) => {
     // Llamada a la función para mostrar un mensaje de confirmación, capturando la respuesta en una constante.
-    const RESPONSE = await confirmarAction('¿Desea eliminar este producto de forma permanente?');
+    const RESPONSE = await confirmAction('¿Desea eliminar el producto de forma permanente?');
+    // Se verifica la respuesta del mensaje.
+    if (RESPONSE) {
+        // Se define una constante tipo objeto con los datos del registro seleccionado.
+        const FORM = new FormData();
+        FORM.append('id_producto', id);
+        // Petición para eliminar el registro seleccionado.
+        const DATA = await fetchData(PRODUCTO_API, 'deleteRow', FORM);
+        // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
+        if (DATA.status) {
+            // Se muestra un mensaje de éxito.
+            await sweetAlert(1, DATA.message, true);
+            // Se carga nuevamente la tabla para visualizar los cambios.
+            fillTable();
+        } else {
+            sweetAlert(2, DATA.error, false);
+        }
+    }
 }

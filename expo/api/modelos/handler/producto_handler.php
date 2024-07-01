@@ -50,7 +50,7 @@ class ProductoHandler
     // Fucnión para leer todos los productos. 
     public function readAll()
     {
-        $sql = 'SELECT p.nombre_producto, p.fecha_vencimiento, p.descripcion, p.existencias_producto, p.id_tipo_presentacion, tipo_presentacion, p.id_categoria, nombre_categoria, p.id_marca, nombre_marca
+        $sql = 'SELECT p.id_producto, p.nombre_producto, p.fecha_vencimiento, p.descripcion, p.existencias_producto, p.id_tipo_presentacion, tipo_presentacion, p.id_categoria, nombre_categoria, p.id_marca, nombre_marca
                 FROM tb_productos p
                 INNER JOIN tipo_presentaciones USING(id_tipo_presentacion)
                 INNER JOIN tb_categorias USING(id_categoria)
@@ -62,7 +62,7 @@ class ProductoHandler
     // Función para leer un producto.
     public function readOne()
     {
-        $sql = 'SELECT p.nombre_producto, p.fecha_vencimiento, p.descripcion, p.existencias_producto, p.id_tipo_presentacion, tipo_presentacion, p.id_categoria, nombre_categoria, p.id_marca, nombre_marca
+        $sql = 'SELECT p.id_producto, p.nombre_producto, p.fecha_vencimiento, p.descripcion, p.existencias_producto, p.id_tipo_presentacion, tipo_presentacion, p.id_categoria, nombre_categoria, p.id_marca, nombre_marca
                 FROM tb_productos p
                 INNER JOIN tipo_presentaciones USING(id_tipo_presentacion)
                 INNER JOIN tb_categorias USING(id_categoria)

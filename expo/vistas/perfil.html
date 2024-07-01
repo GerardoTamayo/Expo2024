@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <!-- Titulo del documento -->
+    <title></title>
+    <!-- Metadatos de la página web -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Llamada a las hojas de estilos del framework e iconos -->
+    <link type="text/css" rel="stylesheet" href="../recursos/css/bootstrap.min.css">
+    <link type="text/css" rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+<body>
+    <div class="container-fluid">
+        <div class="row flex-nowrap" id="inicio">
+            <div class="col py-3" id="main">
+                <!-- Título del contenido principal -->
+                <h5 id="mainTitle" class="text-center"></h5>
+                <!-- Formulario para cambiar datos personales -->
+                <form class="row g-3" id="profileForm">
+                    <div class="col-sm-12 col-md-6 col-lg-4 offset-lg-2">
+                        <label for="nombre_perfil" class="form-label">Nombre</label>
+                        <input id="nombre_perfil" type="text" name="nombre_perfil" class="form-control" required>
+                    </div>
+                    <div class="col-sm-12 col-md-6 col-lg-4">
+                        <label for="apellido_perfil" class="form-label">Apellido</label>
+                        <input id="apellido_perfil" type="text" name="apellido_perfil" class="form-control" required>
+                    </div>
+                    <div class="col-sm-12 col-md-6 col-lg-4 offset-lg-2">
+                        <label for="correo_perfil" class="form-label">Correo</label>
+                        <input id="correo_perfil" type="email" name="correo_perfil" class="form-control" required>
+                    </div>
+                    <div class="text-center p-3 col-md-6">
+                        <button type="submit" class="btn btn-outline-primary"><i class="bi bi-floppy2"></i> Guardar
+                            cambios</button>
+                    </div>
+                    <div class="text-center p-3 col-md-5">
+                        <button type="button" class="btn btn-outline-danger" onclick="openPassword()">
+                            <i class="bi bi-key-fill"></i> Cambiar contraseña
+                        </button>
+                    </div>
+                </form>
+                <!-- Contenedor con enlace para abrir la caja de diálogo del formulario de cambiar constraseña -->
+                <!-- Componente Modal para mostrar el formulario de cambio de contraseña -->
+                <div class="modal fade" id="modal_contra" data-bs-backdrop="static" data-bs-keyboard="false"
+                    tabindex="-1" aria-labelledby="modalTitle" aria-hidden="true">
+                    <div class="modal-dialog modal-lg modal-dialog-centered">
+                        <!-- Contenido del componente Modal -->
+                        <div class="modal-content">
+                            <div class="modal-header text-center">
+                                <h1 class="modal-title fs-5" id="modalTitle">Cambiar contraseña</h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <!-- Formulario para actualizar contraseña -->
+                            <form id="passwordForm">
+                                <div class="modal-body row g-3">
+                                    <div class="col-sm-12 col-md-6 offset-md-3 text-center">
+                                        <label for="contra_actual" class="form-label">Contraseña actual</label>
+                                        <input id="contra_actual" type="password" name="contra_actual"
+                                            class="form-control" required>
+                                    </div>
+                                    <div class="col-12 text-center">
+                                        <span>
+                                            <h5>Nueva contraseña</h5>
+                                        </span>
+                                    </div>
+                                    <div class="col-sm-12 col-md-6 text-center">
+                                        <label for="contra_reciente" class="form-label">Contraseña</label>
+                                        <input id="contra_reciente" type="password" name="contra_reciente"
+                                            class="form-control" required>
+                                    </div>
+                                    <div class="col-sm-12 col-md-6 text-center">
+                                        <label for="repetir_contra" class="form-label">Confirmar contraseña</label>
+                                        <input id="repetir_contra" type="password" name="repetir_contra"
+                                            class="form-control" required>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="submit" class="btn btn-primary">Guardar</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript" src="../recursos/js/bootstrap.bundle.min.js"></script>
+    <script type="text/javascript" src="../recursos/js/sweetalert.min.js"></script>
+    <script type="text/javascript" src="../recursos/js/vanillaTextMask.js"></script>
+    <script type="text/javascript" src="../controladores/utilidades/plantilla.js"></script>
+    <script type="text/javascript" src="../controladores/utilidades/componentes.js"></script>
+    <script type="text/javascript" src="../controladores/administrador/perfil.js"></script>
+</body>
+
+</html>

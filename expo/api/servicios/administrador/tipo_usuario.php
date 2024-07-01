@@ -28,7 +28,7 @@ if (isset($_GET['action'])) {
             case 'createRow':
                 $_POST = Validator::validateForm($_POST);
                 if (
-                    !$tipo->setTipo($_POST['nombreTipo'])
+                    !$tipo->setTipo($_POST['tipo_usuario'])
                 ) {
                     $result['error'] = $tipo->getDataError();
                 } elseif ($tipo->createRow()) {
@@ -62,7 +62,7 @@ if (isset($_GET['action'])) {
                 $_POST = Validator::validateForm($_POST);
                 if (
                     !$tipo->setId($_POST['idTipo']) or
-                    !$tipo->setTipo($_POST['nombreTipo'])
+                    !$tipo->setTipo($_POST['tipo_usuario'])
                 ) {
                     $result['error'] = $tipo->getDataError();
                 } elseif ($tipo->updateRow()) {

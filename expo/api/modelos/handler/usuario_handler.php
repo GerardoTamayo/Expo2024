@@ -60,7 +60,7 @@ class UsuarioHandler
         $sql = 'UPDATE tb_usuarios
                 SET clave_usuario = ?
                 WHERE id_usuario = ?';
-        $params = array($this->clave, $_SESSION['idusuario']);
+        $params = array($this->clave, $_SESSION['id_usuario']);
         return Database::executeRow($sql, $params);
     }
 
@@ -70,17 +70,17 @@ class UsuarioHandler
         $sql = 'SELECT id_usuario, nombre_usuario, apellido_usuario, correo_usuario
                 FROM tb_usuarios
                 WHERE id_usuario = ?';
-        $params = array($_SESSION['idusuario']);
+        $params = array($_SESSION['id_usuario']);
         return Database::getRow($sql, $params);
     }
 
     // Función para leer perfil.
     public function editProfile()
     {
-        $sql = 'UPDATE usuario
+        $sql = 'UPDATE tb_usuarios
                 SET nombre_usuario = ?, apellido_usuario = ?, correo_usuario = ?
                 WHERE id_usuario = ?';
-        $params = array($this->nombre, $this->apellido, $this->correo, $this->alias, $_SESSION['idusuario']);
+        $params = array($this->nombre, $this->apellido, $this->correo, $_SESSION['id_usuario']);
         return Database::executeRow($sql, $params);
     }
 

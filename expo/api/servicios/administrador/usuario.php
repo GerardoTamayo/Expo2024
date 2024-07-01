@@ -35,7 +35,7 @@ if (isset($_GET['action'])) {
                     !$administrador->setTipo($_POST['tipo_usuario'])
                 ) {
                     $result['error'] = $administrador->getDataError();
-                } elseif ($_POST['clave_usuario'] != $_POST['confirmarClave']) {
+                } elseif ($_POST['clave_usuario'] != $_POST['repetir_contra']) {
                     $result['error'] = 'Contraseñas diferentes';
                 } elseif ($administrador->createRow()) {
                     $result['status'] = 1;
@@ -116,26 +116,25 @@ if (isset($_GET['action'])) {
             case 'editProfile':
                 $_POST = Validator::validateForm($_POST);
                 if (
-                    !$administrador->setNombre($_POST['nombre_usuario']) or
-                    !$administrador->setApellido($_POST['apellido_usuario']) or
-                    !$administrador->setCorreo($_POST['correo_usuario'])
+                    !$administrador->setNombre($_POST['nombre_perfil']) or
+                    !$administrador->setApellido($_POST['apellido_perfil']) or
+                    !$administrador->setCorreo($_POST['correo_perfil'])
                 ) {
                     $result['error'] = $administrador->getDataError();
                 } elseif ($administrador->editProfile()) {
                     $result['status'] = 1;
                     $result['message'] = 'Perfil modificado correctamente';
-                    $_SESSION['aliasAdministrador'] = $_POST['aliasAdministrador'];
                 } else {
                     $result['error'] = 'Ocurrió un problema al modificar el perfil';
                 }
                 break;
             case 'changePassword':
                 $_POST = Validator::validateForm($_POST);
-                if (!$administrador->checkPassword($_POST['claveActual'])) {
+                if (!$administrador->checkPassword($_POST['contra_actual'])) {
                     $result['error'] = 'Contraseña actual incorrecta';
-                } elseif ($_POST['claveNueva'] != $_POST['confirmarClave']) {
+                } elseif ($_POST['contra_reciente'] != $_POST['repetir_contra']) {
                     $result['error'] = 'Confirmación de contraseña diferente';
-                } elseif (!$administrador->setClave($_POST['claveNueva'])) {
+                } elseif (!$administrador->setClave($_POST['contra_reciente'])) {
                     $result['error'] = $administrador->getDataError();
                 } elseif ($administrador->changePassword()) {
                     $result['status'] = 1;
@@ -167,7 +166,7 @@ if (isset($_GET['action'])) {
                     !$administrador->setClave($_POST['clave_usuario'])
                 ) {
                     $result['error'] = $administrador->getDataError();
-                } elseif ($_POST['clave_usuario'] != $_POST['confirmarClave']) {
+                } elseif ($_POST['clave_usuario'] != $_POST['repetir_contra']) {
                     $result['error'] = 'Contraseñas diferentes';
                 } elseif ($administrador->firstUser()) {
                     $result['status'] = 1;

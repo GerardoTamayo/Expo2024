@@ -60,16 +60,6 @@
                             <th>Tipo de usuario</th>
                             <th>ACCIONES</th>
                         </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>administrador</td>
-                            <td>
-                                <button type="button" class="btn btn-outline-danger" onclick="openDelete()"><i
-                                        class="bi bi-trash-fill"></i></button>
-                                <button type="button" class="btn btn-outline-dark" onclick="openUpdate()"><i
-                                        class="bi bi-pencil-square"></i></button>
-                            </td>
-                        </tr>
                     </thead>
                     <!-- Cuerpo de la tabla para mostrar un registro por fila -->
                     <tbody id="tableBody"></tbody>
@@ -84,10 +74,10 @@
                                     aria-label="Close"></button>
                             </div>
                             <!-- Formulario para actualizar un registro -->
-                            <form id="formulario_actualizar">
+                            <form id="formulario_guardar">
                                 <div class="modal-body row g-3 justify-content-center">
                                     <!-- Campo oculto para asignar el id del registro al momento de modificar -->
-                                    <input type="number" class="d-none" id="idProducto" name="idProducto">
+                                    <input type="number" class="d-none" id="idTipo" name="idTipo">
                                     <div class="col-sm-12 col-md-6">
                                         <label for="tipo_usuario" class="form-label">
                                             Tipo de usuario</label>

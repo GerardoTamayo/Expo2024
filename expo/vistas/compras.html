@@ -63,18 +63,6 @@
                             <th>VENDEDOR</th>
                             <th>ACCIONES</th>
                         </tr>
-                        <tr>
-                            <td>25-11-24</td>
-                            <td>1</td>
-                            <td>Lorem ipsum</td>
-                            <td>Lorem ipsum</td>
-                            <td>
-                                <button type="button" class="btn btn-outline-danger" onclick="openDelete()"><i
-                                        class="bi bi-trash-fill"></i></button>
-                                <button type="button" class="btn btn-outline-dark" onclick="openUpdate()"><i
-                                        class="bi bi-pencil-square"></i></button>
-                            </td>
-                        </tr>
                     </thead>
                     <!-- Cuerpo de la tabla para mostrar un registro por fila -->
                     <tbody id="tableBody"></tbody>
@@ -93,9 +81,9 @@
                             <form id="formulario_guardar">
                                 <div class="modal-body row g-3">
                                     <!-- Campo oculto para asignar el id del registro al momento de modificar -->
-                                    <input type="number" class="d-none" id="idProducto" name="idProducto">
+                                    <input type="number" class="d-none" id="id_compra" name="id_compra">
                                     <div class="col-sm-12 col-md-6 col-md-6">
-                                        <label for="nombreCliente" class="form-label">
+                                        <label for="fecha_compra" class="form-label">
                                             Fecha compra</label>
                                         <div class="input-group">
                                             <i class="input-group-text bi bi-calendar"></i>
@@ -104,7 +92,7 @@
                                         </div>
                                     </div>
                                     <div class="col-sm-12 col-md-6 col-md-6">
-                                        <label for="nombreCliente" class="form-label">
+                                        <label for="numero_correlativo" class="form-label">
                                             Número correlativo</label>
                                         <div class="input-group">
                                             <i class="input-group-text bi bi-receipt"></i>
@@ -113,21 +101,23 @@
                                         </div>
                                     </div>
                                     <div class="col-sm-12 col-md-6 col-md-6">
-                                        <label for="nombreCliente" class="form-label">
+                                        <label for="estado_compra" class="form-label">
                                             Estado compra</label>
                                         <div class="input-group">
                                             <i class="input-group-text bi bi-dropbox"></i>
                                             <select id="estado_compra" type="number" name="estado_compra"
-                                                class="form-select" required></select>
+                                                class="form-select" required>
+                                                <option value="0">Cancelado</option>
+                                                <option value="1">No cancelado</option>
+                                            </select>
                                         </div>
                                     </div>
                                     <div class="col-sm-12 col-md-6 col-md-6">
-                                        <label for="nombreCliente" class="form-label">
+                                        <label for="id_vendedor" class="form-label">
                                             Vendedor</label>
                                         <div class="input-group">
-                                            <i class="input-group-text bi bi-person-vcard-fill"></i>
-                                            <select id="id_vendedor type="number" name="id_vendedor"
-                                                class="form-select" required></select>
+                                            <i class="input-group-text bi bi-person-fill"></i>
+                                            <select id="id_vendedor" type="text" name="id_vendedor" class="form-select"></select>
                                         </div>
                                     </div>
                                 </div>

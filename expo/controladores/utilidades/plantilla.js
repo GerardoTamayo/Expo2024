@@ -62,6 +62,11 @@ const loadTemplate = async () => {
                             <i class="fs-4 bi-person-badge-fill"></i> <span class="ms-1 d-none d-sm-inline">Vendedores</span>
                         </a>
                     </li>
+                    <li>
+                        <a href="perfil.html" class="nav-link px-0 align-middle text-dark">
+                            <i class="bi bi-person-circle"></i> <span class="ms-1 d-none d-sm-inline">Perfil</span>
+                        </a>
+                    </li>
                 </ul>
                 <hr>
                 <div>

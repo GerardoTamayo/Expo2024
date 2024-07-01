@@ -34,7 +34,7 @@
                                 <button type="submit" class="btn btn-success">
                                     <i class="bi bi-search"></i>
                                 </button>
-                                <button type="reset" class="btn btn-secondary">
+                                <button type="reset" class="btn btn-secondary" onclick="fillTable()">
                                     <i class="bi bi-x-square-fill"></i>
                                 </button>
                             </div>
@@ -62,19 +62,6 @@
                             <th>DUI</th>
                             <th>DIRECCIÓN</th>
                             <th>ACCIONES</th>
-                        </tr>
-                        <tr>
-                            <td>Gerardo Javier</td>
-                            <td>Tamayo Menendez</td>
-                            <td>72212777</td>
-                            <td>1234567-9</td>
-                            <td>Avenida Aguilares 218, San Salvador, El Salvador</td>
-                            <td>
-                                <button type="button" class="btn btn-outline-danger" onclick="openDelete()"><i
-                                        class="bi bi-trash-fill"></i></button>
-                                <button type="button" class="btn btn-outline-dark" onclick="openUpdate()"><i
-                                        class="bi bi-pencil-square"></i></button>
-                            </td>
                         </tr>
                     </thead>
                     <!-- Cuerpo de la tabla para mostrar un registro por fila -->
@@ -118,7 +105,7 @@
                                             Teléfono</label>
                                         <div class="input-group">
                                             <i class="input-group-text bi bi-telephone-fill"></i>
-                                            <input id="telefono_cliente" type="text" name="telefono"
+                                            <input id="telefono_cliente" type="text" name="telefono_cliente"
                                                 class="form-control" required>
                                         </div>
                                     </div>
