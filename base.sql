@@ -37,8 +37,7 @@ CREATE TABLE tb_usuarios (
     id_usuario INT AUTO_INCREMENT PRIMARY KEY,
     nombre_usuario VARCHAR(50) NOT NULL,
     apellido_usuario VARCHAR(50) NOT NULL,
-    usuario VARCHAR(25) NOT NULL,
-    clave_usuario VARCHAR(25) NOT NULL,
+    clave_usuario VARCHAR(100) NOT NULL,
     correo_usuario VARCHAR(100) NOT NULL,
     id_tipo INT NOT NULL
 );
@@ -46,7 +45,7 @@ CREATE TABLE tb_usuarios (
 CREATE TABLE tb_productos (
     id_producto INT AUTO_INCREMENT PRIMARY KEY,
     nombre_producto VARCHAR(50) NOT NULL,
-    fecha_vencimiento DATETIME NOT NULL,
+    fecha_vencimiento DATE NOT NULL,
     descripcion VARCHAR(100) NOT NULL,
     existencias_producto INT NOT NULL,
     CONSTRAINT chk_existencias_producto CHECK (existencias_producto >= 0),
@@ -58,10 +57,10 @@ CREATE TABLE tb_productos (
 
 CREATE TABLE tb_compras (
     id_compra INT AUTO_INCREMENT PRIMARY KEY,
-    fecha_compra DATETIME NOT NULL,
+    fecha_compra DATE NOT NULL,
     numero_correlativo INT NOT NULL,
     CONSTRAINT chk_numero_correlativo CHECK (numero_correlativo >= 0),
-    estado_compra ENUM('Cancelada', 'No cancelada') NOT NULL,
+    estado_compra BOOLEAN NOT NULL,
     id_proveedor INT NOT NULL
 );
 
@@ -79,6 +78,7 @@ CREATE TABLE tb_ventas (
     id_venta INT AUTO_INCREMENT PRIMARY KEY,
     fecha_venta DATETIME NOT NULL,
     observacion_venta VARCHAR(100),
+    estado_venta BOOLEAN NOT NULL,
     id_cliente INT
 );
 
@@ -115,7 +115,12 @@ ADD
 ALTER TABLE
     tb_clientes
 ADD
-    UNIQUE (correo_cliente, dui_cliente);
+    UNIQUE (correo_cliente);
+
+ALTER TABLE
+    tb_clientes
+ADD
+    UNIQUE (dui_cliente);
 
 ALTER TABLE
     tb_productos
@@ -204,3 +209,25 @@ ADD
  ALTER TABLE tb_inventarios ADD FOREIGN KEY (id_compra) REFERENCES tb_compras (id_compra);
  
  ALTER TABLE tb_inventarios ADD FOREIGN KEY (id_venta) REFERENCES tb_ventas (id_venta); */
+ 
+INSERT INTO tb_tipousuarios (tipo_usuario)
+VALUES ('Administrador');
+
+SELECT * FROM tb_compras
+
+SELECT 
+    id_compra AS ID, 
+    fecha_compra AS FECHA, 
+    numero_correlativo AS "NUMERO CORRELATIVO", 
+    estado_compra AS ESTADO, 
+    id_proveedor AS PROVEEDOR, 
+    CASE 
+        WHEN estado_compra = 1 THEN 'Cancelada'
+        WHEN estado_compra = 0 THEN 'No cancelada'
+        ELSE 'Otro estado'
+    END AS ESTADO_DESC
+FROM tb_compras
+ORDER BY FECHA;
+
+SELECT id_venta AS ID, fecha_venta AS FECHA, observacion_venta AS OBSERVACION, estado_venta AS ESTADO, id_cliente AS CLIENTE FROM tb_ventas
+        ORDER BY FECHA
