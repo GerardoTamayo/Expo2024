@@ -105,16 +105,21 @@ class VentaHandler
     // Función para leer todos los pedido
     public function readAll()
     {
-        $sql = 'SELECT id_detalle_venta AS ID, cantidad_venta AS CANTIDAD, precio_venta AS PRECIO, id_producto AS PRODUCTO, id_venta as Venta FROM tb_detalle_ventas
-        ORDER BY Venta;';
-        return Database::getRows($sql);
+        $sql = 'SELECT id_detalle_venta AS ID, cantidad_venta AS CANTIDAD, precio_venta AS PRECIO, id_producto, nombre_producto AS PRODUCTO, id_venta as VENTA FROM tb_detalle_ventas
+        INNER JOIN tb_ventas USING(id_venta)
+        INNER JOIN tb_productos USING(id_producto)
+        WHERE id_venta = ?
+        ORDER BY VENTA;';
+        $params = array($this->id_venta);
+        return Database::getRows($sql,$params);
     }
 
     public function readOne()
     {
-        $sql = 'SELECT id_detalle_venta AS ID, cantidad_venta AS CANTIDAD, precio_venta AS PRECIO, id_producto AS PRODUCTO, id_venta as Venta 
-                FROM tb_detalle_ventas
-                WHERE id_detalle_venta = ?';
+        $sql = 'SELECT id_detalle_venta AS ID, cantidad_venta AS CANTIDAD, precio_venta AS PRECIO, id_producto, nombre_producto AS PRODUCTO, id_venta as VENTA FROM tb_detalle_ventas
+        INNER JOIN tb_ventas USING(id_venta)
+        INNER JOIN tb_productos USING(id_producto)
+        WHERE id_detalle_venta = ?';
         $params = array($this->id_detalle_venta);
         return Database::getRow($sql, $params);
     }
@@ -123,7 +128,7 @@ class VentaHandler
     {
         $sql = 'INSERT INTO tb_detalle_ventas(cantidad_venta, precio_venta, id_producto, id_venta)
                 VALUES(?, ?, ?, ?)';
-        $params = array($this->fecha_venta, $this->observacion_venta, $this->estado_venta, $this->id_cliente);
+        $params = array($this->cantidad_venta, $this->precio_venta, $this->id_producto, $this->id_venta);
         return Database::executeRow($sql, $params);
     }
 

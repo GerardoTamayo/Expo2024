@@ -77,11 +77,11 @@ if (isset($_GET['action'])) {
                 break;
             case 'deleteRow':
                 if (
-                    !$venta->setId($_POST['id_venta'])
+                    !$venta->setIdDetalleVenta($_POST['id_detalle_venta'])
                     // !$categoria->setFilename()
                 ) {
                     $result['error'] = $venta->getDataError();
-                } elseif ($venta->deleteRow1()) {
+                } elseif ($venta->deleteRow()) {
                     $result['status'] = 1;
                     $result['message'] = 'venta eliminada correctamente';
                 } else {
@@ -102,6 +102,71 @@ if (isset($_GET['action'])) {
                     $result['error'] = 'Ocurrió un problema al alterar el estado del venta';
                 }
                 break;
+                case 'readAll1':
+                    if (!$venta->setId($_POST['id_venta'])) {
+                        $result['error'] = $venta->getDataError();
+                    } elseif ($result['dataset'] = $venta->readAll()) {
+                        $result['status'] = 1;
+                        $result['message'] = 'Existen ' . count($result['dataset']) . ' registros';
+                    } else {
+                        $result['error'] = 'No hay ventas registrados';
+                    }
+                    break;
+                case 'createRow1':
+                    $_POST = Validator::validateForm($_POST);
+                    if (
+                        !$venta->setCantidad($_POST['cantidad']) or
+                        !$venta->setPrecio($_POST['precio']) or
+                        !$venta->setIdProducto($_POST['producto']) or
+                        !$venta->setIdVenta($_POST['venta'])
+                    ) {
+                        $result['error'] = $venta->getDataError();
+                    } elseif ($venta->createRow()) {
+                        $result['status'] = 1;
+                        $result['message'] = 'venta creada correctamente';
+                    } else {
+                        $result['error'] = 'Ocurrió un problema al crear la venta';
+                    }
+                    break;
+                case 'readOne1':
+                    if (!$venta->setIdDetalleVenta($_POST['id_detalle_venta'])) {
+                        $result['error'] = $venta->getDataError();
+                    } elseif ($result['dataset'] = $venta->readOne()) {
+                        $result['status'] = 1;
+                    } else {
+                        $result['error'] = 'Venta inexistente';
+                    }
+                    break;
+                case 'updateRow1':
+                    $_POST = Validator::validateForm($_POST);
+                    if (
+                        !$venta->setIdDetalleVenta($_POST['id_detalle_venta']) or
+                        !$venta->setCantidad($_POST['cantidad']) or
+                        !$venta->setPrecio($_POST['precio']) or
+                        !$venta->setIdProducto($_POST['producto']) or
+                        !$venta->setIdVenta($_POST['venta'])
+                    ) {
+                        $result['error'] = $venta->getDataError();
+                    } elseif ($venta->updateRow()) {
+                        $result['status'] = 1;
+                        $result['message'] = 'venta modificada correctamente';
+                    } else {
+                        $result['error'] = 'Ocurrió un problema al modificar la venta';
+                    }
+                    break;
+                case 'deleteRow1':
+                    if (
+                        !$venta->setIdDetalleVenta($_POST['id_detalle_venta'])
+                        // !$categoria->setFilename()
+                    ) {
+                        $result['error'] = $venta->getDataError();
+                    } elseif ($venta->deleteRow()) {
+                        $result['status'] = 1;
+                        $result['message'] = 'venta eliminada correctamente';
+                    } else {
+                        $result['error'] = 'Ocurrió un problema al eliminar la venta';
+                    }
+                    break;
             default:
                 $result['error'] = 'Acción no disponible dentro de la sesión';
         }

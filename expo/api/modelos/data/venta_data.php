@@ -27,6 +27,39 @@ class VentaData extends VentaHandler
         }
     }
 
+    public function setIdDetalleVenta($value)
+    {
+        if (Validator::validateNaturalNumber($value)) {
+            $this->id_detalle_venta = $value;
+            return true;
+        } else {
+            $this->data_error = 'El identificador de la venta es incorrecto';
+            return false;
+        }
+    }
+
+    public function setIdProducto($value)
+    {
+        if (Validator::validateNaturalNumber($value)) {
+            $this->id_producto = $value;
+            return true;
+        } else {
+            $this->data_error = 'El identificador de la venta es incorrecto';
+            return false;
+        }
+    }
+
+    public function setIdVenta($value)
+    {
+        if (Validator::validateNaturalNumber($value)) {
+            $this->id_venta = $value;
+            return true;
+        } else {
+            $this->data_error = 'El identificador de la venta es incorrecto';
+            return false;
+        }
+    }
+
 
     // Validación y asignación del estado del pedido.
     public function setEstado($value)
@@ -91,6 +124,28 @@ class VentaData extends VentaHandler
     public function getFilename()
     {
         return $this->filename;
+    }
+
+    public function setCantidad($value)
+    {
+        if (Validator::validateNaturalNumber($value)) {
+            $this->cantidad_venta = $value;
+            return true;
+        } else {
+            $this->data_error = 'La cantidad del producto debe ser mayor o igual a 1';
+            return false;
+        }
+    }
+
+    public function setPrecio($value)
+    {
+        if (Validator::validateMoney($value)) {
+            $this->precio_venta = $value;
+            return true;
+        } else {
+            $this->data_error = 'El precio debe ser un número positivo';
+            return false;
+        }
     }
 
 }
