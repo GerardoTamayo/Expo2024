@@ -19,7 +19,7 @@ const SAVE_FORM = document.getElementById('formulario_guardar'),
     CORREO_USUARIO = document.getElementById('correo_usuario'),
     TIPO_USUARIO = document.getElementById('tipo_usuario'),
     CLAVE_USUARIO = document.getElementById('clave_usuario'),
-    CONFIRMAR_CLAVE = document.getElementById('confirmarClave');
+    CONFIRMAR_CLAVE = document.getElementById('repetir_contra');
 /*
 *   Función asíncrona para llenar la tabla con los registros disponibles.
 *   Parámetros: form (objeto opcional con los datos de búsqueda).
