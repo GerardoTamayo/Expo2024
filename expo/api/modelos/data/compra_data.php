@@ -22,7 +22,7 @@ class CompraData extends CompraHandler
             $this->id_compra = $value;
             return true;
         } else {
-            $this->data_error = 'El identificador del pedido es incorrecto';
+            $this->data_error = 'El identificador de la compra es incorrecto';
             return false;
         }
     }
@@ -32,13 +32,12 @@ class CompraData extends CompraHandler
     public function setEstado($value)
     {
         if (Validator::validateBoolean($value)) {
-            $this->estado_venta = $value;
+            $this->estado_compra = $value;
             return true;
         } else {
             $this->data_error = 'El estado es incorrecto';
             return false;
         }
-           
     }
 
     /*

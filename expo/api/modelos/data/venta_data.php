@@ -38,7 +38,7 @@ class VentaData extends VentaHandler
             $this->data_error = 'El estado es incorrecto';
             return false;
         }
-           
+
     }
 
     /*

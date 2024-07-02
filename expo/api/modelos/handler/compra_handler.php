@@ -32,9 +32,9 @@ class CompraHandler
         WHEN estado_compra = 1 THEN "Cancelada"
         WHEN estado_compra = 0 THEN "No cancelada"
         END AS ESTADO FROM tb_compras
-                WHERE fecha_compra LIKE ?
+                WHERE numero_correlativo LIKE ? or estado_compra like ?
                 ORDER BY FECHA;';
-        $params = array($value);
+        $params = array($value, $value);
         return Database::getRows($sql, $params);
     }
     // Función para leer todos los pedido
@@ -60,8 +60,9 @@ ORDER BY FECHA;';
 
     public function readOne1()
     {
-        $sql = 'SELECT id_compra, fecha_compra, numero_correlativo, estado_compra, id_proveedor
+        $sql = 'SELECT id_compra, fecha_compra, numero_correlativo, estado_compra, id_proveedor, nombre_proveedor
                 FROM tb_compras
+                INNER JOIN tb_proveedores USING(id_proveedor)
                 WHERE id_compra = ?';
         $params = array($this->id_compra);
         return Database::getRow($sql, $params);
