@@ -14,53 +14,42 @@
 </head>
 
 <body>
-
-
     <!-- Contenido del documento -->
     <div class="container-fluid">
         <div class="row flex-nowrap" id="inicio">
             <div class="col py-3" id="main">
                 <!-- Título del contenido principal -->
                 <h3 id="mainTitle"></h3>
-                <!-- Formulario de búsqueda -->
-                <div class="row row-cols-1 row-cols-md-3 g-4">
+                <div class="mt-4 row row-cols-1 row-cols-md-3 g-4">
                     <div class="col">
-                        <div class="card">
-                            <img src="..." class="card-img-top" alt="...">
+                        <div class="card text-bg-primary mb-3">
+                            <div class="card-header bg-transparent border-light">Clientes</div>
                             <div class="card-body">
-                                <h5 class="card-title">Card title</h5>
-                                <p class="card-text">This is a longer card with supporting text below as a natural lead-in to
-                                    additional content. This content is a little bit longer.</p>
+                                <h5 class="card-title">Clientes registrados: 10</h5>
                             </div>
                         </div>
                     </div>
                     <div class="col">
-                        <div class="card">
-                            <img src="..." class="card-img-top" alt="...">
+                        <div class="card text-bg-success mb-3">
+                            <div class="card-header bg-transparent border-light">Productos</div>
                             <div class="card-body">
-                                <h5 class="card-title">Card title</h5>
-                                <p class="card-text">This is a longer card with supporting text below as a natural lead-in to
-                                    additional content. This content is a little bit longer.</p>
+                                <h5 class="card-title">Productos guardados: 256</h5>
                             </div>
                         </div>
                     </div>
                     <div class="col">
-                        <div class="card">
-                            <img src="..." class="card-img-top" alt="...">
+                        <div class="card text-bg-warning mb-3">
+                            <div class="card-header bg-transparent border-light">Ventas</div>
                             <div class="card-body">
-                                <h5 class="card-title">Card title</h5>
-                                <p class="card-text">This is a longer card with supporting text below as a natural lead-in to
-                                    additional content.</p>
+                                <h5 class="card-title">Total en ventas: $896</h5>
                             </div>
                         </div>
                     </div>
                     <div class="col">
-                        <div class="card">
-                            <img src="..." class="card-img-top" alt="...">
+                        <div class="card text-bg-info mb-3">
+                            <div class="card-header bg-transparent border-light">Compras</div>
                             <div class="card-body">
-                                <h5 class="card-title">Card title</h5>
-                                <p class="card-text">This is a longer card with supporting text below as a natural lead-in to
-                                    additional content. This content is a little bit longer.</p>
+                                <h5 class="card-title">Total en compras: $1000</h5>
                             </div>
                         </div>
                     </div>
@@ -68,7 +57,7 @@
             </div>
         </div>
     </div>
-    
+
     <script type="text/javascript" src="../recursos/js/bootstrap.bundle.min.js"></script>
     <script type="text/javascript" src="../recursos/js/sweetalert.min.js"></script>
     <!-- Llamada al controlador general de la aplicación -->
@@ -76,6 +65,7 @@
     <!-- Llamada de la plantilla de la pagina -->
     <script type="text/javascript" src="../controladores/utilidades/plantilla.js"></script>
     <!-- Llamada al controlador de la pagina -->
+    <script type="text/javascript" src="../controladores/administrador/dashboard.js"></script>
 </body>
 
 </html>

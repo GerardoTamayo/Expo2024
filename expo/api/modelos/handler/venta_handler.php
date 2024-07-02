@@ -41,19 +41,19 @@ class VentaHandler
     public function readAll1()
     {
         $sql = 'SELECT id_venta AS ID, 
-fecha_venta AS FECHA, 
-observacion_venta AS OBSERVACION, 
-estado_venta AS ESTADO, 
-id_cliente,
-nombre_cliente AS CLIENTE,
-    CASE 
-        WHEN estado_venta = 1 THEN "Cancelado"
-        WHEN estado_venta = 0 THEN "No cancelado"
-        ELSE "Otro estado"
-    END AS ESTADO_FINAL
- FROM tb_ventas
-INNER JOIN tb_clientes USING(id_cliente)
- ORDER BY FECHA;';
+            fecha_venta AS FECHA, 
+            observacion_venta AS OBSERVACION, 
+            estado_venta AS ESTADO, 
+            id_cliente,
+            nombre_cliente AS CLIENTE,
+                CASE 
+                    WHEN estado_venta = 1 THEN "Cancelado"
+                    WHEN estado_venta = 0 THEN "No cancelado"
+                    ELSE "Otro estado"
+                    END AS ESTADO_FINAL
+                        FROM tb_ventas
+                        INNER JOIN tb_clientes USING(id_cliente)
+                        ORDER BY FECHA;';
         return Database::getRows($sql);
     }
 
@@ -61,8 +61,8 @@ INNER JOIN tb_clientes USING(id_cliente)
     {
         $sql = 'SELECT id_venta, fecha_venta, observacion_venta, estado_venta, id_cliente, nombre_cliente
                 FROM tb_ventas
-INNER JOIN tb_clientes USING(id_cliente)
- WHERE id_venta = ?;';
+                INNER JOIN tb_clientes USING(id_cliente)
+                WHERE id_venta = ?;';
         $params = array($this->id_venta);
         return Database::getRow($sql, $params);
     }
