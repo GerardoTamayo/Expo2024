@@ -126,6 +126,91 @@
                         </div>
                     </div>
                 </div>
+
+                <!-- Componente Modal para guardar un detalle de compra -->
+                <div class="modal fade" id="guardar_detalle" data-bs-backdrop="static" data-bs-keyboard="false"
+                    tabindex="-1" aria-labelledby="titulo_modal" aria-hidden="true">
+                    <div class="modal-dialog modal-xl modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="titulo_detalle"></h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <!-- Nav tabs -->
+                                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                                    <li class="nav-item" role="presentation">
+                                        <button class="nav-link active" id="tabla-tab" data-bs-toggle="tab"
+                                            data-bs-target="#tabla-tab-pane" type="button" role="tab"
+                                            aria-controls="tabla-tab-pane" aria-selected="true">Tabla</button>
+                                    </li>
+                                    <li class="nav-item" role="presentation">
+                                        <button class="nav-link" id="formulario-tab" data-bs-toggle="tab"
+                                            data-bs-target="#formulario-tab-pane" type="button" role="tab"
+                                            aria-controls="formulario-tab-pane"
+                                            aria-selected="false">Formulario</button>
+                                    </li>
+                                </ul>
+                                <!-- Tab panes -->
+                                <div class="tab-content" id="myTabContent">
+                                    <div class="tab-pane fade show active" id="tabla-tab-pane" role="tabpanel"
+                                        aria-labelledby="tabla-tab" tabindex="0">
+                                        <!-- Contenido de la tabla -->
+                                        <div class="text-center py-4">
+                                            <table class="table table-striped">
+                                                <thead>
+                                                    <tr>
+                                                        <td colspan="5" id="rowsFoundDetalle"></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>CANTIDAD</th>
+                                                        <th>PRECIO</th>
+                                                        <th>PRODUCTO</th>
+                                                        <th>CORRELATIVO</th>
+                                                        <th>ACCIONES</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="tableBodyDetalle"></tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane fade" id="formulario-tab-pane" role="tabpanel"
+                                        aria-labelledby="formulario-tab" tabindex="0">
+                                        <!-- Contenido del formulario -->
+                                        <form class="row" id="formulario_detalle">
+                                            <input type="number" class="d-none" id="id_detalle_compra"
+                                                name="id_detalle_compra">
+                                            <div class="col-md-6 mb-3">
+                                                <label for="cantidad" class="form-label">Cantidad</label>
+                                                <input type="number" class="form-control" id="cantidad" name="cantidad"
+                                                    required>
+                                            </div>
+                                            <div class="col-md-6 mb-3">
+                                                <label for="precio" class="form-label">Precio</label>
+                                                <input type="number" class="form-control" id="precio" name="precio"
+                                                    required>
+                                            </div>
+                                            <div class="col-md-6 mb-3">
+                                                <label for="producto" class="form-label">Producto</label>
+                                                <select id="producto" type="text" name="producto" class="form-select"
+                                                    required></select>
+                                            </div>
+                                            <div class="col-md-6 mb-3">
+                                                <label for="correlativo" class="form-label">Correlativo</label>
+                                                <select id="correlativo" type="text" name="correlativo"
+                                                    class="form-select" required></select>
+                                            </div>
+                                            <div class="col-4 mt-5">
+                                                <button type="submit" class="btn btn-primary">Guardar</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

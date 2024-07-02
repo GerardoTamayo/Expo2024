@@ -40,7 +40,7 @@ class CompraHandler
     // Función para leer todos los pedido
     public function readAll1()
     {
-        $sql = 'SELECT id_compra AS ID, fecha_compra AS FECHA, numero_correlativo AS "CORRELATIVO", estado_compra AS ESTADO, id_proveedor, nombre_proveedor AS PROVEEDOR, 
+        $sql = 'SELECT id_compra AS ID,  numero_correlativo AS "CORRELATIVO", fecha_compra AS FECHA, estado_compra AS ESTADO, id_proveedor, nombre_proveedor AS PROVEEDOR, 
 		CASE 
 		WHEN estado_compra = 1 THEN "Cancelada"
         WHEN estado_compra = 0 THEN "No cancelada"
@@ -97,18 +97,37 @@ class CompraHandler
         return Database::executeRow($sql, $params);
     }
 
+    public function searchRows()
+    {
+        $value = '%' . Validator::getSearchValue() . '%';
+        $sql = 'SELECT id_detalle_compra AS ID, cantidad_compra AS CANTIDAD, precio_compra AS PRECIO, id_producto, nombre_producto AS PRODUCTO, id_compra as COMPRA, numero_correlativo AS CORRELATIVO 
+        FROM tb_detalle_compras
+        INNER JOIN tb_compras USING(id_compra)
+        INNER JOIN tb_productos USING(id_producto)
+        ORDER BY COMPRA;';
+        $params = array($value, $value);
+        return Database::getRows($sql, $params);
+    }
+
     // Función para leer todos los pedido
     public function readAll()
     {
-        $sql = 'SELECT id_detalle_compra AS ID, cantidad_compra AS CANTIDAD, precio_compra AS PRECIO, id_producto AS PRODUCTO, id_compra as COMPRA FROM tb_detalle_compras
+        $sql = 'SELECT id_detalle_compra AS ID, cantidad_compra AS CANTIDAD, precio_compra AS PRECIO, id_producto, nombre_producto AS PRODUCTO, id_compra as COMPRA, numero_correlativo AS CORRELATIVO 
+        FROM tb_detalle_compras 
+        INNER JOIN tb_compras USING(id_compra)
+        INNER JOIN tb_productos USING(id_producto)
+        WHERE id_compra = ?
         ORDER BY COMPRA;';
-        return Database::getRows($sql);
+        $params = array($this->id_compra);
+        return Database::getRows($sql, $params);
     }
 
     public function readOne()
     {
-        $sql = 'SELECT id_detalle_compra AS ID, cantidad_compra AS CANTIDAD, precio_compra AS PRECIO, id_producto AS PRODUCTO, id_compra as COMPRA 
+        $sql = 'SELECT id_detalle_compra AS ID, cantidad_compra AS CANTIDAD, precio_compra AS PRECIO, id_producto AS ID_PRODUCTO, nombre_producto AS PRODUCTO, id_compra AS ID_COMPRA, numero_correlativo AS CORRELATIVO 
                 FROM tb_detalle_compras
+                INNER JOIN tb_compras USING(id_compra)
+                INNER JOIN tb_productos USING(id_producto)
                 WHERE id_detalle_compra = ?';
         $params = array($this->id_detalle_compra);
         return Database::getRow($sql, $params);
@@ -118,7 +137,7 @@ class CompraHandler
     {
         $sql = 'INSERT INTO tb_detalle_compras(cantidad_compra, precio_compra, id_producto, id_compra)
                 VALUES(?, ?, ?, ?)';
-        $params = array($this->fecha_compra, $this->numero_correlativo, $this->estado_compra, $this->id_proveedor);
+        $params = array($this->cantidad_compra, $this->precio_compra, $this->id_producto, $this->id_compra);
         return Database::executeRow($sql, $params);
     }
 

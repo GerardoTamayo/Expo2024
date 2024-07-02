@@ -27,6 +27,17 @@ class CompraData extends CompraHandler
         }
     }
 
+    public function setIdDetalle($value)
+    {
+        if (Validator::validateNaturalNumber($value)) {
+            $this->id_detalle_compra = $value;
+            return true;
+        } else {
+            $this->data_error = 'El identificador de la compra es incorrecto';
+            return false;
+        }
+    }
+
 
     // Validación y asignación del estado del pedido.
     public function setEstado($value)
@@ -81,6 +92,39 @@ class CompraData extends CompraHandler
     public function getFilename()
     {
         return $this->filename;
+    }
+
+    public function setCantidad($value)
+    {
+        if (Validator::validateNaturalNumber($value)) {
+            $this->cantidad_compra = $value;
+            return true;
+        } else {
+            $this->data_error = 'La cantidad del producto debe ser mayor o igual a 1';
+            return false;
+        }
+    }
+
+        public function setPrecio($value)
+    {
+        if (Validator::validateMoney($value)) {
+            $this->precio_compra = $value;
+            return true;
+        } else {
+            $this->data_error = 'El precio debe ser un número positivo';
+            return false;
+        }
+    }
+
+    public function setProducto($value)
+    {
+        if (Validator::validateNaturalNumber($value)) {
+            $this->id_producto = $value;
+            return true;
+        } else {
+            $this->data_error = 'error';
+            return false;
+        }
     }
 
 }

@@ -102,6 +102,81 @@ if (isset($_GET['action'])) {
                     $result['error'] = 'Ocurrió un problema al alterar el estado de la compra';
                 }
                 break;
+                case 'searchRows1':
+                    if (!Validator::validateSearch($_POST['search'])) {
+                        $result['error'] = Validator::getSearchError();
+                    } elseif ($result['dataset'] = $compra->searchRows()) {
+                        $result['status'] = 1;
+                        $result['message'] = 'Existen ' . count($result['dataset']) . ' coincidencias';
+                    } else {
+                        $result['error'] = 'No hay coincidencias';
+                    }
+                    break;
+                case 'readAll1':
+                    if (!$compra->setId($_POST['id_compra'])) {
+                        $result['error'] = $compra->getDataError();
+                    } elseif ($result['dataset'] = $compra->readAll()) {
+                        $result['status'] = 1;
+                        $result['message'] = 'Existen ' . count($result['dataset']) . ' registros';
+                    } else {
+                        $result['error'] = 'No hay compras registrados';
+                    }
+                    break;
+                case 'createRow1':
+                    $_POST = Validator::validateForm($_POST);
+                    if (
+                        !$compra->setCantidad($_POST['cantidad']) or
+                        !$compra->setPrecio($_POST['precio']) or
+                        !$compra->setProducto($_POST['producto']) or
+                        !$compra->setId($_POST['correlativo'])
+                    ) {
+                        $result['error'] = $compra->getDataError();
+                    } elseif ($compra->createRow()) {
+                        $result['status'] = 1;
+                        $result['message'] = 'Detalle compra agregado correctamente';
+                    } else {
+                        $result['error'] = 'Ocurrió un problema al crear el detalle';
+                    }
+                    break;
+                case 'readOne1':
+                    if (!$compra->setIdDetalle($_POST['id_detalle_compra'])) {
+                        $result['error'] = $compra->getDataError();
+                    } elseif ($result['dataset'] = $compra->readOne()) {
+                        $result['status'] = 1;
+                    } else {
+                        $result['error'] = 'Compra inexistente';
+                    }
+                    break;
+                case 'updateRow1':
+                    $_POST = Validator::validateForm($_POST);
+                    if (
+                        !$compra->setIdDetalle($_POST['id_detalle_compra']) or
+                        !$compra->setFecha($_POST['cantidad']) or
+                        !$compra->setCorrelativo($_POST['precio']) or
+                        !$compra->setEstado($_POST['producto']) or
+                        !$compra->setIdProveedor($_POST['correlativo'] )
+                    ) {
+                        $result['error'] = $compra->getDataError();
+                    } elseif ($compra->updateRow()) {
+                        $result['status'] = 1;
+                        $result['message'] = 'Detalle compra modificado correctamente';
+                    } else {
+                        $result['error'] = 'Ocurrió un problema al modificar el detalle';
+                    }
+                    break;
+                case 'deleteRow1':
+                    if (
+                        !$compra->setIdDetalle($_POST['id_detalle_compra'])
+                        // !$categoria->setFilename()
+                    ) {
+                        $result['error'] = $compra->getDataError();
+                    } elseif ($compra->deleteRow()) {
+                        $result['status'] = 1;
+                        $result['message'] = 'Detalle compra eliminado correctamente';
+                    } else {
+                        $result['error'] = 'Ocurrió un problema al eliminar el detalle';
+                    }
+                    break;
             default:
                 $result['error'] = 'Acción no disponible fuera de la sesión';
         }
