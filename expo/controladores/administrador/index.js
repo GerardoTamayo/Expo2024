@@ -26,6 +26,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         MAIN_TITLE.textContent = 'Iniciar sesión';
         // Se muestra el formulario para iniciar sesión.
         LOGIN_FORM.classList.remove('d-none');
+        SIGNUP_FORM.remove();
         sweetAlert(4, DATA.message, true);
     } else {
         // Se establece el título del contenido principal.

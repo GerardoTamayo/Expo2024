@@ -90,14 +90,14 @@ if (isset($_GET['action'])) {
                     $result['error'] = 'Ocurrió un problema al eliminar el administrador';
                 }
                 break;
-            // case 'getUser':
-            //     if (isset($_SESSION['aliasAdministrador'])) {
-            //         $result['status'] = 1;
-            //         $result['username'] = $_SESSION['aliasAdministrador'];
-            //     } else {
-            //         $result['error'] = 'Alias de administrador indefinido';
-            //     }
-            //     break;
+            case 'getUser':
+                if (isset($_SESSION['id_usuario'])) {
+                    $result['status'] = 1;
+                    $result['username'] = $_SESSION['id_usuario'];
+                } else {
+                    $result['error'] = 'Nombre de administrador indefinido';
+                }
+                break;
             case 'logOut':
                 if (session_destroy()) {
                     $result['status'] = 1;

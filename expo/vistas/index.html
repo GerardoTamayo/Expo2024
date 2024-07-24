@@ -34,11 +34,11 @@
 
                         <div class="mb-4" h></div>
                         <div class="d-grip">
-                            <button type="submit" class="btn btn-light">Iniciar
+                            <button type="submit" class="btn btn-outline-success">Iniciar
                                 Sesión</button>
                         </div>
                         <div class="my-3 col-md-6">
-                            <button class="btn btn-light" type="button" data-bs-toggle="modal"
+                            <button class="btn btn-outline-info" type="button" data-bs-toggle="modal"
                                 data-bs-target="#recuperar">
                                 ¿Has olvidado tu contraseña?
                             </button>
@@ -52,32 +52,30 @@
                 <div class="row g-3">
                     <div class="col-sm-12 col-md-6">
                         <label for="nombre_usuario" class="form-label">Nombre</label>
-                        <input id="nombre_usuario" type="text" name="nombre_usuario" class="form-control"
-                            required>
+                        <input id="nombre_usuario" type="text" name="nombre_usuario" class="form-control" required>
                     </div>
                     <div class="col-sm-12 col-md-6">
                         <label for="apellido_usuario" class="form-label">Apellido</label>
-                        <input id="apellido_usuario" type="text" name="apellido_usuario" class="form-control"
-                            required>
+                        <input id="apellido_usuario" type="text" name="apellido_usuario" class="form-control" required>
                     </div>
                     <div class="col-sm-12 col-md-6">
                         <label for="correo_usuario" class="form-label">Correo</label>
-                        <input id="correo_usuario" type="email" name="correo_usuario" class="form-control"
-                            required>
+                        <input id="correo_usuario" type="email" name="correo_usuario" class="form-control" required>
                     </div>
                     <div class="col-sm-12 col-md-6">
                         <label for="clave_usuario" class="form-label">Contraseña</label>
-                        <input id="clave_usuario" type="password" name="clave_usuario" class="form-control"
-                            required>
+                        <input id="clave_usuario" type="password" name="clave_usuario" class="form-control" required>
                     </div>
                     <div class="col-sm-12 col-md-6">
                         <label for="repetir_contra" class="form-label">Confirmar contraseña</label>
                         <input id="repetir_contra" type="password" name="repetir_contra" class="form-control" required>
                     </div>
                     <div class="text-center">
-                        <button type="reset" class="btn btn-outline-danger col-6 mt-4"><i class="bi bi-x-square-fill"></i>
+                        <button type="reset" class="btn btn-outline-danger col-6 mt-4"><i
+                                class="bi bi-x-square-fill"></i>
                             Cancelar</button>
-                        <button type="submit" class="btn btn-outline-primary col-6 mt-4"><i class="bi bi-floppy-fill"></i>
+                        <button type="submit" class="btn btn-outline-primary col-6 mt-4"><i
+                                class="bi bi-floppy-fill"></i>
                             Guardar</button>
                     </div>
                 </div>
@@ -128,7 +126,7 @@
             <div class="modal-dialog modal-lg modal-dialog-centered">
                 <div class="modal-content">
                     <div class="modal-header mx-auto">
-                        <img src="/recursos/imagenes/login.png" class="mx-auto d-block" width="150" height="150">
+                        <img src="../recursos/imagenes/login.png" class="mx-auto d-block" width="150" height="150">
                     </div>
                     <div class="modal-body">
                         <div class="card mb-3 d-flex">
@@ -169,6 +167,7 @@
     <!-- Llamada al framework y librería de mensajes -->
     <script type="text/javascript" src="../recursos/js/bootstrap.bundle.min.js"></script>
     <script type="text/javascript" src="../recursos/js/sweetalert.min.js"></script>
+        <!-- Llamada al controlador general de la aplicación -->
     <script type="text/javascript" src="../controladores/utilidades/componentes.js"></script>
     <!-- llamada al controlador de la pagina -->
     <script type="text/javascript" src="../controladores/administrador/index.js"></script>
