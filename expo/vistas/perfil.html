@@ -22,21 +22,22 @@
                 <form class="row g-3" id="profileForm">
                     <div class="col-sm-12 col-md-6 col-lg-4 offset-lg-2">
                         <label for="nombre_perfil" class="form-label">Nombre</label>
-                        <input id="nombre_perfil" type="text" name="nombre_perfil" class="form-control" required>
+                        <input id="nombre_perfil" type="text" name="nombre_perfil" class="form-control"
+                            autocomplete="off" required>
                     </div>
                     <div class="col-sm-12 col-md-6 col-lg-4">
                         <label for="apellido_perfil" class="form-label">Apellido</label>
-                        <input id="apellido_perfil" type="text" name="apellido_perfil" class="form-control" required>
+                        <input id="apellido_perfil" type="text" name="apellido_perfil" class="form-control"
+                            autocomplete="off" required>
                     </div>
                     <div class="col-sm-12 col-md-6 col-lg-4 offset-lg-2">
                         <label for="correo_perfil" class="form-label">Correo</label>
-                        <input id="correo_perfil" type="email" name="correo_perfil" class="form-control" required>
+                        <input id="correo_perfil" type="email" name="correo_perfil" class="form-control"
+                            autocomplete="off" required>
                     </div>
-                    <div class="text-center p-3 col-md-6">
-                        <button type="submit" class="btn btn-outline-primary"><i class="bi bi-floppy2"></i> Guardar
+                    <div class="col-12 text-center mt-4">
+                        <button type="submit" class="btn btn-outline-primary me-2"><i class="bi bi-floppy2"></i> Guardar
                             cambios</button>
-                    </div>
-                    <div class="text-center p-3 col-md-5">
                         <button type="button" class="btn btn-outline-danger" onclick="openPassword()">
                             <i class="bi bi-key-fill"></i> Cambiar contraseña
                         </button>
