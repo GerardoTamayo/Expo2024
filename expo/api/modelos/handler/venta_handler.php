@@ -151,6 +151,15 @@ class VentaHandler
         return Database::executeRow($sql, $params);
     }
 
+    
+    public function totalVenta()
+    {
+        $sql = 'SELECT DATE_FORMAT(v.fecha_venta,  "%Y-%m" ) AS mes, SUM(dv.cantidad_venta * dv.precio_venta) AS total_ventas
+        FROM tb_ventas v JOIN tb_detalle_ventas dv ON v.id_venta = dv.id_venta
+        WHERE YEAR(v.fecha_venta) = YEAR(CURDATE());';
+        return Database::getRows($sql);
+    }
+
     // //Funcion de buscador
     // public function readAllPublic()
     // {

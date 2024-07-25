@@ -59,6 +59,13 @@ class ProductoHandler
         return Database::getRows($sql);
     }
 
+    
+    public function countAllProducts()
+    {
+        $sql = 'SELECT COUNT(*) AS TOTAL FROM tb_productos';
+        return Database::getRows($sql);
+    }
+
     // Función para leer un producto.
     public function readOne()
     {

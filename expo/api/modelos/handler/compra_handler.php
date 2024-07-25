@@ -160,6 +160,14 @@ class CompraHandler
         return Database::executeRow($sql, $params);
     }
 
+    public function totalCompra()
+    {
+        $sql = 'SELECT DATE_FORMAT(c.fecha_compra, "%Y-%m") AS mes, SUM(dc.cantidad_compra * dc.precio_compra) AS total_compras
+        FROM tb_compras c JOIN tb_detalle_compras dc ON c.id_compra = dc.id_compra 
+        WHERE YEAR(c.fecha_compra) = YEAR(CURDATE());';
+        return Database::getRows($sql);
+    }
+
     // //Funcion de buscador
     // public function readAllPublic()
     // {

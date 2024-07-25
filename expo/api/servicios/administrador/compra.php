@@ -33,6 +33,13 @@ if (isset($_GET['action'])) {
                     $result['error'] = 'No hay compras registrados';
                 }
                 break;
+                case 'totalCompra':
+                    if ($result['dataset'] = $compra->totalCompra()) {
+                        $result['status'] = 1;
+                    } else {
+                        $result['error'] = 'No hay compras registrados';
+                    }
+                    break;
             case 'createRow':
                 $_POST = Validator::validateForm($_POST);
                 if (

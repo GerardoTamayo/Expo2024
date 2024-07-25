@@ -51,6 +51,13 @@ if (isset($_GET['action'])) {
                     $result['error'] = 'No existen clientees registrados';
                 }
                 break;
+                case 'countAll':
+                    if ($result['dataset'] = $cliente->countAll()) {
+                        $result['status'] = 1;
+                    } else {
+                        $result['error'] = 'No existen clientees registrados';
+                    }
+                    break;
             case 'readOne':
                 if (!$cliente->setId($_POST['id_cliente'])) {
                     $result['error'] = 'cliente incorrecto';

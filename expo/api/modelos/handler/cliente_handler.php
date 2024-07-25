@@ -53,6 +53,12 @@ class ClienteHandler
         return Database::getRows($sql);
     }
 
+    public function countAll()
+    {
+        $sql = 'SELECT COUNT(*) AS CLIENTES FROM tb_clientes';
+        return Database::getRows($sql);
+    }
+
     // Función para leer un usuario.
     public function readOne()
     {

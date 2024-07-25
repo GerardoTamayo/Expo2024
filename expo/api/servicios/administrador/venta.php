@@ -17,7 +17,7 @@ if (isset($_GET['action'])) {
             case 'searchRows':
                 if (!Validator::validateSearch($_POST['search'])) {
                     $result['error'] = Validator::getSearchError();
-                } elseif ($result['dataset'] = $venta->searchRows()) {
+                } elseif ($result['dataset'] = $venta->searchRows1()) {
                     $result['status'] = 1;
                     $result['message'] = 'Existen ' . count($result['dataset']) . ' coincidencias';
                 } else {
@@ -33,6 +33,14 @@ if (isset($_GET['action'])) {
                     $result['error'] = 'No hay ventas registrados';
                 }
                 break;
+                case 'readTotalVenta':
+                    if ($result['dataset'] = $venta->totalVenta()) {
+                        $result['status'] = 1;
+                        // $result['message'] = 'Existen ' . count($result['dataset']) . ' registros';
+                    } else {
+                        $result['error'] = 'No hay ventas registrados';
+                    }
+                    break;
             case 'createRow':
                 $_POST = Validator::validateForm($_POST);
                 if (
