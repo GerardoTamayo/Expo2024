@@ -213,7 +213,84 @@ ADD
 INSERT INTO tb_tipousuarios (tipo_usuario)
 VALUES ('Administrador');
 
-SELECT * FROM tb_compras
+SELECT * FROM tb_productos
+
+--procedimiento para sumar a las existencias
+DELIMITER //
+
+CREATE PROCEDURE ActualizarStockCompra(IN p_id_compra INT)
+BEGIN
+    DECLARE done INT DEFAULT 0;
+    DECLARE v_id_producto INT;
+    DECLARE v_cantidad_compra INT;
+
+    DECLARE cur CURSOR FOR 
+        SELECT id_producto, cantidad_compra
+        FROM tb_detalle_compras
+        WHERE id_compra = p_id_compra;
+
+    DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = 1;
+
+    OPEN cur;
+
+    read_loop: LOOP
+        FETCH cur INTO v_id_producto, v_cantidad_compra;
+        IF done THEN
+            LEAVE read_loop;
+        END IF;
+
+        -- Actualizar el stock del producto
+        UPDATE tb_productos
+        SET existencias_producto = existencias_producto + v_cantidad_compra
+        WHERE id_producto = v_id_producto;
+    END LOOP;
+
+    CLOSE cur;
+END //
+
+DELIMITER ;
+
+CALL ActualizarStockCompra(17); -- Reemplaza 1 con el ID de la compra que deseas procesar
+
+--procedimiento para restar a las existencias de los productos
+
+DELIMITER //
+
+CREATE PROCEDURE ActualizarStockVenta(IN p_id_venta INT)
+BEGIN
+    DECLARE done INT DEFAULT 0;
+    DECLARE v_id_producto INT;
+    DECLARE v_cantidad_venta INT;
+
+    DECLARE cur CURSOR FOR 
+        SELECT id_producto, cantidad_venta
+        FROM tb_detalle_ventas
+        WHERE id_venta = p_id_venta;
+
+    DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = 1;
+
+    OPEN cur;
+
+    read_loop: LOOP
+        FETCH cur INTO v_id_producto, v_cantidad_venta;
+        IF done THEN
+            LEAVE read_loop;
+        END IF;
+
+        -- Actualizar el stock del producto
+        UPDATE tb_productos
+        SET existencias_producto = existencias_producto - v_cantidad_venta
+        WHERE id_producto = v_id_producto;
+    END LOOP;
+
+    CLOSE cur;
+END //
+
+DELIMITER ;
+
+CALL ActualizarStockVenta(4); -- Reemplaza 1 con el ID de la venta que deseas procesar
+
+
 
 SELECT 
     id_compra AS ID, 

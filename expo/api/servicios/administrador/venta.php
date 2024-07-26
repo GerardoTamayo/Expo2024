@@ -85,11 +85,11 @@ if (isset($_GET['action'])) {
                 break;
             case 'deleteRow':
                 if (
-                    !$venta->setIdDetalleVenta($_POST['id_detalle_venta'])
+                    !$venta->setId($_POST['id_venta'])
                     // !$categoria->setFilename()
                 ) {
                     $result['error'] = $venta->getDataError();
-                } elseif ($venta->deleteRow()) {
+                } elseif ($venta->deleteRow1()) {
                     $result['status'] = 1;
                     $result['message'] = 'venta eliminada correctamente';
                 } else {
