@@ -126,16 +126,16 @@ if (isset($_GET['action'])) {
                         $result['status'] = 1;
                         $result['message'] = 'Existen ' . count($result['dataset']) . ' registros';
                     } else {
-                        $result['error'] = 'No hay compras registrados';
+                        $result['error'] = 'No hay productos registrados';
                     }
                     break;
                 case 'createRow1':
                     $_POST = Validator::validateForm($_POST);
                     if (
+                        !$compra->setId($_POST['id_compra']) or
                         !$compra->setCantidad($_POST['cantidad']) or
                         !$compra->setPrecio($_POST['precio']) or
-                        !$compra->setProducto($_POST['producto']) or
-                        !$compra->setId($_POST['correlativo'])
+                        !$compra->setProducto($_POST['producto'])
                     ) {
                         $result['error'] = $compra->getDataError();
                     } elseif ($compra->createRow()) {
@@ -158,10 +158,10 @@ if (isset($_GET['action'])) {
                     $_POST = Validator::validateForm($_POST);
                     if (
                         !$compra->setIdDetalle($_POST['id_detalle_compra']) or
-                        !$compra->setFecha($_POST['cantidad']) or
-                        !$compra->setCorrelativo($_POST['precio']) or
-                        !$compra->setEstado($_POST['producto']) or
-                        !$compra->setIdProveedor($_POST['correlativo'] )
+                        !$compra->setId($_POST['id_compra']) or
+                        !$compra->setCantidad($_POST['cantidad']) or
+                        !$compra->setPrecio($_POST['precio']) or
+                        !$compra->setProducto($_POST['producto'])
                     ) {
                         $result['error'] = $compra->getDataError();
                     } elseif ($compra->updateRow()) {

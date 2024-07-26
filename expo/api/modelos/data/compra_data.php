@@ -33,7 +33,7 @@ class CompraData extends CompraHandler
             $this->id_detalle_compra = $value;
             return true;
         } else {
-            $this->data_error = 'El identificador de la compra es incorrecto';
+            $this->data_error = 'El identificador del detalle de la  compra es incorrecto';
             return false;
         }
     }

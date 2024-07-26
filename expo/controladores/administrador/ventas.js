@@ -185,6 +185,7 @@ SAVE_FORM_DETALLE.addEventListener('submit', async (event) => {
     (ID_DETALLE_VENTA.value) ? action = 'updateRow1' : action = 'createRow1';
     // Constante tipo objeto con los datos del formulario.
     const FORM = new FormData(SAVE_FORM_DETALLE);
+    FORM.append('venta', id_venta_global);
     // Petición para guardar los datos del formulario.
     const DATA = await fetchData(VENTA_API, action, FORM);
     // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
@@ -194,7 +195,7 @@ SAVE_FORM_DETALLE.addEventListener('submit', async (event) => {
         // Se muestra un mensaje de éxito.
         sweetAlert(1, DATA.message, true);
         const FORM = new FormData();
-        FORM.append('id_venta', idventa)
+        FORM.append('id_venta', id_venta_global)
         // Se carga nuevamente la tabla para visualizar los cambios.
         fillTableDetalle(FORM);
     } else {
@@ -243,18 +244,23 @@ const fillTableDetalle = async (form) => {
     }
 }
 
-
-const openDetalle = (id) => {
-    // Se muestra la caja de diálogo con su título.
-    SAVE_MODAL_DETALLE.show();
-        // Se prepara el formulario.
-    SAVE_FORM_DETALLE.reset();
-    fillSelect(PRODUCTO_API, 'readAll', 'producto');
-    fillSelect(VENTA_API, 'readAll', 'venta');
-    idventa = id;
+let id_venta_global = null;
+const openDetalle = async (id) => {
     const FORM = new FormData();
     FORM.append('id_venta', id)
-    fillTableDetalle(FORM);
+    const DATA = await fetchData(VENTA_API, 'readOne', FORM);
+    if (DATA.status) {
+        // Se muestra la caja de diálogo con su título.
+        SAVE_MODAL_DETALLE.show();
+        // Se prepara el formulario.
+        SAVE_FORM_DETALLE.reset();
+        fillSelect(PRODUCTO_API, 'readAll', 'producto');
+        fillTableDetalle(FORM);
+        id_venta_global = id;
+        console.log(id_venta_global);
+    }else{
+        sweetAlert(2, DATA.error, false);
+    }
 }
 
 const openUpdateDetalle = async (id) => {
@@ -281,11 +287,9 @@ const openUpdateDetalle = async (id) => {
         document.getElementById('cantidad').value = ROW.CANTIDAD;
         document.getElementById('precio').value = ROW.PRECIO;
         document.getElementById('producto').value = ROW.PRODUCTO;
-        document.getElementById('venta').value = ROW.VENTA;
         
         // Llenar el select si es necesario
         fillSelect(PRODUCTO_API, 'readAll', 'producto', ROW.ID_PRODUCTO);
-        fillSelect(VENTA_API, 'readAll', 'venta', ROW.ID_VENTA);
     } else {
         sweetAlert(2, DATA.error, false);
     }
@@ -306,7 +310,7 @@ const openDeleteDetalle = async (id) => {
             // Se muestra un mensaje de éxito.
             await sweetAlert(1, DATA.message, true);
             const FORM = new FormData();
-            FORM.append('id_venta', idventa)
+            FORM.append('id_venta', id_venta_global)
             // Se carga nuevamente la tabla para visualizar los cambios.
             fillTableDetalle(FORM);
         } else {

@@ -1,7 +1,7 @@
 // Constante para completar la ruta de la API.
 const COMPRA_API = 'servicios/administrador/compra.php';
-const  PROVEEDOR_API = 'servicios/administrador/vendedor.php';
-const  PRODUCTO_API = 'servicios/administrador/producto.php';
+const PROVEEDOR_API = 'servicios/administrador/vendedor.php';
+const PRODUCTO_API = 'servicios/administrador/producto.php';
 // Constante para establecer el formulario de buscar.
 const SEARCH_FORM = document.getElementById('searchForm');
 // Constantes para establecer los elementos de la tabla.
@@ -26,9 +26,9 @@ const SAVE_FORM_DETALLE = document.getElementById('formulario_detalle'),
     PRECIO_DETALLE = document.getElementById('precio'),
     PRODUCTO_DETALLE = document.getElementById('producto'),
     CORRELATIVO_DETALLE = document.getElementById('correlativo');
-    // Constantes para establecer los elementos de la tabla.
+// Constantes para establecer los elementos de la tabla.
 const TABLE_BODY_DETALLE = document.getElementById('tableBodyDetalle'),
-ROWS_FOUND_DETALLE = document.getElementById('rowsFoundDetalle');
+    ROWS_FOUND_DETALLE = document.getElementById('rowsFoundDetalle');
 
 document.addEventListener('DOMContentLoaded', () => {
     // Llamada a la función para mostrar el encabezado y pie del documento.
@@ -183,6 +183,7 @@ SAVE_FORM_DETALLE.addEventListener('submit', async (event) => {
     (ID_DETALLE.value) ? action = 'updateRow1' : action = 'createRow1';
     // Constante tipo objeto con los datos del formulario.
     const FORM = new FormData(SAVE_FORM_DETALLE);
+    FORM.append('id_compra', id_compra_global);
     // Petición para guardar los datos del formulario.
     const DATA = await fetchData(COMPRA_API, action, FORM);
     // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
@@ -191,8 +192,10 @@ SAVE_FORM_DETALLE.addEventListener('submit', async (event) => {
         SAVE_MODAL.hide();
         // Se muestra un mensaje de éxito.
         sweetAlert(1, DATA.message, true);
+        const FORM = new FormData();
+        FORM.append('id_compra', id_compra_global);
         // Se carga nuevamente la tabla para visualizar los cambios.
-        fillTableDetalle();
+        fillTableDetalle(FORM);
     } else {
         sweetAlert(2, DATA.error, false);
     }
@@ -238,48 +241,54 @@ const fillTableDetalle = async (form) => {
     }
 }
 
-const openDetalle = (id) => {
-    // Se muestra la caja de diálogo con su título.
-    SAVE_MODAL_DETALLE.show();
-    MODAL_TITLE_DETALLE.textContent = 'Agregar detalle compra';
-        // Se prepara el formulario.
-    SAVE_FORM_DETALLE.reset();
-    fillSelect(PRODUCTO_API, 'readAll', 'producto');
-    fillSelect(COMPRA_API, 'readAll', 'correlativo');
+let id_compra_global = null;
+const openDetalle = async (id) => {
     const FORM = new FormData();
-    FORM.append('id_compra', id)
-    fillTableDetalle(FORM);
+    FORM.append('id_compra', id);
+    console.log(id)
+    const DATA = await fetchData(COMPRA_API, 'readOne', FORM);
+    if (DATA.status) {
+        // Se muestra la caja de diálogo con su título.
+        SAVE_MODAL_DETALLE.show();
+        MODAL_TITLE_DETALLE.textContent = 'Agregar detalle compra';
+        // Se prepara el formulario.
+        SAVE_FORM_DETALLE.reset();
+        fillSelect(PRODUCTO_API, 'readAll', 'producto');
+        fillTableDetalle(FORM);
+        id_compra_global = id;
+        console.log(id_compra_global);
+    } else {
+        sweetAlert(2, DATA.error, false);
+    }
 }
 
 const openUpdateDetalle = async (id) => {
     // Se define una constante tipo objeto con los datos del registro seleccionado.
     const FORM = new FormData();
     FORM.append('id_detalle_compra', id);
-    
+
     // Petición para obtener los datos del registro solicitado.
     const DATA = await fetchData(COMPRA_API, 'readOne1', FORM);
-    
+
     // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
     if (DATA.status) {
-        
+
         // Cambiar al tab del formulario
         const formularioTab = new bootstrap.Tab(document.getElementById('formulario-tab'));
         formularioTab.show();
-        
+
         // Se prepara el formulario.
         SAVE_FORM.reset();
-        
+
         // Se inicializan los campos con los datos.
         const ROW = DATA.dataset;
         document.getElementById('id_detalle_compra').value = ROW.ID;
         document.getElementById('cantidad').value = ROW.CANTIDAD;
         document.getElementById('precio').value = ROW.PRECIO;
         document.getElementById('producto').value = ROW.PRODUCTO;
-        document.getElementById('correlativo').value = ROW.CORRELATIVO;
-        
+
         // Llenar el select si es necesario
         fillSelect(PRODUCTO_API, 'readAll', 'producto', ROW.ID_PRODUCTO);
-        fillSelect(COMPRA_API, 'readAll', 'correlativo', ROW.ID_COMPRA);
     } else {
         sweetAlert(2, DATA.error, false);
     }
@@ -299,8 +308,10 @@ const openDeleteDetalle = async (id) => {
         if (DATA.status) {
             // Se muestra un mensaje de éxito.
             await sweetAlert(1, DATA.message, true);
+            const FORM = new FormData();
+            FORM.append('id_compra', id_compra_global);
             // Se carga nuevamente la tabla para visualizar los cambios.
-            fillTableDetalle();
+            fillTableDetalle(FORM);
         } else {
             sweetAlert(2, DATA.error, false);
         }

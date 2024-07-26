@@ -116,7 +116,7 @@ class VentaHandler
 
     public function readOne()
     {
-        $sql = 'SELECT id_detalle_venta AS ID, cantidad_venta AS CANTIDAD, precio_venta AS PRECIO, id_producto, nombre_producto AS PRODUCTO, id_venta as VENTA FROM tb_detalle_ventas
+        $sql = 'SELECT id_detalle_venta AS ID, cantidad_venta AS CANTIDAD, precio_venta AS PRECIO, id_producto AS ID_PRODUCTO, nombre_producto AS PRODUCTO, id_venta as VENTA FROM tb_detalle_ventas
         INNER JOIN tb_ventas USING(id_venta)
         INNER JOIN tb_productos USING(id_producto)
         WHERE id_detalle_venta = ?';
