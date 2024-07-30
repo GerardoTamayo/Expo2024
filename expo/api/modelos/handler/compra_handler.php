@@ -1,6 +1,6 @@
 <?php
 // Se incluye la clase para trabajar con la base de datos.
-require_once ('../../ayudantes/base_datos.php');
+require_once('../../ayudantes/base_datos.php');
 /*
  *  Clase para manejar el comportamiento de los datos de la tabla administrador.
  */
@@ -168,16 +168,27 @@ class CompraHandler
         return Database::getRows($sql);
     }
 
-    // //Funcion de buscador
-    // public function readAllPublic()
-    // {
-    //     $sql = 'SELECT id_pedido AS ID, fecha_venta AS FECHA, direccion_pedido AS DIRECCION, CASE 
-    //     WHEN estado_pedido = 1 THEN "Entregado"
-    //     WHEN estado_pedido = 0 THEN "Cancelado"
-    //     END AS ESTADO FROM tb_pedidos
-    //     ORDER BY FECHA;';
-    //     return Database::getRows($sql);
-    // }
+    // Método para actualizar la cantidad de un producto agregado a una compra.
+    //actualizar un producto de una compra
+    public function actualizarCompra()
+    {
+        $sql = 'CALL actualizar_detalle_compra(?, ?, ?, ?, ?);';
+        $params = array($this->id_compra, $this->id_detalle_compra, $this->cantidad_compra, $this->id_producto, $this->precio_compra);
+        return Database::executeRow($sql, $params);
+    }
 
+    public function agregarCompra()
+    {
+        $sql = 'CALL insertar_orden_validado(?, ?, ?, ?);';
+        $params = array($this->id_compra, $this->cantidad_compra, $this->id_producto, $this->precio_compra);
+        return Database::executeRow($sql, $params);
+    }
+
+    public function eliminarCompra()
+    {
+        $sql = 'CALL eliminar_detalle_compra(?, ?);';
+        $params = array($this->id_detalle_compra, $this->id_compra);
+        return Database::executeRow($sql, $params);
+    }
 
 }

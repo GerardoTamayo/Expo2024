@@ -176,39 +176,6 @@ ALTER TABLE
     tb_detalle_ventas
 ADD
     CONSTRAINT fk_id_producto_detalle_ventas FOREIGN KEY (id_producto) REFERENCES tb_productos (id_producto);
-
-/*relaciones anteriores de eliminar tabla inventarios y agregar tabla detalle compra y venta y modifcar talba vendedores a proveedores
- CREATE TABLE tb_inventarios (
- id_inventario INT AUTO_INCREMENT PRIMARY KEY,
- id_producto INT NOT NULL,
- existencias_producto INT NOT NULL,
- id_venta INT NOT NULL,
- id_compra INT NOT NULL
- );
- 
- ALTER TABLE tb_productos ADD CONSTRAINT fk_id_categoria FOREIGN KEY (id_categoria) REFERENCES tb_categorias (id_categoria);
- 
- ALTER TABLE tb_productos ADD CONSTRAINT fk_id_tipo_presentacion FOREIGN KEY (id_tipo_presentacion) REFERENCES tipo_presentaciones (id_tipo_presentacion);
- 
- ALTER TABLE tb_productos ADD CONSTRAINT fk_id_marca FOREIGN KEY (id_marca) REFERENCES tb_marcas (id_marca);
- 
- ALTER TABLE tb_usuarios ADD CONSTRAINT fk_id_tipo FOREIGN KEY (id_tipo) REFERENCES tb_tipousuarios (id_tipo);
- 
- ALTER TABLE tb_compras ADD CONSTRAINT fk_id_vendedor FOREIGN KEY (id_vendedor) REFERENCES tb_vendedores (id_vendedor);
- 
- ALTER TABLE tb_productos ADD CONSTRAINT fk_id_usuario FOREIGN KEY (id_usuario) REFERENCES tb_usuarios (id_usuario);
- 
- ALTER TABLE tb_ventas ADD CONSTRAINT fk_id_cliente FOREIGN KEY (id_cliente) REFERENCES tb_clientes (id_cliente);
- 
- ALTER TABLE tb_compras ADD FOREIGN KEY (id_producto) REFERENCES tb_productos (id_producto);
- 
- ALTER TABLE tb_ventas ADD FOREIGN KEY (id_producto) REFERENCES tb_productos (id_producto);
- 
- ALTER TABLE tb_inventarios ADD CONSTRAINT fk_id_producto FOREIGN KEY (id_producto) REFERENCES tb_productos (id_producto);
- 
- ALTER TABLE tb_inventarios ADD FOREIGN KEY (id_compra) REFERENCES tb_compras (id_compra);
- 
- ALTER TABLE tb_inventarios ADD FOREIGN KEY (id_venta) REFERENCES tb_ventas (id_venta); */
  
 INSERT INTO tb_tipousuarios (tipo_usuario)
 VALUES ('Administrador');
@@ -216,80 +183,120 @@ VALUES ('Administrador');
 SELECT * FROM tb_productos
 
 --procedimiento para sumar a las existencias
-DELIMITER //
 
-CREATE PROCEDURE ActualizarStockCompra(IN p_id_compra INT)
+DROP PROCEDURE IF EXISTS insertar_orden_validado;
+
+DELIMITER $$
+CREATE PROCEDURE insertar_orden_validado(
+    IN p_id_compra INT,
+    IN p_cantidad_comprada INT,
+    IN p_id_producto INT, 
+    IN p_precio DECIMAL(10, 2)
+)
 BEGIN
-    DECLARE done INT DEFAULT 0;
-    DECLARE v_id_producto INT;
-    DECLARE v_cantidad_compra INT;
+    DECLARE mensaje VARCHAR(255);
 
-    DECLARE cur CURSOR FOR 
-        SELECT id_producto, cantidad_compra
-        FROM tb_detalle_compras
-        WHERE id_compra = p_id_compra;
+    -- Insertar el detalle de la compra
+    INSERT INTO tb_detalle_compras (id_compra, cantidad_compra, precio_compra, id_producto)
+    VALUES (p_id_compra, p_cantidad_comprada, p_precio , p_id_producto); -- precio_compra se puede ajustar según sea necesario
+    SET mensaje = 'Producto agregado a la compra correctamente.';
 
-    DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = 1;
+    -- Ajustar las existencias en la tabla tb_productos
+    UPDATE tb_productos
+    SET existencias_producto = existencias_producto + p_cantidad_comprada
+    WHERE id_producto = p_id_producto;
 
-    OPEN cur;
+    SELECT mensaje;
+END $$
+DELIMITER ;
 
-    read_loop: LOOP
-        FETCH cur INTO v_id_producto, v_cantidad_compra;
-        IF done THEN
-            LEAVE read_loop;
-        END IF;
+CALL insertar_orden_validado(18, 30, 1); -- Reemplaza los valores con los adecuados
 
-        -- Actualizar el stock del producto
-        UPDATE tb_productos
-        SET existencias_producto = existencias_producto + v_cantidad_compra
-        WHERE id_producto = v_id_producto;
-    END LOOP;
+SELECT * FROM tb_productos;
+SELECT * FROM tb_compras;
+SELECT * FROM tb_detalle_compras;
 
-    CLOSE cur;
-END //
+--actualizar cantidad
+
+DELIMITER $$
+
+DROP PROCEDURE IF EXISTS actualizar_detalle_compra;
+CREATE PROCEDURE actualizar_detalle_compra(
+    IN p_id_compra INT,
+    IN p_id_detalle_compra INT,
+    IN p_nueva_cantidad INT,
+    IN p_id_producto INT,
+    IN p_precio DECIMAL(10, 2)
+)
+BEGIN
+    DECLARE p_cantidad_previa INT;
+    DECLARE diferencia INT;
+    DECLARE mensaje VARCHAR(255);
+
+    -- Obtener la cantidad previa del detalle de compra
+    SELECT cantidad_compra INTO p_cantidad_previa
+    FROM tb_detalle_compras
+    WHERE id_detalle_compra = p_id_detalle_compra
+    AND id_compra = p_id_compra
+    LIMIT 1;
+
+    -- Calcular la diferencia
+    SET diferencia = p_nueva_cantidad - p_cantidad_previa;
+
+    -- Actualizar la cantidad comprada en tb_detalle_compras
+    UPDATE tb_detalle_compras
+    SET cantidad_compra = p_nueva_cantidad, precio_compra = p_precio
+    WHERE id_detalle_compra = p_id_detalle_compra
+    AND id_compra = p_id_compra;
+
+    -- Ajustar las existencias en la tabla tb_productos
+    UPDATE tb_productos
+    SET existencias_producto = existencias_producto + diferencia
+    WHERE id_producto = p_id_producto;
+
+    SET mensaje = 'Detalle de compra actualizado correctamente.';
+    SELECT mensaje;
+END $$
 
 DELIMITER ;
 
-CALL ActualizarStockCompra(17); -- Reemplaza 1 con el ID de la compra que deseas procesar
+CALL actualizar_detalle_compra(3, 10, 20, 5, 15.50);
 
---procedimiento para restar a las existencias de los productos
+DELIMITER $$
 
-DELIMITER //
-
-CREATE PROCEDURE ActualizarStockVenta(IN p_id_venta INT)
+DROP PROCEDURE IF EXISTS eliminar_detalle_compra;
+CREATE PROCEDURE eliminar_detalle_compra(
+    IN p_id_detalle_compra INT,
+    IN p_id_compra INT
+)
 BEGIN
-    DECLARE done INT DEFAULT 0;
-    DECLARE v_id_producto INT;
-    DECLARE v_cantidad_venta INT;
+    DECLARE p_cantidad_previa INT;
+    DECLARE p_id_producto INT;
 
-    DECLARE cur CURSOR FOR 
-        SELECT id_producto, cantidad_venta
-        FROM tb_detalle_ventas
-        WHERE id_venta = p_id_venta;
+    -- Obtener la cantidad previa y el id_producto del detalle de compra a eliminar
+    SELECT dc.cantidad_compra, dc.id_producto INTO p_cantidad_previa, p_id_producto
+    FROM tb_detalle_compras dc
+    WHERE dc.id_detalle_compra = p_id_detalle_compra
+      AND dc.id_compra = p_id_compra
+    LIMIT 1;
 
-    DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = 1;
+    -- Ajustar las existencias en la tabla tb_productos
+    UPDATE tb_productos
+    SET existencias_producto = existencias_producto - p_cantidad_previa
+    WHERE id_producto = p_id_producto;
 
-    OPEN cur;
+    -- Eliminar el detalle de la compra
+    DELETE FROM tb_detalle_compras
+    WHERE id_detalle_compra = p_id_detalle_compra
+      AND id_compra = p_id_compra;
 
-    read_loop: LOOP
-        FETCH cur INTO v_id_producto, v_cantidad_venta;
-        IF done THEN
-            LEAVE read_loop;
-        END IF;
-
-        -- Actualizar el stock del producto
-        UPDATE tb_productos
-        SET existencias_producto = existencias_producto - v_cantidad_venta
-        WHERE id_producto = v_id_producto;
-    END LOOP;
-
-    CLOSE cur;
-END //
+    -- Mensaje de confirmación
+    SELECT CONCAT('El detalle de la compra con ID ', p_id_detalle_compra, ' ha sido eliminado y ', p_cantidad_previa, ' unidades han sido devueltas al inventario.') AS mensaje;
+END $$
 
 DELIMITER ;
 
-CALL ActualizarStockVenta(4); -- Reemplaza 1 con el ID de la venta que deseas procesar
-
+CALL eliminar_detalle_compra(10, 5);
 
 
 SELECT 
@@ -308,3 +315,4 @@ ORDER BY FECHA;
 
 SELECT id_venta AS ID, fecha_venta AS FECHA, observacion_venta AS OBSERVACION, estado_venta AS ESTADO, id_cliente AS CLIENTE FROM tb_ventas
         ORDER BY FECHA
+

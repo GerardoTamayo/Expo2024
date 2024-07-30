@@ -180,7 +180,7 @@ SAVE_FORM_DETALLE.addEventListener('submit', async (event) => {
     // Se evita recargar la página web después de enviar el formulario.
     event.preventDefault();
     // Se verifica la acción a realizar.
-    (ID_DETALLE.value) ? action = 'updateRow1' : action = 'createRow1';
+    (ID_DETALLE.value) ? action = 'actualizarCompra' : action = 'agregarCompra';
     // Constante tipo objeto con los datos del formulario.
     const FORM = new FormData(SAVE_FORM_DETALLE);
     FORM.append('id_compra', id_compra_global);
@@ -262,7 +262,7 @@ const openDetalle = async (id) => {
     }
 }
 
-const openUpdateDetalle = async (id) => {
+const openUpdateDetalle = async (id, quantity) => {
     // Se define una constante tipo objeto con los datos del registro seleccionado.
     const FORM = new FormData();
     FORM.append('id_detalle_compra', id);
@@ -282,7 +282,7 @@ const openUpdateDetalle = async (id) => {
 
         // Se inicializan los campos con los datos.
         const ROW = DATA.dataset;
-        document.getElementById('id_detalle_compra').value = ROW.ID;
+        document.getElementById('id_detalle_compra').value = id;
         document.getElementById('cantidad').value = ROW.CANTIDAD;
         document.getElementById('precio').value = ROW.PRECIO;
         document.getElementById('producto').value = ROW.PRODUCTO;
@@ -302,8 +302,9 @@ const openDeleteDetalle = async (id) => {
         // Se define una constante tipo objeto con los datos del registro seleccionado.
         const FORM = new FormData();
         FORM.append('id_detalle_compra', id);
+        FORM.append('id_compra', id_compra_global);
         // Petición para eliminar el registro seleccionado.
-        const DATA = await fetchData(COMPRA_API, 'deleteRow1', FORM);
+        const DATA = await fetchData(COMPRA_API, 'eliminarCompra', FORM);
         // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
         if (DATA.status) {
             // Se muestra un mensaje de éxito.
