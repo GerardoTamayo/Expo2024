@@ -91,9 +91,8 @@ const loadTemplate = async () => {
 									class="bi bi-box-arrow-left"></i></button>
 						</div>
 					</div>
-				</div>
-				
-		}`);
+				</div>		
+		`);
 			Inicio.insertAdjacentHTML('beforeend', ` 
 		<footer class="py-3 bg-body-light">
 			<div class=" container-fluid clear">

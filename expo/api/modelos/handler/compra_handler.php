@@ -168,7 +168,7 @@ class CompraHandler
         return Database::getRows($sql);
     }
 
-    // Método para actualizar la cantidad de un producto agregado a una compra.
+    // Metodos para detalle compra agregar, actualuzar y eliminar
     //actualizar un producto de una compra
     public function actualizarCompra()
     {

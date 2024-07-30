@@ -182,7 +182,7 @@ SAVE_FORM_DETALLE.addEventListener('submit', async (event) => {
     // Se evita recargar la página web después de enviar el formulario.
     event.preventDefault();
     // Se verifica la acción a realizar.
-    (ID_DETALLE_VENTA.value) ? action = 'updateRow1' : action = 'createRow1';
+    (ID_DETALLE_VENTA.value) ? action = 'actualizarVenta' : action = 'agregarVenta';
     // Constante tipo objeto con los datos del formulario.
     const FORM = new FormData(SAVE_FORM_DETALLE);
     FORM.append('venta', id_venta_global);
@@ -303,8 +303,9 @@ const openDeleteDetalle = async (id) => {
         // Se define una constante tipo objeto con los datos del registro seleccionado.
         const FORM = new FormData();
         FORM.append('id_detalle_venta', id);
+        FORM.append('id_venta', id_venta_global)
         // Petición para eliminar el registro seleccionado.
-        const DATA = await fetchData(VENTA_API, 'deleteRow1', FORM);
+        const DATA = await fetchData(VENTA_API, 'eliminarVenta', FORM);
         // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
         if (DATA.status) {
             // Se muestra un mensaje de éxito.

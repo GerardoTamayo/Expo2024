@@ -182,7 +182,7 @@ VALUES ('Administrador');
 
 SELECT * FROM tb_productos
 
---procedimiento para sumar a las existencias
+-- procedimiento para sumar a las existencias
 
 DROP PROCEDURE IF EXISTS insertar_orden_validado;
 
@@ -210,13 +210,13 @@ BEGIN
 END $$
 DELIMITER ;
 
-CALL insertar_orden_validado(18, 30, 1); -- Reemplaza los valores con los adecuados
+-- CALL insertar_orden_validado(18, 30, 1);
 
 SELECT * FROM tb_productos;
 SELECT * FROM tb_compras;
 SELECT * FROM tb_detalle_compras;
 
---actualizar cantidad
+-- actualizar cantidad
 
 DELIMITER $$
 
@@ -260,7 +260,9 @@ END $$
 
 DELIMITER ;
 
-CALL actualizar_detalle_compra(3, 10, 20, 5, 15.50);
+/*CALL actualizar_detalle_compra(3, 10, 20, 5, 15.50);*/
+
+-- procedimiento para eliminar detalle compra
 
 DELIMITER $$
 
@@ -296,9 +298,120 @@ END $$
 
 DELIMITER ;
 
-CALL eliminar_detalle_compra(10, 5);
+/*CALL eliminar_detalle_compra(10, 5);*/
 
+-- procedimiento para agregar productos a venta
 
+DELIMITER $$
+
+CREATE PROCEDURE insertar_detalle_venta(
+    IN p_id_venta INT,
+    IN p_cantidad_venta INT,
+    IN p_id_producto INT,
+    IN p_precio DECIMAL(10, 2)
+)
+BEGIN
+    DECLARE mensaje VARCHAR(255);
+
+    -- Insertar el detalle de la venta
+    INSERT INTO tb_detalle_ventas (id_venta, cantidad_venta, precio_venta, id_producto)
+    VALUES (p_id_venta, p_cantidad_venta, p_precio, p_id_producto);
+    SET mensaje = 'Producto agregado a la venta correctamente.';
+
+    -- Ajustar las existencias en la tabla tb_productos
+    UPDATE tb_productos
+    SET existencias_producto = existencias_producto - p_cantidad_venta
+    WHERE id_producto = p_id_producto;
+
+    SELECT mensaje;
+END $$
+
+DELIMITER ;
+
+-- CALL insertar_detalle_venta(1, 5, 3, 100.00);
+
+-- procedimiento para actualizar un detalle venta
+
+DELIMITER $$
+
+CREATE PROCEDURE actualizar_detalle_venta(
+    IN p_id_venta INT,
+    IN p_id_detalle_venta INT,
+    IN p_nueva_cantidad INT,
+    IN p_id_producto INT,
+    IN p_precio DECIMAL(10, 2)
+)
+BEGIN
+    DECLARE p_cantidad_previa INT;
+    DECLARE diferencia INT;
+    DECLARE mensaje VARCHAR(255);
+
+    -- Obtener la cantidad previa del detalle de venta
+    SELECT cantidad_venta INTO p_cantidad_previa
+    FROM tb_detalle_ventas
+    WHERE id_detalle_venta = p_id_detalle_venta
+    AND id_venta = p_id_venta
+    LIMIT 1;
+
+    -- Calcular la diferencia
+    SET diferencia = p_nueva_cantidad - p_cantidad_previa;
+
+    -- Actualizar la cantidad vendida en tb_detalle_ventas
+    UPDATE tb_detalle_ventas
+    SET cantidad_venta = p_nueva_cantidad, precio_venta = p_precio
+    WHERE id_detalle_venta = p_id_detalle_venta
+    AND id_venta = p_id_venta;
+
+    -- Ajustar las existencias en la tabla tb_productos
+    UPDATE tb_productos
+    SET existencias_producto = existencias_producto - diferencia
+    WHERE id_producto = p_id_producto;
+
+    SET mensaje = 'Detalle de venta actualizado correctamente.';
+    SELECT mensaje;
+END $$
+
+DELIMITER ;
+
+-- CALL actualizar_detalle_venta(1, 2, 10, 3, 150.00);
+
+-- procedimiento para eliminar un detalle venta
+
+DELIMITER $$
+CREATE PROCEDURE eliminar_detalle_venta(
+    IN p_id_detalle_venta INT,
+    IN p_id_venta INT
+)
+BEGIN
+    DECLARE p_cantidad_previa INT;
+    DECLARE p_id_producto INT;
+
+    -- Obtener la cantidad previa y el id_producto del detalle de venta a eliminar
+    SELECT dv.cantidad_venta, dv.id_producto INTO p_cantidad_previa, p_id_producto
+    FROM tb_detalle_ventas dv
+    WHERE dv.id_detalle_venta = p_id_detalle_venta
+      AND dv.id_venta = p_id_venta
+    LIMIT 1;
+
+    -- Ajustar las existencias en la tabla tb_productos
+    UPDATE tb_productos
+    SET existencias_producto = existencias_producto + p_cantidad_previa
+    WHERE id_producto = p_id_producto;
+
+    -- Eliminar el detalle de la venta
+    DELETE FROM tb_detalle_ventas
+    WHERE id_detalle_venta = p_id_detalle_venta
+      AND id_venta = p_id_venta;
+
+    -- Mensaje de confirmación
+    SELECT CONCAT('El detalle de la venta con ID ', p_id_detalle_venta, ' ha sido eliminado y ', p_cantidad_previa, ' unidades han sido devueltas al inventario.') AS mensaje;
+END $$
+
+DELIMITER ;
+
+-- CALL eliminar_detalle_venta(1, 2);
+
+/*
 SELECT 
     id_compra AS ID, 
     fecha_compra AS FECHA, 
@@ -316,3 +429,4 @@ ORDER BY FECHA;
 SELECT id_venta AS ID, fecha_venta AS FECHA, observacion_venta AS OBSERVACION, estado_venta AS ESTADO, id_cliente AS CLIENTE FROM tb_ventas
         ORDER BY FECHA
 
+*/

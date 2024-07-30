@@ -160,6 +160,30 @@ class VentaHandler
         return Database::getRows($sql);
     }
 
+        // Metodos para detalle ventas agregar, actualuzar y eliminar
+    //actualizar un producto de una venta
+
+    public function agregarVenta()
+    {
+        $sql = 'CALL insertar_detalle_venta(?, ?, ?, ?);';
+        $params = array($this->id_venta, $this->cantidad_venta, $this->id_producto, $this->precio_venta);
+        return Database::executeRow($sql, $params);
+    }
+
+    public function actualizarVenta()
+    {
+        $sql = 'CALL actualizar_detalle_venta(?, ?, ?, ?, ?);';
+        $params = array($this->id_venta, $this->id_detalle_venta, $this->cantidad_venta, $this->id_producto, $this->precio_venta);
+        return Database::executeRow($sql, $params);
+    }
+
+    public function eliminarVenta()
+    {
+        $sql = 'CALL eliminar_detalle_venta(?, ?);';
+        $params = array($this->id_detalle_venta, $this->id_venta);
+        return Database::executeRow($sql, $params);
+    }
+
     // //Funcion de buscador
     // public function readAllPublic()
     // {
