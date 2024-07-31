@@ -177,11 +177,13 @@ if (isset($_GET['action'])) {
                 break;
             case 'logIn':
                 $_POST = Validator::validateForm($_POST);
-                if ($administrador->checkUser($_POST['correo'], $_POST['contra'])) {
+                if (!$administrador->checkUser($_POST['correo'], $_POST['contra'])) {
+                    $result['error'] = 'Credenciales incorrectas';
+                } elseif ($administrador->checkStatus()) {
                     $result['status'] = 1;
                     $result['message'] = 'Autenticación correcta';
-                } else {
-                    $result['error'] = 'Credenciales incorrectas';
+                }else{
+                    $result['error'] = 'La cuenta ha sido desactivada';
                 }
                 break;
             default:

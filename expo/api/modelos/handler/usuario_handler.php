@@ -17,6 +17,8 @@ class UsuarioHandler
 
     protected $tipo = null;
 
+    protected $estado = null;
+
     /*
      *  Métodos para gestionar la cuenta del usuario.
      */
@@ -24,16 +26,37 @@ class UsuarioHandler
      // Función para el login.
     public function checkUser($username, $password)
     {
-        $sql = 'SELECT id_usuario, clave_usuario
+        $sql = 'SELECT id_usuario, correo_usuario, clave_usuario, estado_usuario
                 FROM tb_usuarios
                 WHERE  correo_usuario = ?';
         $params = array($username);
         if (!($data = Database::getRow($sql, $params))) {
             return false;
         } elseif (password_verify($password, $data['clave_usuario'])) {
-            $_SESSION['id_usuario'] = $data['id_usuario'];
+            $this->id = $data['id_usuario'];
+            $this->estado = $data['estado_usuario'];
             return true;
         } else {
+            return false;
+        }
+    }
+
+    //Función para chequear el estado de la cuenta del usuario
+    public function checkStatus()
+    {
+        //se verifica si el estado es activo
+        if ($this->estado) {
+            //se crea variable de sesión llamada idCliente, para verificar que exista una sesión iniciada
+            $_SESSION['id_usuario'] = $this->id;
+            //se crea variable de sesión llamada correoCliente para alguna verificación que se pueda utilizar con esta
+            //ya sea para el perfil o alguna otra cosa mas
+            $_SESSION['correo_usuario'] = $this->correo;
+            //se retorna true si es correcta la verificación del estado
+            return true;
+        }
+        //en caso que el estado sea inactivo o bloqueado
+        else {
+            //se retorna falso y no se dejara iniciar sesión
             return false;
         }
     }
@@ -104,17 +127,17 @@ class UsuarioHandler
     // Función para crear un admministrador.
     public function createRow()
     {
-        $sql = 'INSERT INTO tb_usuarios(nombre_usuario, apellido_usuario, correo_usuario, clave_usuario,id_tipo)
-                VALUES(?, ?, ?, ?, ?)';
-        $params = array($this->nombre, $this->apellido, $this->correo, $this->clave, $this->tipo);
+        $sql = 'INSERT INTO tb_usuarios(nombre_usuario, apellido_usuario, correo_usuario, clave_usuario, id_tipo, estado_usuario)
+                VALUES(?, ?, ?, ?, ?, 1)';
+        $params = array($this->nombre, $this->apellido, $this->correo, $this->clave, $this->tipo, $this->estado);
         return Database::executeRow($sql, $params);
     }
 
     // Función para primer uso.
     public function firstUser()
     {
-        $sql = 'INSERT INTO tb_usuarios(nombre_usuario, apellido_usuario, clave_usuario, correo_usuario, id_tipo)
-                VALUES(?, ?, ?, ?, 1)';
+        $sql = 'INSERT INTO tb_usuarios(nombre_usuario, apellido_usuario, clave_usuario, correo_usuario, id_tipo, estado_usuario)
+                VALUES(?, ?, ?, ?, 1, 1)';
         $params = array($this->nombre, $this->apellido, $this->clave, $this->correo);
         return Database::executeRow($sql, $params);
     }
@@ -122,7 +145,11 @@ class UsuarioHandler
     // Función para leer usuarioes.
     public function readAll()
     {
-        $sql = 'SELECT id_usuario, nombre_usuario, apellido_usuario, clave_usuario, correo_usuario, id_tipo, tipo_usuario
+        $sql = 'SELECT id_usuario, nombre_usuario, apellido_usuario, clave_usuario, correo_usuario, id_tipo, tipo_usuario,
+                CASE 
+                WHEN estado_usuario = 1 THEN "Activo"
+                WHEN estado_usuario = 0 THEN "Bloqueado"
+                END AS ESTADO
                 FROM tb_usuarios
                 INNER JOIN tb_tipousuarios USING (id_tipo)
                 ORDER BY id_usuario';

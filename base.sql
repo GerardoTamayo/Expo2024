@@ -39,7 +39,8 @@ CREATE TABLE tb_usuarios (
     apellido_usuario VARCHAR(50) NOT NULL,
     clave_usuario VARCHAR(100) NOT NULL,
     correo_usuario VARCHAR(100) NOT NULL,
-    id_tipo INT NOT NULL
+    id_tipo INT NOT NULL,
+    estado_usuario BOOLEAN NOT NULL
 );
 
 CREATE TABLE tb_productos (
@@ -179,6 +180,33 @@ ADD
  
 INSERT INTO tb_tipousuarios (tipo_usuario)
 VALUES ('Administrador');
+
+-- procedimiento para cambiar estado al usuario
+
+DELIMITER $$
+
+CREATE PROCEDURE cambiar_estado_usuario(IN usuario_id INT)
+BEGIN
+    DECLARE usuario_estado BOOLEAN;
+
+    -- Obtener el estado actual del usuario
+    SELECT estado_usuario INTO usuario_estado
+    FROM tb_usuarios
+    WHERE id_usuario = usuario_id;
+
+    -- Actualizar el estado del usuario
+    IF usuario_estado = 1 THEN
+        UPDATE tb_usuarios
+        SET estado_usuario = 0
+        WHERE id_usuario = usuario_id;
+    ELSE
+        UPDATE tb_usuarios
+        SET estado_usuario = 1
+        WHERE id_usuario = usuario_id;
+    END IF;
+END $$
+
+DELIMITER $$
 
 -- procedimiento para sumar a las existencias
 
@@ -448,3 +476,6 @@ SELECT id_venta AS ID, fecha_venta AS FECHA, observacion_venta AS OBSERVACION, e
         ORDER BY FECHA
 
 */
+
+SELECT * FROM tb_detalle_ventas;
+SELECT * FROM tb_ventas;
