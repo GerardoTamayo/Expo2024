@@ -180,11 +180,7 @@ ADD
 INSERT INTO tb_tipousuarios (tipo_usuario)
 VALUES ('Administrador');
 
-SELECT * FROM tb_productos
-
 -- procedimiento para sumar a las existencias
-
-DROP PROCEDURE IF EXISTS insertar_orden_validado;
 
 DELIMITER $$
 CREATE PROCEDURE insertar_orden_validado(
@@ -211,10 +207,6 @@ END $$
 DELIMITER ;
 
 -- CALL insertar_orden_validado(18, 30, 1);
-
-SELECT * FROM tb_productos;
-SELECT * FROM tb_compras;
-SELECT * FROM tb_detalle_compras;
 
 -- actualizar cantidad
 
