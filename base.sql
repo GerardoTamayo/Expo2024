@@ -304,21 +304,34 @@ CREATE PROCEDURE insertar_detalle_venta(
 )
 BEGIN
     DECLARE mensaje VARCHAR(255);
+    DECLARE existencias_actuales INT;
 
-    -- Insertar el detalle de la venta
-    INSERT INTO tb_detalle_ventas (id_venta, cantidad_venta, precio_venta, id_producto)
-    VALUES (p_id_venta, p_cantidad_venta, p_precio, p_id_producto);
-    SET mensaje = 'Producto agregado a la venta correctamente.';
+    -- Obtener las existencias actuales del producto
+    SELECT existencias_producto INTO existencias_actuales
+    FROM tb_productos
+    WHERE id_producto = p_id_producto
+    LIMIT 1;
 
-    -- Ajustar las existencias en la tabla tb_productos
-    UPDATE tb_productos
-    SET existencias_producto = existencias_producto - p_cantidad_venta
-    WHERE id_producto = p_id_producto;
+    -- Verificar si hay suficientes existencias para la venta
+    IF p_cantidad_venta <= existencias_actuales THEN
+        -- Insertar el detalle de la venta
+        INSERT INTO tb_detalle_ventas (id_venta, cantidad_venta, precio_venta, id_producto)
+        VALUES (p_id_venta, p_cantidad_venta, p_precio, p_id_producto);
+        SET mensaje = 'Producto agregado a la venta correctamente.';
+
+        -- Ajustar las existencias en la tabla tb_productos
+        UPDATE tb_productos
+        SET existencias_producto = existencias_producto - p_cantidad_venta
+        WHERE id_producto = p_id_producto;
+    ELSE
+        SET mensaje = 'No hay suficientes existencias para completar la venta.';
+    END IF;
 
     SELECT mensaje;
 END $$
 
 DELIMITER ;
+
 
 -- CALL insertar_detalle_venta(1, 5, 3, 100.00);
 
@@ -337,6 +350,7 @@ BEGIN
     DECLARE p_cantidad_previa INT;
     DECLARE diferencia INT;
     DECLARE mensaje VARCHAR(255);
+    DECLARE existencias_actuales INT;
 
     -- Obtener la cantidad previa del detalle de venta
     SELECT cantidad_venta INTO p_cantidad_previa
@@ -348,18 +362,30 @@ BEGIN
     -- Calcular la diferencia
     SET diferencia = p_nueva_cantidad - p_cantidad_previa;
 
-    -- Actualizar la cantidad vendida en tb_detalle_ventas
-    UPDATE tb_detalle_ventas
-    SET cantidad_venta = p_nueva_cantidad, precio_venta = p_precio
-    WHERE id_detalle_venta = p_id_detalle_venta
-    AND id_venta = p_id_venta;
+    -- Obtener las existencias actuales del producto
+    SELECT existencias_producto INTO existencias_actuales
+    FROM tb_productos
+    WHERE id_producto = p_id_producto
+    LIMIT 1;
 
-    -- Ajustar las existencias en la tabla tb_productos
-    UPDATE tb_productos
-    SET existencias_producto = existencias_producto - diferencia
-    WHERE id_producto = p_id_producto;
+    -- Verificar si hay suficientes existencias para la nueva cantidad
+    IF diferencia <= existencias_actuales THEN
+        -- Actualizar la cantidad vendida en tb_detalle_ventas
+        UPDATE tb_detalle_ventas
+        SET cantidad_venta = p_nueva_cantidad, precio_venta = p_precio
+        WHERE id_detalle_venta = p_id_detalle_venta
+        AND id_venta = p_id_venta;
 
-    SET mensaje = 'Detalle de venta actualizado correctamente.';
+        -- Ajustar las existencias en la tabla tb_productos
+        UPDATE tb_productos
+        SET existencias_producto = existencias_producto - diferencia
+        WHERE id_producto = p_id_producto;
+
+        SET mensaje = 'Detalle de venta actualizado correctamente.';
+    ELSE
+        SET mensaje = 'No hay suficientes existencias para la nueva cantidad.';
+    END IF;
+
     SELECT mensaje;
 END $$
 
