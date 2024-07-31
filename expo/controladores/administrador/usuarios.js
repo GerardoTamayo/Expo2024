@@ -44,12 +44,16 @@ const fillTable = async (form = null) => {
                     <td>${row.apellido_usuario}</td>
                     <td>${row.correo_usuario}</td>
                     <td>${row.tipo_usuario}</td>
+                    <td>${row.ESTADO}</td>
                     <td>
                         <button type="button" class="btn btn-outline-info" onclick="openUpdate(${row.id_usuario})">
                             <i class="bi bi-pencil-square"></i>
                         </button>
                         <button type="button" class="btn btn-outline-danger" onclick="openDelete(${row.id_usuario})">
                             <i class="bi bi-trash-fill"></i>
+                        </button>
+                        <button type="button" class="btn btn-outline-primary" onclick="openState(${row.id_usuario})">
+                            <i class="bi bi-exclamation-octagon"></i>
                         </button>
                     </td>
                 </tr>
@@ -59,6 +63,38 @@ const fillTable = async (form = null) => {
         ROWS_FOUND.textContent = DATA.message;
     } else {
         sweetAlert(4, DATA.error, true);
+    }
+}
+
+/*
+*   Función asíncrona para cambiar el estado de un registro.
+*   Parámetros: id (identificador del registro seleccionado).
+*   Retorno: ninguno.
+*/
+const openState = async (id) => {
+    // Llamada a la función para mostrar un mensaje de confirmación, capturando la respuesta en una constante.
+    const RESPONSE = await confirmAction('¿Desea cambiar el estado del usuario?');
+    try {
+        // Se verifica la respuesta del mensaje.
+        if (RESPONSE) {
+            // Se define una constante tipo objeto con los datos del registro seleccionado.
+            const FORM = new FormData();
+            FORM.append('id_usuario', id);
+            // Petición para eliminar el registro seleccionado.
+            const DATA = await fetchData(USUARIO_API, 'changeState', FORM);
+            // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
+            if (DATA.status) {
+                // Se muestra un mensaje de éxito.
+                await sweetAlert(1, DATA.message, true);
+                // Se carga nuevamente la tabla para visualizar los cambios.
+                fillTable();
+            } else {
+                sweetAlert(2, DATA.error, false);
+            }
+        }
+    }
+    catch (Error) {
+        sweetAlert(2, Error, false);
     }
 }
 

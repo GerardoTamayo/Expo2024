@@ -23,7 +23,7 @@ class UsuarioHandler
      *  Métodos para gestionar la cuenta del usuario.
      */
 
-     // Función para el login.
+    // Función para el login.
     public function checkUser($username, $password)
     {
         $sql = 'SELECT id_usuario, correo_usuario, clave_usuario, estado_usuario
@@ -129,7 +129,7 @@ class UsuarioHandler
     {
         $sql = 'INSERT INTO tb_usuarios(nombre_usuario, apellido_usuario, correo_usuario, clave_usuario, id_tipo, estado_usuario)
                 VALUES(?, ?, ?, ?, ?, 1)';
-        $params = array($this->nombre, $this->apellido, $this->correo, $this->clave, $this->tipo, $this->estado);
+        $params = array($this->nombre, $this->apellido, $this->correo, $this->clave, $this->tipo);
         return Database::executeRow($sql, $params);
     }
 
@@ -145,7 +145,7 @@ class UsuarioHandler
     // Función para leer usuarioes.
     public function readAll()
     {
-        $sql = 'SELECT id_usuario, nombre_usuario, apellido_usuario, clave_usuario, correo_usuario, id_tipo, tipo_usuario,
+        $sql = 'SELECT id_usuario, nombre_usuario, apellido_usuario, correo_usuario, id_tipo, tipo_usuario,
                 CASE 
                 WHEN estado_usuario = 1 THEN "Activo"
                 WHEN estado_usuario = 0 THEN "Bloqueado"
@@ -182,6 +182,14 @@ class UsuarioHandler
     {
         $sql = 'DELETE FROM tb_usuarios
                 WHERE id_usuario = ?';
+        $params = array($this->id);
+        return Database::executeRow($sql, $params);
+    }
+
+    //Función para cambiar el estado de un cliente.
+    public function changeState()
+    {
+        $sql = 'CALL cambiar_estado_usuario(?);';
         $params = array($this->id);
         return Database::executeRow($sql, $params);
     }

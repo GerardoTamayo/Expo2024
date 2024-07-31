@@ -1,6 +1,6 @@
 <?php
 // Se incluye la clase del modelo.
-require_once ('../../modelos/data/usuario_data.php');
+require_once('../../modelos/data/usuario_data.php');
 
 // Se comprueba si existe una acción a realizar, de lo contrario se finaliza el script con un mensaje de error.
 if (isset($_GET['action'])) {
@@ -67,7 +67,7 @@ if (isset($_GET['action'])) {
                     !$administrador->setId($_POST['id_usuario']) or
                     !$administrador->setNombre($_POST['nombre_usuario']) or
                     !$administrador->setApellido($_POST['apellido_usuario']) or
-                    !$administrador->setCorreo($_POST['correo_usuario'])or
+                    !$administrador->setCorreo($_POST['correo_usuario']) or
                     !$administrador->setTipo($_POST['tipo_usuario'])
                 ) {
                     $result['error'] = $administrador->getDataError();
@@ -143,6 +143,19 @@ if (isset($_GET['action'])) {
                     $result['error'] = 'Ocurrió un problema al cambiar la contraseña';
                 }
                 break;
+                // Cambiar el estado del usuario
+            case 'changeState':
+                if (
+                    !$administrador->setId($_POST['id_usuario'])
+                ) {
+                    $result['error'] = $administrador->getDataError();
+                } elseif ($administrador->changeState()) {
+                    $result['status'] = 1;
+                    $result['message'] = 'Estado del usuario cambiado correctamente';
+                } else {
+                    $result['error'] = 'Ocurrió un problema al cambiar el estado del usuario';
+                }
+                break;
             default:
                 $result['error'] = 'Acción no disponible dentro de la sesión';
         }
@@ -182,8 +195,8 @@ if (isset($_GET['action'])) {
                 } elseif ($administrador->checkStatus()) {
                     $result['status'] = 1;
                     $result['message'] = 'Autenticación correcta';
-                }else{
-                    $result['error'] = 'La cuenta ha sido desactivada';
+                } else {
+                    $result['error'] = 'Su cuenta ha sido desactivada';
                 }
                 break;
             default:
@@ -195,7 +208,7 @@ if (isset($_GET['action'])) {
     // Se indica el tipo de contenido a mostrar y su respectivo conjunto de caracteres.
     header('Content-type: application/json; charset=utf-8');
     // Se imprime el resultado en formato JSON y se retorna al controlador.
-    print (json_encode($result));
+    print(json_encode($result));
 } else {
-    print (json_encode('Recurso no disponible'));
+    print(json_encode('Recurso no disponible'));
 }
