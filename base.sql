@@ -77,7 +77,7 @@ CREATE TABLE tb_clientes (
 
 CREATE TABLE tb_ventas (
     id_venta INT AUTO_INCREMENT PRIMARY KEY,
-    fecha_venta DATETIME NOT NULL,
+    fecha_venta DATE NOT NULL,
     observacion_venta VARCHAR(100),
     estado_venta BOOLEAN NOT NULL,
     id_cliente INT

@@ -82,41 +82,39 @@
                                 <div class="modal-body row g-3">
                                     <!-- Campo oculto para asignar el id del registro al momento de modificar -->
                                     <input type="number" class="d-none" id="id_compra" name="id_compra">
-                                    <div class="col-sm-12 col-md-6 col-md-6">
-                                        <label for="fecha_compra" class="form-label">
-                                            Fecha compra</label>
+                                    <div class="col-sm-12 col-md-6">
+                                        <label for="fecha_compra" class="form-label">Fecha compra</label>
                                         <div class="input-group">
                                             <i class="input-group-text bi bi-calendar"></i>
                                             <input id="fecha_compra" type="date" name="fecha_compra"
                                                 class="form-control" required>
                                         </div>
                                     </div>
-                                    <div class="col-sm-12 col-md-6 col-md-6">
-                                        <label for="numero_correlativo" class="form-label">
-                                            Número correlativo</label>
+                                    <div class="col-sm-12 col-md-6">
+                                        <label for="numero_correlativo" class="form-label">Número correlativo</label>
                                         <div class="input-group">
                                             <i class="input-group-text bi bi-receipt"></i>
                                             <input id="numero_correlativo" type="number" name="numero_correlativo"
                                                 class="form-control" required>
                                         </div>
                                     </div>
-                                    <div class="col-sm-12 col-md-6 col-md-6">
-                                        <div class="text-center mt-4">
-                                            <label for="estado_compra .ms-1" class="form-label">
-                                                Estado compra</label>
-                                            <input id="estado_compra" type="checkbox" name="estado_compra">
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-12 col-md-6 col-md-6">
-                                        <label for="id_vendedor" class="form-label">
-                                            Vendedor</label>
+                                    <div class="col-sm-12 col-md-6">
+                                        <label for="id_vendedor" class="form-label">Vendedor</label>
                                         <div class="input-group">
                                             <i class="input-group-text bi bi-person-fill"></i>
                                             <select id="id_vendedor" type="text" name="id_vendedor"
                                                 class="form-select"></select>
                                         </div>
                                     </div>
+                                    <div class="col-sm-12 col-md-6">
+                                        <label for="estado_compra" class="form-check-label mt-4">Estado compra</label>
+                                        <div class="form-check form-switch">
+                                            <input id="estado_compra" class="form-check-input" role="switch"
+                                                type="checkbox" name="estado_compra">
+                                        </div>
+                                    </div>
                                 </div>
+
                                 <div class="modal-footer container">
                                     <button type="submit" class="btn btn-primary"><i
                                             class="bi bi-file-earmark-plus-fill"></i>
