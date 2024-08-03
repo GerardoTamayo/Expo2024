@@ -90,6 +90,19 @@ if (isset($_GET['action'])) {
                     $result['error'] = 'Ocurrió un problema al eliminar el administrador';
                 }
                 break;
+                // Cambiar el estado del usuario
+            case 'changeState':
+                if ($_POST['id_usuario'] == $_SESSION['id_usuario']) {
+                    $result['error'] = 'No se puede cambiar el estado a sí mismo';
+                } elseif (!$administrador->setId($_POST['id_usuario'])) {
+                    $result['error'] = $administrador->getDataError();
+                } elseif ($administrador->changeState()) {
+                    $result['status'] = 1;
+                    $result['message'] = 'Estado del usuario cambiado correctamente';
+                } else {
+                    $result['error'] = 'Ocurrió un problema al cambiar el estado del usuario';
+                }
+                break;
             case 'getUser':
                 if (isset($_SESSION['id_usuario'])) {
                     $result['status'] = 1;
@@ -141,19 +154,6 @@ if (isset($_GET['action'])) {
                     $result['message'] = 'Contraseña cambiada correctamente';
                 } else {
                     $result['error'] = 'Ocurrió un problema al cambiar la contraseña';
-                }
-                break;
-                // Cambiar el estado del usuario
-            case 'changeState':
-                if (
-                    !$administrador->setId($_POST['id_usuario'])
-                ) {
-                    $result['error'] = $administrador->getDataError();
-                } elseif ($administrador->changeState()) {
-                    $result['status'] = 1;
-                    $result['message'] = 'Estado del usuario cambiado correctamente';
-                } else {
-                    $result['error'] = 'Ocurrió un problema al cambiar el estado del usuario';
                 }
                 break;
             default:
