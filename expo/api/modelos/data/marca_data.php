@@ -59,25 +59,13 @@ class MarcaData extends MarcaHandler
         }
     }
 
-    public function setTelefono($value)
-    {
-        if (Validator::validatePhone($value)) {
-            $this->telefono = $value;
-            return true;
-        } else {
-            $this->data_error = 'El teléfono debe tener el formato (2, 6, 7)####-####';
-            return false;
-        }
-    }
-
-
     public function setFilename()
     {
         if ($data = $this->readFilename()) {
             $this->filename = $data['imagen'];
             return true;
         } else {
-            $this->data_error = 'Categoría inexistente';
+            $this->data_error = 'Marca inexistente';
             return false;
         }
     }

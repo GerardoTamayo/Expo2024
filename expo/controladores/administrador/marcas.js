@@ -77,7 +77,7 @@ const fillTable = async (form = null) => {
             TABLE_BODY.innerHTML += `
                 <tr>
                     <td>${row.nombre_marca}</td>
-                    <td>${row.imagen}</td>
+                    <td><img src="${SERVER_URL}/imagenes/marcas/${row.imagen}" height="50"></td>
                     <td>
                         <button type="button" class="btn btn-outline-info" onclick="openUpdate(${row.id_marca})">
                             <i class="bi bi-pencil-fill"></i>

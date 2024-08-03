@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     // Se comprueba si existe una sesión, de lo contrario se sigue con el flujo normal.
     if (DATA.session) {
         // Se direcciona a la página web de bienvenida.
-        location.href = 'producto.html';
+        location.href = 'dashboard.html';
     } else if (DATA.status) {
         // Se establece el título del contenido principal.
         MAIN_TITLE.textContent = 'Iniciar sesión';

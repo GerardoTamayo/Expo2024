@@ -25,7 +25,7 @@ CREATE TABLE tb_proveedores (
 CREATE TABLE tb_marcas (
     id_marca INT AUTO_INCREMENT PRIMARY KEY,
     nombre_marca VARCHAR(25) NOT NULL,
-    imagen VARCHAR(25) NULL DEFAULT 'default.png'
+    imagen VARCHAR(50) NULL
 );
 
 CREATE TABLE tb_tipousuarios (

@@ -14,7 +14,7 @@ class MarcaHandler
     protected $imagen = null;
 
     // Constante para establecer la ruta de las imágenes.
-    const RUTA_IMAGEN = '../../Imagenes/marca/';
+    const RUTA_IMAGEN = '../../imagenes/marcas/';
 
     /*
      *  Métodos para realizar las operaciones SCRUD (search, create, read, update, and delete).
@@ -63,9 +63,9 @@ class MarcaHandler
     // Función para leer un archivo.
     public function readFilename()
     {
-        $sql = 'SELECT imagen_categoria
-                FROM categoria
-                WHERE id_categoria = ?';
+        $sql = 'SELECT imagen
+                FROM tb_marcas
+                WHERE id_marca = ?';
         $params = array($this->id);
         return Database::getRow($sql, $params);
     }
