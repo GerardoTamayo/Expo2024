@@ -197,7 +197,7 @@ const openReport = () => {
 async function openModalGraphic() {
     // Se muestra la caja de diálogo con su título.
     REPORT_MODAL.show();
-    REPORT_MODAL_TITLE.textContent = 'Gráfica de dona de clientes por estado';
+    REPORT_MODAL_TITLE.textContent = 'Gráfica de barra de productos por marcas';
     try {
         graficoDonaProductoMarcas();
     } catch (error) {
@@ -217,11 +217,11 @@ const graficoDonaProductoMarcas = async () => {
             // Se recorre el conjunto de registros fila por fila a través del objeto row.
             DATA.dataset.forEach(row => {
                 // Se agregan los datos a los arreglos.
-                nombre_marca.push(row.id_marca);
-                existencias_producto.push(row.EXISTENCIA_PRODUCTO);
+                nombre_marca.push(row.MARCA);
+                existencias_producto.push(row.EXISTENCIAS);
             });
             // Llamada a la función para generar y mostrar un gráfico de pastel. Se encuentra en el archivo components.js
-            DoughnutGraph('chart2', nombre_marca, existencias_producto, 'Productos por marcas');
+            barGraph('chart2', nombre_marca, existencias_producto, 'Productos por marcas');
         } else {
             document.getElementById('chart2').remove();
             console.log(DATA.error);

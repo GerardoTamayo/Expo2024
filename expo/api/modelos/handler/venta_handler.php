@@ -65,6 +65,7 @@ class VentaHandler
         return Database::getRows($sql);
     }
 
+
     public function readOne1()
     {
         $sql = 'SELECT id_venta, fecha_venta, observacion_venta, estado_venta, id_cliente, nombre_cliente
@@ -121,6 +122,21 @@ class VentaHandler
         $params = array($this->id_venta);
         return Database::getRows($sql,$params);
     }
+
+    public function graficaVentas()
+    {
+        $sql = 'SELECT nombre_producto, SUM(cantidad_venta) AS total_vendido 
+        FROM tb_detalle_ventas 
+        INNER JOIN tb_productos 
+        USING (id_producto) 
+        WHERE id_producto = ? 
+        HAVING total_vendido;';
+        $params = array($this->id_producto);
+        return Database::getRows($sql,$params);
+    }
+
+    
+
 
     public function readOne()
     {
@@ -202,6 +218,17 @@ class VentaHandler
     //     ORDER BY FECHA;';
     //     return Database::getRows($sql);
     // }
+        // Función para leer todos los pedido
+        public function ventaReports()
+        {
+            $sql = 'SELECT fecha_venta, nombre_cliente, apellido_cliente, cantidad_venta, precio_venta, 
+            (cantidad_venta * precio_venta) AS total
+            FROM tb_ventas 
+            INNER JOIN tb_clientes USING (id_cliente) 
+            INNER JOIN tb_detalle_ventas USING (id_venta)
+            ORDER BY fecha_venta DESC;';
+            return Database::getRows($sql);
+        }
 
 
 }

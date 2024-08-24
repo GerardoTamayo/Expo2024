@@ -61,10 +61,10 @@ class ProductoHandler
 
     public function graficaProducto()
     {
-        $sql = 'SELECT m.nombre_marca, SUM(p.existencias_producto) AS total_existencias
+        $sql = 'SELECT nombre_marca AS MARCA, SUM(existencias_producto) AS EXISTENCIAS
                 FROM tb_productos p
-                JOIN tb_marcas m ON p.id_marca = m.id_marca
-                GROUP BY m.nombre_marca;';
+                INNER JOIN tb_marcas USING (id_marca)
+                GROUP BY nombre_marca;';
         return Database::getRows($sql);
     }
 

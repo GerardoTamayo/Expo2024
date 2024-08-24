@@ -128,6 +128,16 @@ if (isset($_GET['action'])) {
                     $result['error'] = 'No hay productos registrados';
                 }
                 break;
+                case 'graficaVentas':
+                    if (!$venta->setIdProducto($_POST['id_producto'])) {
+                        $result['error'] = $venta->getDataError();
+                    } elseif ($result['dataset'] = $venta->graficaVentas()) {
+                        $result['status'] = 1;
+                        $result['message'] = 'Existen ' . count($result['dataset']) . ' registros';
+                    } else {
+                        $result['error'] = 'No hay productos registrados';
+                    }
+                    break;
             case 'createRow1':
                 $_POST = Validator::validateForm($_POST);
                 if (

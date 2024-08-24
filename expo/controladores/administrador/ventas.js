@@ -33,6 +33,7 @@ const TABLE_BODY_DETALLE = document.getElementById('tableBodyDetalle'),
 ROWS_FOUND_DETALLE = document.getElementById('rowsFoundDetalle');
 const REPORT_MODAL = new bootstrap.Modal('#reportModal'),
     REPORT_MODAL_TITLE = document.getElementById('reportModalTitle');
+    CHART_MODAL = new bootstrap.Modal('#chartModal');
 
 let idventa = null;
 document.addEventListener('DOMContentLoaded', () => {
@@ -236,6 +237,9 @@ const fillTableDetalle = async (form) => {
                         <button type="button" class="btn btn-outline-danger" onclick="openDeleteDetalle(${row.ID})">
                             <i class="bi bi-trash-fill"></i>
                         </button>
+                        <button type="button" class="btn btn-outline-danger" onclick="openChart(${row.id_producto})">
+                            <i class="bi bi-trash-fill"></i>
+                        </button>
                         
                     </td>
                 </tr>
@@ -327,9 +331,10 @@ const openDeleteDetalle = async (id) => {
 async function openModalGraphic() {
     // Se muestra la caja de diálogo con su título.
     REPORT_MODAL.show();
-    REPORT_MODAL_TITLE.textContent = 'Gráfica de dona de clientes por estado';
+    REPORT_MODAL_TITLE.textContent = 'Gráfica de dona de ventas por estado';
     try {
         graficoPastelVentasEstados();
+
     } catch (error) {
         console.log(error);
     }
@@ -361,4 +366,44 @@ const graficoPastelVentasEstados = async () => {
     } catch (error) {
         console.log('error:', error);
     }
+}
+
+const openChart = async (id) => {
+    // Se define una constante tipo objeto con los datos del registro seleccionado.
+    const FORM = new FormData();
+    FORM.append('id_producto', id);
+    // Petición para obtener los datos del registro solicitado.
+    const DATA = await fetchData(VENTA_API, 'graficaVentas', FORM);
+    // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con el error.
+    if (DATA.status) {
+        // Se muestra la caja de diálogo con su título.
+        CHART_MODAL.show();
+        // Se declaran los arreglos para guardar los datos a graficar.
+        let nombre_producto = [];
+        let total_vendidos = [];
+        // Se recorre el conjunto de registros fila por fila a través del objeto row.
+        DATA.dataset.forEach(row => {
+            // Se agregan los datos a los arreglos.
+            nombre_producto.push(row.nombre_producto);
+            total_vendidos.push(row.total_vendido);
+        });
+        // Se agrega la etiqueta canvas al contenedor de la modal.
+        document.getElementById('chartContainer').innerHTML = `<canvas id="chart"></canvas>`;
+        // Llamada a la función para generar y mostrar un gráfico de barras. Se encuentra en el archivo components.js
+        barGraph('chart', nombre_producto, total_vendidos, 'Cantidad de productos', 'Top 5 de productos');
+    } else {
+        sweetAlert(4, DATA.error, true);
+    }
+}
+
+/*
+*   Función para abrir un reporte parametrizado de productos de una categoría.
+*   Parámetros: id (identificador del registro seleccionado).
+*   Retorno: ninguno.
+*/
+const openReport = () => {
+    // Se declara una constante tipo objeto con la ruta específica del reporte en el servidor.
+    const PATH = new URL(`${SERVER_URL}reportes/administrador/historial_ventas.php`);
+    // Se abre el reporte en una nueva pestaña.
+    window.open(PATH.href);
 }

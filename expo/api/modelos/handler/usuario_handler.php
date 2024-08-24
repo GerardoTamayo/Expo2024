@@ -26,7 +26,7 @@ class UsuarioHandler
     // Función para el login.
     public function checkUser($username, $password)
     {
-        $sql = 'SELECT id_usuario, correo_usuario, clave_usuario, estado_usuario
+        $sql = 'SELECT id_usuario, nombre_usuario, correo_usuario, clave_usuario, estado_usuario
                 FROM tb_usuarios
                 WHERE  correo_usuario = ?';
         $params = array($username);
@@ -35,6 +35,7 @@ class UsuarioHandler
         } elseif (password_verify($password, $data['clave_usuario'])) {
             $this->id = $data['id_usuario'];
             $this->estado = $data['estado_usuario'];
+            $_SESSION['nombre_usuario'] = $data['nombre_usuario'];
             return true;
         } else {
             return false;
