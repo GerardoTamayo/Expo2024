@@ -19,6 +19,8 @@ const SAVE_FORM = document.getElementById('formulario_guardar'),
     VENDEDOR_VENTA = document.getElementById('id_vendedor'),
     ID_CLIENTE = document.getElementById('id_cliente'),
     FECHA_VENTA = document.getElementById('fecha_venta');
+    
+
     // Constantes para establecer los elementos del formulario de guardar detalle compra.
 const SAVE_FORM_DETALLE = document.getElementById('formulario_detalle'),
 ID_DETALLE_VENTA = document.getElementById('id_detalle_venta'),
@@ -29,6 +31,8 @@ VENTA_DETALLE = document.getElementById('venta');
 // Constantes para establecer los elementos de la tabla.
 const TABLE_BODY_DETALLE = document.getElementById('tableBodyDetalle'),
 ROWS_FOUND_DETALLE = document.getElementById('rowsFoundDetalle');
+const REPORT_MODAL = new bootstrap.Modal('#reportModal'),
+    REPORT_MODAL_TITLE = document.getElementById('reportModalTitle');
 
 let idventa = null;
 document.addEventListener('DOMContentLoaded', () => {
@@ -320,3 +324,41 @@ const openDeleteDetalle = async (id) => {
     }
 }
 
+async function openModalGraphic() {
+    // Se muestra la caja de diálogo con su título.
+    REPORT_MODAL.show();
+    REPORT_MODAL_TITLE.textContent = 'Gráfica de dona de clientes por estado';
+    try {
+        graficoPastelVentasEstados();
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+const graficoPastelVentasEstados = async () => {
+    try {
+        // Petición para obtener los datos del gráfico.
+        const DATA = await fetchData(VENTA_API, 'graficoState');
+        // Se comprueba si la respuesta es satisfactoria, de lo contrario se remueve la etiqueta canvas.
+        if (DATA.status) {
+            // Se declaran los arreglos para guardar los datos a gráficar.
+            let estado = [];
+            let cantidad = [];
+            // Se recorre el conjunto de registros fila por fila a través del objeto row.
+            DATA.dataset.forEach(row => {
+                // Convertir estado booleano a texto legible.
+                let estadoTexto = row.ESTADO ? 'Cancelado' : 'No cancelado';
+                // Se agregan los datos a los arreglos.
+                estado.push(estadoTexto);
+                cantidad.push(row.CANTIDAD);
+            });
+            // Llamada a la función para generar y mostrar un gráfico de pastel. Se encuentra en el archivo components.js
+            barGraph('chart2', estado, cantidad, 'Ventas por estado');
+        } else {
+            document.getElementById('chart2').remove();
+            console.log(DATA.error);
+        }
+    } catch (error) {
+        console.log('error:', error);
+    }
+}

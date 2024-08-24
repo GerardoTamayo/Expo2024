@@ -235,6 +235,41 @@ const pieGraph = (canvas, legends, values, title) => {
 *   Parámetros: ninguno.
 *   Retorno: ninguno.
 */
+let graph = null;
+const DoughnutGraph = (canvas, legends, values, title) => {
+    // Se declara un arreglo para guardar códigos de colores en formato hexadecimal.
+    let colors = [];
+    // Se generan códigos hexadecimales de 6 cifras de acuerdo con el número de datos a mostrar y se agregan al arreglo.
+    values.forEach(() => {
+        colors.push('#' + (Math.random().toString(16)).substring(2, 8));
+    });
+
+    //Verifica si la variable graph cuenta con una grafica previamente creada, si es si entonces la va destruir
+    if (graph) {
+        graph.destroy();
+    }
+
+    // Se crea una instancia para generar el gráfico con los datos recibidos.
+    graph = new Chart(document.getElementById(canvas), {
+        type: 'doughnut',
+        data: {
+            labels: legends,
+            datasets: [{
+                data: values,
+                backgroundColor: colors
+            }]
+        },
+        options: {
+            plugins: {
+                title: {
+                    display: true,
+                    text: title
+                }
+            }
+        }
+    });
+}
+
 const logOut = async () => {
     // Se muestra un mensaje de confirmación y se captura la respuesta en una constante.
     const RESPONSE = await confirmAction('¿Está seguro de cerrar la sesión?');

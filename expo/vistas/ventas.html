@@ -37,6 +37,9 @@
                                 <button type="reset" class="btn btn-secondary" onclick="fillTable()">
                                     <i class="bi bi-x-square-fill"></i>
                                 </button>
+                                <button type="button" class="btn btn-outline-dark" onclick="openModalGraphic()">
+                                    <i class="bi bi-bar-chart-fill"></i>
+                                </button>
                             </div>
                         </div>
                     </form>
@@ -211,6 +214,27 @@
                         </div>
                     </div>
                 </div>
+                <div class="modal fade" id="reportModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog modal-lg" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="reportModalTitle"></span></h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <!-- Formulario para crear o actualizar un registro -->
+                                <div class="modal-body row g-3">
+                                    <h4>Gráfico de clientes por estado</h4>
+                                </div>
+                                <!-- Identificador del contenedor de las gráficas -->
+                                <canvas id="chart2"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -220,6 +244,8 @@
     <!-- Llamada al framework y librería de mensajes -->
     <script type="text/javascript" src="../recursos/js/bootstrap.bundle.min.js"></script>
     <script type="text/javascript" src="../recursos/js/sweetalert.min.js"></script>
+    <!-- Llamada a la libreria de los gráficos -->
+    <script type="text/javascript" src="../recursos/js/chart.umd.min.js"></script>
     <!-- Llamada al controlador general de la aplicación -->
     <script type="text/javascript" src="../controladores/utilidades/componentes.js"></script>
     <!-- Llamada de la plantilla de la pagina -->

@@ -19,8 +19,11 @@ const SAVE_FORM = document.getElementById('formulario_guardar'),
     EXISTENCIA_PRODUCTO = document.getElementById('existencias_producto'),
     MARCA_PRODUCTO = document.getElementById('marca_producto'),
     PRESENTACION_PRODUCTO = document.getElementById('presentacion_producto')
-    FECHA_PRODUCTO = document.getElementById('fecha_producto')
-    CATEGORIA_PRODUCTO = document.getElementById('categoria_producto');
+FECHA_PRODUCTO = document.getElementById('fecha_producto')
+CATEGORIA_PRODUCTO = document.getElementById('categoria_producto');
+
+const REPORT_MODAL = new bootstrap.Modal('#reportModal'),
+    REPORT_MODAL_TITLE = document.getElementById('reportModalTitle');
 
 document.addEventListener('DOMContentLoaded', () => {
     // Llamada a la función para mostrar el encabezado y pie del documento.
@@ -176,5 +179,54 @@ const openDelete = async (id) => {
         } else {
             sweetAlert(2, DATA.error, false);
         }
+    }
+}
+
+/*
+*   Función para abrir un reporte automático de productos por categoría.
+*   Parámetros: ninguno.
+*   Retorno: ninguno.
+*/
+const openReport = () => {
+    // Se declara una constante tipo objeto con la ruta específica del reporte en el servidor.
+    const PATH = new URL(`${SERVER_URL}reportes/administrador/inventario_producto.php`);
+    // Se abre el reporte en una nueva pestaña.
+    window.open(PATH.href);
+}
+
+async function openModalGraphic() {
+    // Se muestra la caja de diálogo con su título.
+    REPORT_MODAL.show();
+    REPORT_MODAL_TITLE.textContent = 'Gráfica de dona de clientes por estado';
+    try {
+        graficoDonaProductoMarcas();
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+const graficoDonaProductoMarcas = async () => {
+    try {
+        // Petición para obtener los datos del gráfico.
+        const DATA = await fetchData(PRODUCTO_API, 'graficaProducto');
+        // Se comprueba si la respuesta es satisfactoria, de lo contrario se remueve la etiqueta canvas.
+        if (DATA.status) {
+            // Se declaran los arreglos para guardar los datos a gráficar.
+            let nombre_marca = [];
+            let existencias_producto = [];
+            // Se recorre el conjunto de registros fila por fila a través del objeto row.
+            DATA.dataset.forEach(row => {
+                // Se agregan los datos a los arreglos.
+                nombre_marca.push(row.id_marca);
+                existencias_producto.push(row.EXISTENCIA_PRODUCTO);
+            });
+            // Llamada a la función para generar y mostrar un gráfico de pastel. Se encuentra en el archivo components.js
+            DoughnutGraph('chart2', nombre_marca, existencias_producto, 'Productos por marcas');
+        } else {
+            document.getElementById('chart2').remove();
+            console.log(DATA.error);
+        }
+    } catch (error) {
+        console.log('error:', error);
     }
 }

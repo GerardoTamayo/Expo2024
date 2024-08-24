@@ -59,6 +59,15 @@ class ProductoHandler
         return Database::getRows($sql);
     }
 
+    public function graficaProducto()
+    {
+        $sql = 'SELECT m.nombre_marca, SUM(p.existencias_producto) AS total_existencias
+                FROM tb_productos p
+                JOIN tb_marcas m ON p.id_marca = m.id_marca
+                GROUP BY m.nombre_marca;';
+        return Database::getRows($sql);
+    }
+
     
     public function countAllProducts()
     {
@@ -158,4 +167,18 @@ class ProductoHandler
     //     $params = array($this->categoria);
     //     return Database::getRows($sql, $params);
     // }
+
+        // Fucnión para inventario de productos. 
+        public function inventory()
+        {
+            $sql = 'SELECT id_producto, nombre_marca, nombre_producto, existencias_producto, nombre_categoria, tipo_presentacion
+            FROM tb_productos
+            INNER JOIN tb_categorias USING (id_categoria)
+            INNER JOIN tb_marcas USING (id_marca)
+            INNER JOIN tipo_presentaciones USING (id_tipo_presentacion)
+            WHERE id_marca = ?
+            ORDER BY existencias_producto ASC;';
+            $params = array($this->marca);
+            return Database::getRows($sql, $params);
+        }
 }

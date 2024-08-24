@@ -57,6 +57,14 @@ class VentaHandler
         return Database::getRows($sql);
     }
 
+    public function graficoState()
+    {
+        $sql = 'SELECT estado_venta AS ESTADO, COUNT(*) AS CANTIDAD
+                FROM tb_ventas
+                GROUP BY estado_venta;';
+        return Database::getRows($sql);
+    }
+
     public function readOne1()
     {
         $sql = 'SELECT id_venta, fecha_venta, observacion_venta, estado_venta, id_cliente, nombre_cliente

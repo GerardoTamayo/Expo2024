@@ -33,10 +33,18 @@ if (isset($_GET['action'])) {
                     $result['error'] = 'No hay ventas registrados';
                 }
                 break;
+                case 'graficoState':
+                    if ($result['dataset'] = $venta->graficoState()) {
+                        $result['status'] = 1;
+                        $result['message'] = 'Existen ' . count($result['dataset']) . ' registros';
+                    } else {
+                        $result['error'] = 'No hay ventas registrados';
+                    }
+                    break;
             case 'readTotalVenta':
                 if ($result['dataset'] = $venta->totalVenta()) {
                     $result['status'] = 1;
-                    // $result['message'] = 'Existen ' . count($result['dataset']) . ' registros';
+                    $result['message'] = 'Existen ' . count($result['dataset']) . ' registros';
                 } else {
                     $result['error'] = 'No hay ventas registrados';
                 }
