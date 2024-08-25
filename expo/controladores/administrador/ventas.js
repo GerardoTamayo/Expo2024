@@ -396,11 +396,6 @@ const openChart = async (id) => {
     }
 }
 
-/*
-*   Función para abrir un reporte parametrizado de productos de una categoría.
-*   Parámetros: id (identificador del registro seleccionado).
-*   Retorno: ninguno.
-*/
 const openReport = () => {
     // Se declara una constante tipo objeto con la ruta específica del reporte en el servidor.
     const PATH = new URL(`${SERVER_URL}reportes/administrador/historial_ventas.php`);

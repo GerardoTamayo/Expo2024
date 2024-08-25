@@ -161,3 +161,12 @@ const openDelete = async (id) => {
         }
     }
 }
+
+const openReport = (id) => {
+    // Se declara una constante tipo objeto con la ruta específica del reporte en el servidor.
+    const PATH = new URL(`${SERVER_URL}reportes/administrador/categoria_producto.php`);
+    // Se agrega un parámetro a la ruta con el valor del registro seleccionado.
+    PATH.searchParams.append('id_categoria', id);
+    // Se abre el reporte en una nueva pestaña.
+    window.open(PATH.href);
+}
