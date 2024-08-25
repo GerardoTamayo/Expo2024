@@ -11,19 +11,19 @@ const TABLE_BODY = document.getElementById('tableBody'),
     ROWS_FOUND = document.getElementById('rowsFound');
 // Constantes para establecer los elementos del formulario de guardar.
 const SAVE_FORM = document.getElementById('formulario_guardar'),
-ID_PROVEEDOR = document.getElementById('id_proveedor'),
-NOMBRE_PROVEEDOR = document.getElementById('nombre_proveedor'),
-APELLIDO_PROVEEDOR = document.getElementById('apellido_proveedor'),
-TELEFONO_PROVEEDOR = document.getElementById('telefono_proveedor'),
-CORREO_PROVEEDOR = document.getElementById('correo_proveedor');
+    ID_PROVEEDOR = document.getElementById('id_proveedor'),
+    NOMBRE_PROVEEDOR = document.getElementById('nombre_proveedor'),
+    APELLIDO_PROVEEDOR = document.getElementById('apellido_proveedor'),
+    TELEFONO_PROVEEDOR = document.getElementById('telefono_proveedor'),
+    CORREO_PROVEEDOR = document.getElementById('correo_proveedor');
 
 document.addEventListener('DOMContentLoaded', () => {
     // Llamada a la función para mostrar el encabezado y pie del documento.
     loadTemplate();
     // Se establece el título del contenido principal.
     MAIN_TITLE.textContent = 'Administrar vendedores';
-        // Llamada a la función para llenar la tabla con los registros existentes.
-        fillTable();
+    // Llamada a la función para llenar la tabla con los registros existentes.
+    fillTable();
 })
 
 // Método del evento para cuando se envía el formulario de buscar.
@@ -89,6 +89,9 @@ const fillTable = async (form = null) => {
                         </button>
                         <button type="button" class="btn btn-outline-danger" onclick="openDelete(${row.id_proveedor})">
                             <i class="bi bi-trash-fill"></i>
+                        </button>
+                        <button type="button" class="btn btn-warning" onclick="openReport(${row.id_proveedor})">
+                            <i class="bi bi-filetype-pdf"></i>
                         </button>
                     </td>
                 </tr>
@@ -165,6 +168,20 @@ const openDelete = async (id) => {
             sweetAlert(2, DATA.error, false);
         }
     }
+}
+
+/*
+*   Función para abrir un reporte automático de productos por categoría.
+*   Parámetros: ninguno.
+*   Retorno: ninguno.
+*/
+const openReport = (id) => {
+    // Se declara una constante tipo objeto con la ruta específica del reporte en el servidor.
+    const PATH = new URL(`${SERVER_URL}reportes/administrador/proveedor_compra.php`);
+    // Se agrega un parámetro a la ruta con el valor del registro seleccionado.
+    PATH.searchParams.append('id_proveedor', id);
+    // Se abre el reporte en una nueva pestaña.
+    window.open(PATH.href);
 }
 
 // Llamada a la función para establecer la mascara del campo teléfono.

@@ -56,8 +56,9 @@ class CompraHandler
     {
         $sql = 'SELECT p.nombre_proveedor, COUNT(c.id_compra) AS total_compras
                 FROM tb_compras c
-                JOIN tb_proveedores p ON c.id_proveedor = p.id_proveedor
-                GROUP BY p.nombre_proveedor;';
+                INNER JOIN tb_proveedores p ON c.id_proveedor = p.id_proveedor
+                GROUP BY p.nombre_proveedor
+                LIMIT 5;';
         return Database::getRows($sql);
     }
 
@@ -198,6 +199,17 @@ class CompraHandler
         $sql = 'CALL eliminar_detalle_compra(?, ?);';
         $params = array($this->id_detalle_compra, $this->id_compra);
         return Database::executeRow($sql, $params);
+    }
+
+    public function vendedorCompra()
+    {
+        $sql = 'SELECT fecha_compra, cantidad_compra, precio_compra, nombre_producto
+        FROM tb_compras 
+        JOIN tb_detalle_compras USING (id_compra)
+        JOIN tb_productos USING (id_producto)
+        WHERE id_proveedor = ?;';
+        $params = array($this->id_proveedor);
+        return Database::getRows($sql, $params);
     }
 
 }

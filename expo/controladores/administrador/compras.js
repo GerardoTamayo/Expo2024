@@ -107,6 +107,9 @@ const fillTable = async (form = null) => {
                             <i class="bi bi-layout-text-sidebar-reverse"></i>
                             <span>Detalle</span>
                         </button>
+                        <button type="button" class="btn btn-warning" onclick="openReport(${row.id_proveedor})">
+                            <i class="bi bi-filetype-pdf"></i>
+                        </button>
                     </td>
                 </tr>
             `;
@@ -317,6 +320,20 @@ const openDeleteDetalle = async (id) => {
             sweetAlert(2, DATA.error, false);
         }
     }
+}
+
+/*
+*   Función para abrir un reporte automático de productos por categoría.
+*   Parámetros: ninguno.
+*   Retorno: ninguno.
+*/
+const openReport = (id) => {
+    // Se declara una constante tipo objeto con la ruta específica del reporte en el servidor.
+    const PATH = new URL(`${SERVER_URL}reportes/administrador/proveedor_compra.php`);
+    // Se agrega un parámetro a la ruta con el valor del registro seleccionado.
+    PATH.searchParams.append('id_proveedor', id);
+    // Se abre el reporte en una nueva pestaña.
+    window.open(PATH.href);
 }
 
 

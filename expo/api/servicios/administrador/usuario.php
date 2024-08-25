@@ -52,6 +52,14 @@ if (isset($_GET['action'])) {
                     $result['error'] = 'No existen administradores registrados';
                 }
                 break;
+                case 'graficaUsuario':
+                    if ($result['dataset'] = $administrador->graficaUsuario()) {
+                        $result['status'] = 1;
+                        $result['message'] = 'Existen ' . count($result['dataset']) . ' registros';
+                    } else {
+                        $result['error'] = 'No existen administradores registrados';
+                    }
+                    break;
             case 'readOne':
                 if (!$administrador->setId($_POST['id_usuario'])) {
                     $result['error'] = 'Administrador incorrecto';

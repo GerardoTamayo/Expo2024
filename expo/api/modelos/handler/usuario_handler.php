@@ -157,6 +157,20 @@ class UsuarioHandler
         return Database::getRows($sql);
     }
 
+    public function graficaUsuario()
+    {
+        $sql = 'SELECT 
+    CASE 
+        WHEN estado_usuario = 1 THEN "Activo" 
+        ELSE "Inactivo" 
+        END AS Estado_Usuario, 
+        COUNT(id_usuario) AS Cantidad_Usuarios
+        FROM tb_usuarios
+        GROUP BY Estado_Usuario;
+        LIMIT 5';
+        return Database::getRows($sql);
+    }
+
     // Función para leer un usuario.
     public function readOne()
     {
@@ -193,5 +207,16 @@ class UsuarioHandler
         $sql = 'CALL cambiar_estado_usuario(?);';
         $params = array($this->id);
         return Database::executeRow($sql, $params);
+    }
+
+    public function readEstado()
+    {
+        $sql = 'SELECT id_usuario, nombre_usuario, apellido_usuario, correo_usuario, tipo_usuario, 
+        CASE WHEN estado_usuario = 1 THEN "Activo"
+        ELSE "Inactivo"
+        END AS estado
+        FROM tb_usuarios 
+        INNER JOIN tb_tipousuarios USING (id_tipo);';
+        return Database::getRows($sql);
     }
 }

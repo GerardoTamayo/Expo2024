@@ -26,6 +26,7 @@ document.addEventListener('DOMContentLoaded', () => {
     totalProductos();
     totalClientes();
     totalCompras();
+    graficoBarraCompraProveedor();
 });
 
 async function totalVentas() {
@@ -105,7 +106,7 @@ const graficoBarraCompraProveedor = async () => {
             total_compras.push(row.total_compras);
         });
         // Llamada a la función para generar y mostrar un gráfico de barras. Se encuentra en el archivo components.js
-        barGraph('chart2', nombre_proveedor, total_compras, 'Cantidad de productos', 'Cantidad de productos por categoría');
+        barGraph('chart2', nombre_proveedor, total_compras, 'Cantidad de Comptas', 'Compras por proveedor');
     } else {
         document.getElementById('chart2').remove();
         console.log(DATA.error);
