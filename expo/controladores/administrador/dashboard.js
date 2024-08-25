@@ -89,3 +89,25 @@ async function totalCompras() {
         console.error('Error: ', error);
     }
 }
+
+const graficoBarraCompraProveedor = async () => {
+    // Petición para obtener los datos del gráfico.
+    const DATA = await fetchData(COMPRA_API, 'graficaCompras');
+    // Se comprueba si la respuesta es satisfactoria, de lo contrario se remueve la etiqueta canvas.
+    if (DATA.status) {
+        // Se declaran los arreglos para guardar los datos a graficar.
+        let nombre_proveedor = [];
+        let total_compras = [];
+        // Se recorre el conjunto de registros fila por fila a través del objeto row.
+        DATA.dataset.forEach(row => {
+            // Se agregan los datos a los arreglos.
+            nombre_proveedor.push(row.nombre_proveedor);
+            total_compras.push(row.total_compras);
+        });
+        // Llamada a la función para generar y mostrar un gráfico de barras. Se encuentra en el archivo components.js
+        barGraph('chart2', nombre_proveedor, total_compras, 'Cantidad de productos', 'Cantidad de productos por categoría');
+    } else {
+        document.getElementById('chart2').remove();
+        console.log(DATA.error);
+    }
+}

@@ -33,6 +33,14 @@ if (isset($_GET['action'])) {
                     $result['error'] = 'No hay compras registrados';
                 }
                 break;
+                case 'graficaCompras':
+                    if ($result['dataset'] = $compra->graficaCompras()) {
+                        $result['status'] = 1;
+                        $result['message'] = 'Existen ' . count($result['dataset']) . ' registros';
+                    } else {
+                        $result['error'] = 'No hay compras registrados';
+                    }
+                    break;
             case 'totalCompra':
                 if ($result['dataset'] = $compra->totalCompra()) {
                     $result['status'] = 1;

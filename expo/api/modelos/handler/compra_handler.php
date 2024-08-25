@@ -52,6 +52,15 @@ class CompraHandler
         return Database::getRows($sql);
     }
 
+    public function graficaCompras()
+    {
+        $sql = 'SELECT p.nombre_proveedor, COUNT(c.id_compra) AS total_compras
+                FROM tb_compras c
+                JOIN tb_proveedores p ON c.id_proveedor = p.id_proveedor
+                GROUP BY p.nombre_proveedor;';
+        return Database::getRows($sql);
+    }
+
     public function readOne1()
     {
         $sql = 'SELECT id_compra, fecha_compra, numero_correlativo, estado_compra, id_proveedor, nombre_proveedor
