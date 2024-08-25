@@ -24,6 +24,7 @@ CATEGORIA_PRODUCTO = document.getElementById('categoria_producto');
 
 const REPORT_MODAL = new bootstrap.Modal('#reportModal'),
     REPORT_MODAL_TITLE = document.getElementById('reportModalTitle');
+    CHART_MODAL = new bootstrap.Modal('#chartModal');
 
 document.addEventListener('DOMContentLoaded', () => {
     // Llamada a la función para mostrar el encabezado y pie del documento.
@@ -98,6 +99,7 @@ const fillTable = async (form = null) => {
                         <button type="button" class="btn btn-outline-danger" onclick="openDelete(${row.id_producto})">
                             <i class="bi bi-trash-fill"></i>
                         </button>
+                        
                     </td>
                 </tr>
             `;
@@ -230,3 +232,4 @@ const graficoDonaProductoMarcas = async () => {
         console.log('error:', error);
     }
 }
+

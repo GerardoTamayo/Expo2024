@@ -45,6 +45,15 @@ if (isset($_GET['action'])) {
                     $result['error'] = 'No existen presentaciones registradas';
                 }
                 break;
+                case 'graficaPresentacion':
+                    if (!$presentacion->setId($_POST['id_presentacion'])) {
+                        $result['error'] = $presentacion->getDataError();
+                    } elseif ($result['dataset'] = $presentacion->graficaPresentacion()) {
+                        $result['status'] = 1;
+                    } else {
+                        $result['error'] = 'Producto inexistente';
+                    }
+                    break;
             case 'readOne':
                 if (!$presentacion->setId($_POST['id_presentacion'])) {
                     $result['error'] = $presentacion->getDataError();

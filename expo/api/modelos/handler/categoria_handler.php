@@ -46,6 +46,22 @@ class CategoriaHandler
         return Database::getRows($sql);
     }
 
+    public function graficaProductoCategoria()
+    {
+        $sql = 'SELECT c.nombre_categoria AS Categoria, 
+                COUNT(p.id_producto) AS Cantidad_Productos
+                FROM 
+                tb_productos p
+                JOIN 
+                tb_categorias c ON p.id_categoria = c.id_categoria
+                WHERE 
+                c.id_categoria = ?
+                GROUP BY 
+                c.nombre_categoria;';
+            $params = array($this->id);
+        return Database::getRows($sql, $params);
+    }
+
     // Función para leer una categoría.
     public function readOne()
     {

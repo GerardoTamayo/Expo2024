@@ -12,6 +12,7 @@ MODAL_TITLE = document.getElementById('titulo_modal1');
 const SAVE_FORM = document.getElementById('formulario_guardar'),
     ID_PRESENTACION = document.getElementById('id_presentacion'),
     NOMBRE_PRESENTACION = document.getElementById('tipo_presentacion');
+    CHART_MODAL = new bootstrap.Modal('#chartModal');
 
 document.addEventListener('DOMContentLoaded', () => {
     // Llamada a la función para mostrar el encabezado y pie del documento.
@@ -83,6 +84,9 @@ const fillTable = async (form = null) => {
                         </button>
                         <button type="button" class="btn btn-outline-danger" onclick="openDelete(${row.id_tipo_presentacion})">
                             <i class="bi bi-trash-fill"></i>
+                        </button>
+                         <button type="button" class="btn btn-outline-danger" onclick="openChart(${row.id_tipo_presentacion})">
+                            <i class="bi bi-bar-chart-fill"></i>
                         </button>
                     </td>
                 </tr>
@@ -160,5 +164,33 @@ const openDelete = async (id) => {
         } else {
             sweetAlert(2, DATA.error, false);
         }
+    }
+}
+
+const openChart = async (id) => {
+    // Se define una constante tipo objeto con los datos del registro seleccionado.
+    const FORM = new FormData();
+    FORM.append('id_presentacion', id);
+    // Petición para obtener los datos del registro solicitado.
+    const DATA = await fetchData(PRESENTACION_API, 'graficaPresentacion', FORM);
+    // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con el error.
+    if (DATA.status) {
+        // Se muestra la caja de diálogo con su título.
+        CHART_MODAL.show();
+        // Se declaran los arreglos para guardar los datos a graficar.
+        let tipo_presentacion = [];
+        let cantidad_productos = [];
+        // Se recorre el conjunto de registros fila por fila a través del objeto row.
+        DATA.dataset.forEach(row => {
+            // Se agregan los datos a los arreglos.
+            tipo_presentacion.push(row.Tipo_Presentacion);
+            cantidad_productos.push(row.Cantidad_Productos);
+        });
+        // Se agrega la etiqueta canvas al contenedor de la modal.
+        document.getElementById('chartContainer').innerHTML = `<canvas id="chart"></canvas>`;
+        // Llamada a la función para generar y mostrar un gráfico de barras. Se encuentra en el archivo components.js
+        barGraph('chart', tipo_presentacion, cantidad_productos, 'Cantidad de Ventas', 'Top 5 de productos');
+    } else {
+        sweetAlert(4, DATA.error, true);
     }
 }

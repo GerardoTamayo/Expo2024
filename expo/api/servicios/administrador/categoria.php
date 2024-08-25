@@ -45,6 +45,15 @@ if (isset($_GET['action'])) {
                     $result['error'] = 'No existen categorías registradas';
                 }
                 break;
+                case 'graficaProductoCategoria':
+                    if (!$categoria->setId($_POST['id_categoria'])) {
+                        $result['error'] = $categoria->getDataError();
+                    } elseif ($result['dataset'] = $categoria->graficaProductoCategoria()) {
+                        $result['status'] = 1;
+                    } else {
+                        $result['error'] = 'Producto inexistente';
+                    }
+                    break;
             case 'readOne':
                 if (!$categoria->setId($_POST['id_categoria'])) {
                     $result['error'] = $categoria->getDataError();

@@ -59,6 +59,7 @@ if (isset($_GET['action'])) {
                         $result['error'] = 'No existen productos registrados';
                     }
                     break;
+
                 case 'countAllProducts':
                     if ($result['dataset'] = $producto->countAllProducts()) {
                         $result['status'] = 1;

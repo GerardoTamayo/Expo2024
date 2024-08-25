@@ -46,6 +46,22 @@ class PresentacionHandler
         return Database::getRows($sql);
     }
 
+    public function graficaPresentacion()
+    {
+        $sql = 'SELECT tp.tipo_presentacion AS Tipo_Presentacion, 
+                COUNT(p.id_producto) AS Cantidad_Productos
+                FROM 
+                tb_productos p
+                JOIN 
+                tipo_presentaciones tp ON p.id_tipo_presentacion = tp.id_tipo_presentacion
+                WHERE 
+                tp.id_tipo_presentacion = ? -- Reemplaza ? con el tipo de presentación deseado
+                GROUP BY 
+                tp.tipo_presentacion;';
+                $params = array($this->id);
+        return Database::getRows($sql, $params);
+    }
+
     // Función para leer una categoría.
     public function readOne()
     {

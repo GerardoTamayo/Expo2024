@@ -97,6 +97,23 @@
                         </div>
                     </div>
                 </div>
+                <div class="modal fade" id="chartModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+                    aria-labelledby="chartTitle" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="chartTitle">Gráfico de productos</h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <!-- Contenedor para mostrar el gráfico -->
+                            <div class="modal-body" id="chartContainer"></div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Aceptar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -105,6 +122,8 @@
     <!-- Llamada al framework y librería de mensajes -->
     <script type="text/javascript" src="../recursos/js/bootstrap.bundle.min.js"></script>
     <script type="text/javascript" src="../recursos/js/sweetalert.min.js"></script>
+     <!-- Llamada a la libreria de los gráficos -->
+     <script type="text/javascript" src="../recursos/js/chart.umd.min.js"></script>
     <!-- Llamada al controlador general de la aplicación -->
     <script type="text/javascript" src="../controladores/utilidades/componentes.js"></script>
     <!-- Llamada de la plantilla de la pagina -->

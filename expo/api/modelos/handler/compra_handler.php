@@ -212,4 +212,32 @@ class CompraHandler
         return Database::getRows($sql, $params);
     }
 
+    public function compraFactura()
+    {
+        $sql = '    SELECT 
+        id_compra, 
+        fecha_compra, 
+        numero_correlativo, 
+        estado_compra, 
+        nombre_proveedor, 
+        apellido_proveedor, 
+        telefono_proveedor, 
+        correo_proveedor, 
+        cantidad_compra, 
+        precio_compra, 
+        nombre_producto, 
+        (cantidad_compra * precio_compra) AS total_producto 
+    FROM 
+        tb_compras 
+    JOIN 
+        tb_proveedores USING (id_proveedor)
+    JOIN 
+        tb_detalle_compras USING (id_compra)
+    JOIN 
+        tb_productos USING (id_producto)
+    WHERE 
+        id_compra = ?;';
+        $params = array($this->id_compra);
+        return Database::getRows($sql, $params);
+    }
 }

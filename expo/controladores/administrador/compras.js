@@ -107,8 +107,9 @@ const fillTable = async (form = null) => {
                             <i class="bi bi-layout-text-sidebar-reverse"></i>
                             <span>Detalle</span>
                         </button>
-                        <button type="button" class="btn btn-warning" onclick="openReport(${row.id_proveedor})">
+                        <button type="button" class="btn btn-warning" onclick="openReport2(${row.ID})">
                             <i class="bi bi-filetype-pdf"></i>
+                            <span>Factura</span>
                         </button>
                     </td>
                 </tr>
@@ -327,6 +328,15 @@ const openReport = (id) => {
     const PATH = new URL(`${SERVER_URL}reportes/administrador/proveedor_compra.php`);
     // Se agrega un parámetro a la ruta con el valor del registro seleccionado.
     PATH.searchParams.append('id_proveedor', id);
+    // Se abre el reporte en una nueva pestaña.
+    window.open(PATH.href);
+}
+
+const openReport2 = (id) => {
+    // Se declara una constante tipo objeto con la ruta específica del reporte en el servidor.
+    const PATH = new URL(`${SERVER_URL}reportes/administrador/factura_compra.php`);
+    // Se agrega un parámetro a la ruta con el valor del registro seleccionado.
+    PATH.searchParams.append('id_compra', id);
     // Se abre el reporte en una nueva pestaña.
     window.open(PATH.href);
 }
