@@ -52,7 +52,7 @@ $pdf->setTextColor(0, 0, 0); // Negro
 // Función para imprimir usuarios.
 function imprimirUsuarios($pdf, $usuarios, $estado) {
     if (!empty($usuarios)) {
-        $pdf->cell(190, 10, $pdf->encodeString('Rol: ' . $estado), 1, 1, 'C', 1);
+        $pdf->cell(190, 10, $pdf->encodeString('Estado: ' . $estado), 1, 1, 'C', 1);
         foreach ($usuarios as $usuario) {
             $pdf->cell(40, 10, $usuario['nombre_usuario'], 1, 0, 'C', 1);
             $pdf->cell(40, 10, $pdf->encodeString($usuario['apellido_usuario']), 1, 0, 'C', 1);
@@ -65,10 +65,10 @@ function imprimirUsuarios($pdf, $usuarios, $estado) {
 }
 
 // Imprime los usuarios activos
-imprimirUsuarios($pdf, $usuariosActivos, 'Activo');
+imprimirUsuarios($pdf, $usuariosActivos, 'Activo(s)');
 
 // Imprime los usuarios inactivos
-imprimirUsuarios($pdf, $usuariosInactivos, 'Inactivo');
+imprimirUsuarios($pdf, $usuariosInactivos, 'Bloqueado(s)');
 
 // Se llama implícitamente al método footer() y se envía el documento al navegador web.
 $pdf->output('I', 'Usuarios por estado.pdf');

@@ -66,4 +66,4 @@ if (isset($_GET['id_proveedor'])) {
 } else {
     print('Debe seleccionar un proveedor');
 }
-?>
+

@@ -43,6 +43,23 @@ class TiposUsuariosHandler
         return Database::getRows($sql);
     }
 
+    public function graficaTipo()
+    {
+        $sql = 'SELECT 
+    CASE 
+        WHEN u.estado_usuario = 1 THEN "Activo"
+        ELSE "Inactivo"
+        END AS Estado_Usuario, 
+        COUNT(u.id_usuario) AS Cantidad_Usuarios
+        FROM tb_usuarios u
+        WHERE 
+        u.id_tipo = ? -- Reemplaza ? con el id_tipo deseado
+        GROUP BY 
+        u.estado_usuario;';
+         $params = array($this->id_tipo);
+         return Database::getRows($sql, $params);
+    }
+
     //Función para mostrar uno de los tipos de usuarios
     public function readOne()
     {

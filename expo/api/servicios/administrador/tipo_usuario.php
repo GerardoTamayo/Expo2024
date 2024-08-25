@@ -47,7 +47,16 @@ if (isset($_GET['action'])) {
                     $result['error'] = 'No existen tipoes registrados';
                 }
                 break;
-                // Leer uno
+                case 'graficaTipo':
+                    if (!$tipo->setId($_POST['idTipo'])) {
+                        $result['error'] = $tipo->getDataError();
+                    } elseif ($result['dataset'] = $tipo->graficaTipo()) {
+                        $result['status'] = 1;
+                        $result['message'] = 'Existen ' . count($result['dataset']) . ' registros';
+                    } else {
+                        $result['error'] = 'No hay tipos registrados';
+                    }
+                    break;
             case 'readOne':
                 if (!$tipo->setId($_POST['idTipo'])) {
                     $result['error'] = $tipo->getDataError();

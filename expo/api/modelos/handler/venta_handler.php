@@ -1,6 +1,6 @@
 <?php
 // Se incluye la clase para trabajar con la base de datos.
-require_once ('../../ayudantes/base_datos.php');
+require_once('../../ayudantes/base_datos.php');
 /*
  *  Clase para manejar el comportamiento de los datos de la tabla administrador.
  */
@@ -120,7 +120,7 @@ class VentaHandler
         WHERE id_venta = ?
         ORDER BY VENTA;';
         $params = array($this->id_venta);
-        return Database::getRows($sql,$params);
+        return Database::getRows($sql, $params);
     }
 
     public function graficaVentas()
@@ -132,10 +132,10 @@ class VentaHandler
         WHERE id_producto = ? 
         HAVING total_vendido;';
         $params = array($this->id_producto);
-        return Database::getRows($sql,$params);
+        return Database::getRows($sql, $params);
     }
 
-    
+
 
 
     public function readOne()
@@ -175,7 +175,7 @@ class VentaHandler
         return Database::executeRow($sql, $params);
     }
 
-    
+
     public function totalVenta()
     {
         $sql = 'SELECT DATE_FORMAT(v.fecha_venta,  "%Y-%m" ) AS mes, SUM(dv.cantidad_venta * dv.precio_venta) AS total_ventas
@@ -184,7 +184,7 @@ class VentaHandler
         return Database::getRows($sql);
     }
 
-        // Metodos para detalle ventas agregar, actualuzar y eliminar
+    // Metodos para detalle ventas agregar, actualuzar y eliminar
     //actualizar un producto de una venta
 
     public function agregarVenta()
@@ -218,17 +218,29 @@ class VentaHandler
     //     ORDER BY FECHA;';
     //     return Database::getRows($sql);
     // }
-        // Función para leer todos los pedido
-        public function ventaReports()
-        {
-            $sql = 'SELECT fecha_venta, nombre_cliente, apellido_cliente, cantidad_venta, precio_venta, 
+    // Función para leer todos los pedido
+    public function ventaReports()
+    {
+        $sql = 'SELECT fecha_venta, nombre_cliente, apellido_cliente, cantidad_venta, precio_venta, 
             (cantidad_venta * precio_venta) AS total
             FROM tb_ventas 
             INNER JOIN tb_clientes USING (id_cliente) 
             INNER JOIN tb_detalle_ventas USING (id_venta)
             ORDER BY fecha_venta DESC;';
-            return Database::getRows($sql);
-        }
+        return Database::getRows($sql);
+    }
 
-
+    public function Facturacion()
+    {
+        $sql = 'SELECT id_venta, fecha_venta, observacion_venta, nombre_cliente, apellido_cliente, telefono_cliente, 
+        correo_cliente, dui_cliente, direccion_cliente, cantidad_venta, precio_venta, nombre_producto, 
+        (cantidad_venta * precio_venta) AS total_producto 
+        FROM tb_ventas 
+        JOIN tb_clientes USING (id_cliente) 
+        JOIN tb_detalle_ventas USING (id_venta)
+        JOIN tb_productos USING (id_producto)
+        WHERE id_venta = ?;';
+        $params = array($this->id_venta);
+        return Database::getRows($sql, $params);
+    }
 }

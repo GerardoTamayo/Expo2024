@@ -13,6 +13,7 @@ MODAL_TITLE = document.getElementById('titulo_modal1');
 const SAVE_FORM = document.getElementById('formulario_guardar'),
     ID_TIPO = document.getElementById('idTipo'),
     NOMBRE_TIPO = document.getElementById('tipo_usuario');
+    CHART_MODAL = new bootstrap.Modal('#chartModal');
 
 document.addEventListener('DOMContentLoaded', () => {
     // Llamada a la función para mostrar el encabezado y pie del documento.
@@ -85,8 +86,8 @@ const fillTable = async (form = null) => {
                         <button type="button" class="btn btn-outline-danger" onclick="openDelete(${row.id_tipo})">
                             <i class="bi bi-trash-fill"></i>
                         </button>
-                        <button type="button" class="btn btn-warning" onclick="openReport(${row.id_tipo})">
-                            <i class="bi bi-filetype-pdf"></i>
+                        <button type="button" class="btn btn-warning" onclick="openChart(${row.id_tipo})">
+                            <i class="bi bi-bar-chart-fill"></i>
                         </button>
                     </td>
                 </tr>
@@ -160,5 +161,34 @@ const openDelete = async (id) => {
         } else {
             sweetAlert(2, DATA.error, false);
         }
+    }
+}
+
+
+const openChart = async (id) => {
+    // Se define una constante tipo objeto con los datos del registro seleccionado.
+    const FORM = new FormData();
+    FORM.append('idTipo', id);
+    // Petición para obtener los datos del registro solicitado.
+    const DATA = await fetchData(TIPOS_API, 'graficaTipo', FORM);
+    // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con el error.
+    if (DATA.status) {
+        // Se muestra la caja de diálogo con su título.
+        CHART_MODAL.show();
+        // Se declaran los arreglos para guardar los datos a graficar.
+        let tipo_usuario = [];
+        let cantidad_usuario = [];
+        // Se recorre el conjunto de registros fila por fila a través del objeto row.
+        DATA.dataset.forEach(row => {
+            // Se agregan los datos a los arreglos.
+            tipo_usuario.push(row.Estado_Usuario);
+            cantidad_usuario.push(row.Cantidad_Usuarios);
+        });
+        // Se agrega la etiqueta canvas al contenedor de la modal.
+        document.getElementById('chartContainer').innerHTML = `<canvas id="chart"></canvas>`;
+        // Llamada a la función para generar y mostrar un gráfico de barras. Se encuentra en el archivo components.js
+        barGraph('chart', tipo_usuario, cantidad_usuario, 'Cantidad de Tipos', 'Tipos de usuarios');
+    } else {
+        sweetAlert(4, DATA.error, true);
     }
 }

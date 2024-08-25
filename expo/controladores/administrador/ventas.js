@@ -113,6 +113,10 @@ const fillTable = async (form = null) => {
                             <i class="bi bi-layout-text-sidebar-reverse"></i>
                             <span>Detalle</span>
                         </button>
+                        <button type="button" class="btn btn-warning" onclick="openReport2(${row.ID})">
+                            <i class="bi bi-filetype-pdf"></i>
+                            <span>Generar factura</span>
+                        </button>
                     </td>
                 </tr>
             `;
@@ -240,7 +244,6 @@ const fillTableDetalle = async (form) => {
                         <button type="button" class="btn btn-outline-danger" onclick="openChart(${row.id_producto})">
                             <i class="bi bi-trash-fill"></i>
                         </button>
-                        
                     </td>
                 </tr>
             `;
@@ -399,6 +402,15 @@ const openChart = async (id) => {
 const openReport = () => {
     // Se declara una constante tipo objeto con la ruta específica del reporte en el servidor.
     const PATH = new URL(`${SERVER_URL}reportes/administrador/historial_ventas.php`);
+    // Se abre el reporte en una nueva pestaña.
+    window.open(PATH.href);
+}
+
+const openReport2 = (id) => {
+    // Se declara una constante tipo objeto con la ruta específica del reporte en el servidor.
+    const PATH = new URL(`${SERVER_URL}reportes/administrador/factura_venta.php`);
+    // Se agrega un parámetro a la ruta con el valor del registro seleccionado.
+    PATH.searchParams.append('id_venta', id);
     // Se abre el reporte en una nueva pestaña.
     window.open(PATH.href);
 }
