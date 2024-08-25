@@ -48,6 +48,14 @@ if (isset($_GET['action'])) {
                     $result['error'] = 'No existen marcas registradas';
                 }
                 break;
+                case 'graficaMarcas':
+                    if ($result['dataset'] = $marca->graficaMarcas()) {
+                        $result['status'] = 1;
+                        $result['message'] = 'Existen ' . count($result['dataset']) . ' registros';
+                    } else {
+                        $result['error'] = 'No existen marcas registradas';
+                    }
+                    break;
             case 'readOne':
                 if (!$marca->setId($_POST['id_marca'])) {
                     $result['error'] = $marca->getDataError();

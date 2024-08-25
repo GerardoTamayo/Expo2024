@@ -224,4 +224,15 @@ class UsuarioHandler
         INNER JOIN tb_tipousuarios USING (id_tipo);';
         return Database::getRows($sql);
     }
+
+    public function readAllTipo()
+    {
+        $sql = 'SELECT nombre_usuario, apellido_usuario, correo_usuario, id_tipo, tipo_usuario
+                FROM tb_usuarios
+                INNER JOIN tb_tipousuarios USING (id_tipo)
+                WHERE id_tipo = ?
+                ORDER BY id_usuario';
+                $params = array($this->tipo);
+        return Database::getRows($sql, $params);
+    }
 }

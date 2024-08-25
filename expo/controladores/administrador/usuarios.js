@@ -20,7 +20,6 @@ const SAVE_FORM = document.getElementById('formulario_guardar'),
     TIPO_USUARIO = document.getElementById('tipo_usuario'),
     CLAVE_USUARIO = document.getElementById('clave_usuario'),
     CONFIRMAR_CLAVE = document.getElementById('repetir_contra');
-    CHART_MODAL = new bootstrap.Modal('#chartModal');
 /*
 *   Función asíncrona para llenar la tabla con los registros disponibles.
 *   Parámetros: form (objeto opcional con los datos de búsqueda).
@@ -56,9 +55,7 @@ const fillTable = async (form = null) => {
                         <button type="button" class="btn btn-outline-primary" onclick="openState(${row.id_usuario})">
                             <i class="bi bi-exclamation-octagon"></i>
                         </button>
-                        <button type="button" class="btn btn-outline-primary" onclick="openChart(${row.id_usuario})">
-                            <i class="bi bi-bar-chart-fill"></i>
-                        </button>
+                       
                     </td>
                 </tr>
             `;
@@ -225,37 +222,26 @@ SAVE_FORM.addEventListener('submit', async (event) => {
     }
 });
 
-// const openChart = async (id) => {
-//     // Se define una constante tipo objeto con los datos del registro seleccionado.
-//     const FORM = new FormData();
-//     FORM.append('id_usuario', id);
-//     // Petición para obtener los datos del registro solicitado.
-//     const DATA = await fetchData(USUARIO_API, 'graficaUsuario', FORM);
-//     // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con el error.
-//     if (DATA.status) {
-//         // Se muestra la caja de diálogo con su título.
-//         CHART_MODAL.show();
-//         // Se declaran los arreglos para guardar los datos a graficar.
-//         let estado_usuario = [];
-//         let cantidad_usuarios = [];
-//         // Se recorre el conjunto de registros fila por fila a través del objeto row.
-//         DATA.dataset.forEach(row => {
-//             // Se agregan los datos a los arreglos.
-//             estado_usuario.push(row.Estado_Usuario);
-//             cantidad_usuarios.push(row.Cantidad_Usuarios);
-//         });
-//         // Se agrega la etiqueta canvas al contenedor de la modal.
-//         document.getElementById('chartContainer').innerHTML = `<canvas id="chart"></canvas>`;
-//         // Llamada a la función para generar y mostrar un gráfico de barras. Se encuentra en el archivo components.js
-//         barGraph('chart', estado_usuario, cantidad_usuarios, 'Cantidad de Ventas', 'Top 5 de productos');
-//     } else {
-//         sweetAlert(4, DATA.error, true);
-//     }
-// }
-
+/*
+*   Función para abrir un reporte automático de productos por categoría.
+*   Parámetros: ninguno.
+*   Retorno: ninguno.
+*/
 const openReport = () => {
     // Se declara una constante tipo objeto con la ruta específica del reporte en el servidor.
     const PATH = new URL(`${SERVER_URL}reportes/administrador/estado_usuario.php`);
+    // Se abre el reporte en una nueva pestaña.
+    window.open(PATH.href);
+}
+
+/*
+*   Función para abrir un reporte automático de productos por categoría.
+*   Parámetros: ninguno.
+*   Retorno: ninguno.
+*/
+const openReport2 = () => {
+    // Se declara una constante tipo objeto con la ruta específica del reporte en el servidor.
+    const PATH = new URL(`${SERVER_URL}reportes/administrador/tipo_usuario.php`);
     // Se abre el reporte en una nueva pestaña.
     window.open(PATH.href);
 }

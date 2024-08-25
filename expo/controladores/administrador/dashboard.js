@@ -3,6 +3,7 @@ const VENTA_API = 'servicios/administrador/venta.php',
     PRODUCTO_API = 'servicios/administrador/producto.php',
     COMPRA_API = 'servicios/administrador/compra.php',
     CLIENTE_API = 'servicios/administrador/cliente.php';
+     MARCA_API = 'servicios/administrador/marca.php';
 
 document.addEventListener('DOMContentLoaded', () => {
     // Constante para obtener el número de horas.
@@ -27,6 +28,7 @@ document.addEventListener('DOMContentLoaded', () => {
     totalClientes();
     totalCompras();
     graficoBarraCompraProveedor();
+    graficoBarraMarcasRegistradas();
 });
 
 async function totalVentas() {
@@ -109,6 +111,28 @@ const graficoBarraCompraProveedor = async () => {
         barGraph('chart2', nombre_proveedor, total_compras, 'Cantidad de Comptas', 'Compras por proveedor');
     } else {
         document.getElementById('chart2').remove();
+        console.log(DATA.error);
+    }
+}
+
+const graficoBarraMarcasRegistradas = async () => {
+    // Petición para obtener los datos del gráfico.
+    const DATA = await fetchData(MARCA_API, 'graficaMarcas');
+    // Se comprueba si la respuesta es satisfactoria, de lo contrario se remueve la etiqueta canvas.
+    if (DATA.status) {
+        // Se declaran los arreglos para guardar los datos a graficar.
+        let nombre_marca = [];
+        let cantidad_marcas = [];
+        // Se recorre el conjunto de registros fila por fila a través del objeto row.
+        DATA.dataset.forEach(row => {
+            // Se agregan los datos a los arreglos.
+            nombre_marca.push('Marcas registradas');
+            cantidad_marcas.push(row.Cantidad_Marcas);
+        });
+        // Llamada a la función para generar y mostrar un gráfico de barras. Se encuentra en el archivo components.js
+        barGraph('chart1', nombre_marca, cantidad_marcas, 'Cantidad de Marcas', 'Marcas Registradas');
+    } else {
+        document.getElementById('chart1').remove();
         console.log(DATA.error);
     }
 }

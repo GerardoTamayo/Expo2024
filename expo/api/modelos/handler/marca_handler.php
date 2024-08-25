@@ -50,6 +50,14 @@ class MarcaHandler
         return Database::getRows($sql);
     }
 
+    public function graficaMarcas()
+    {
+        $sql = 'SELECT COUNT(id_marca) AS Cantidad_Marcas
+                FROM 
+                tb_marcas;';
+        return Database::getRows($sql);
+    }
+
     // Función para leer una marca.
     public function readOne()
     {
