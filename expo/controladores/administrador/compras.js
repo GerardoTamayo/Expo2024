@@ -29,6 +29,8 @@ const SAVE_FORM_DETALLE = document.getElementById('formulario_detalle'),
 // Constantes para establecer los elementos de la tabla.
 const TABLE_BODY_DETALLE = document.getElementById('tableBodyDetalle'),
     ROWS_FOUND_DETALLE = document.getElementById('rowsFoundDetalle');
+    CHART_MODAL_2 = new bootstrap.Modal('#chartModal2'),
+    CHART_MODAL_TITLE2 = document.getElementById('chartTitlepredictive');
 
 document.addEventListener('DOMContentLoaded', () => {
     // Llamada a la función para mostrar el encabezado y pie del documento.
@@ -337,6 +339,52 @@ const openReport2 = (id) => {
     const PATH = new URL(`${SERVER_URL}reportes/administrador/factura_compra.php`);
     // Se agrega un parámetro a la ruta con el valor del registro seleccionado.
     PATH.searchParams.append('id_compra', id);
+    // Se abre el reporte en una nueva pestaña.
+    window.open(PATH.href);
+}
+
+
+async function openModalGraphicPredictive() {
+    // Se muestra la caja de diálogo con su título.
+    CHART_MODAL_2.show();
+    CHART_MODAL_TITLE2.textContent = 'Gráfica lineal  de compras por gastos';
+    try {
+        graficoLinealPredictivo();
+
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+const graficoLinealPredictivo = async () => {
+    try {
+        // Petición para obtener los datos del gráfico.
+        const DATA = await fetchData(COMPRA_API, 'predictiva');
+        // Se comprueba si la respuesta es satisfactoria, de lo contrario se remueve la etiqueta canvas.
+        if (DATA.status) {
+            // Se declaran los arreglos para guardar los datos a gráficar.
+            let fecha = [];
+            let ganancias = [];
+            // Se recorre el conjunto de registros fila por fila a través del objeto row.
+            DATA.dataset.forEach(row => {
+                // Se agregan los datos a los arreglos.
+                fecha.push(row.fecha);
+                ganancias.push(row.gastos);
+            });
+            // Llamada a la función para generar y mostrar un gráfico de pastel. Se encuentra en el archivo components.js
+            lineGraph('chart3', fecha, ganancias, 'Gastos por día $', 'Gráfica predicitiva de gastos de la siguiente semana');
+        } else {
+            document.getElementById('chart3').remove();
+            console.log(DATA.error);
+        }
+    } catch (error) {
+        console.log('error:', error);
+    }
+}
+
+const openReportPredictive = () => {
+    // Se declara una constante tipo objeto con la ruta específica del reporte en el servidor.
+    const PATH = new URL(`${SERVER_URL}reportes/administrador/prediccion_compras.php`);
     // Se abre el reporte en una nueva pestaña.
     window.open(PATH.href);
 }

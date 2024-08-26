@@ -85,10 +85,10 @@ const fillTable = async (form = null) => {
                         <button type="button" class="btn btn-outline-danger" onclick="openDelete(${row.id_categoria})">
                             <i class="bi bi-trash-fill"></i>
                         </button>
-                        <button type="button" class="btn btn-warning" onclick="openReport(${row.id_categoria})">
+                        <button type="button" class="btn btn-outline-warning" onclick="openReport(${row.id_categoria})">
                             <i class="bi bi-filetype-pdf"></i>
                         </button>
-                        <button type="button" class="btn btn-outline-danger" onclick="openChart(${row.id_categoria})">
+                        <button type="button" class="btn btn-outline-dark" onclick="openChart(${row.id_categoria})">
                             <i class="bi bi-bar-chart-fill"></i>
                         </button>
                     </td>
@@ -197,7 +197,7 @@ const openChart = async (id) => {
         // Se agrega la etiqueta canvas al contenedor de la modal.
         document.getElementById('chartContainer').innerHTML = `<canvas id="chart"></canvas>`;
         // Llamada a la función para generar y mostrar un gráfico de barras. Se encuentra en el archivo components.js
-        barGraph('chart', nombre_categoria, cantidad_productos, 'Cantidad de Ventas', 'Top 5 de productos');
+        barGraph('chart', nombre_categoria, cantidad_productos, 'Cantidad de producto', 'Por categoria');
     } else {
         sweetAlert(4, DATA.error, true);
     }

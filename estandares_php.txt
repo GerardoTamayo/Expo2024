@@ -1,0 +1,53 @@
+Estándares de programación utilizados del lado del servidor (PHP)
+
+Desarrolladores: 
+-Gerardo Javier Tamayo Menéndez.
+-Ricardo José Pérez Hernéndez. 
+-Andy Alejandro Pineda Hernéndez.
+-Denis Adiel Castillo Vasquez.
+
+Estructura del Código:
+1. Organización de Archivos y Directorios:
+Clases y Modelos: Las clases que manejan lógica de negocio o datos deben estar ubicadas en el directorio de modelos: 
+- /modelos/handler: que se utiliza para manejar la lógica del negocio. 
+- /modelos/data: que se utiliza para el manejo de datos.
+
+Servicios: Los scripts que manejan solicitudes y respuestas deben estar ubicados en un directorio separado, en este caso: 
+/servicios.
+
+2. Nombres de Clases y Métodos:
+-Clases: Deben utilizar el formato snake_casa y ser descriptivas de su función, 
+por ejemplo: 
+compra_handler. 
+compra_data.
+
+-Métodos: Deben utilizar el formato camelCase y describir claramente la acción que realizan, por ejemplo: 
+-createRow 
+-updateRow.
+
+3. Comentarios:
+Clases: Incluir un comentario descriptivo al inicio de cada clase.
+
+Métodos: Incluir un comentario antes de cada método describiendo su propósito y, 
+si es necesario, sus parámetros y valores de retorno.
+
+Código: Usar comentarios en línea para explicar partes complejas del código.
+
+4. Espaciado e Identación:
+La indentación en programación se refiere al espacio en blanco que se inserta al comienzo de una línea de código. 
+Este espacio en blanco ayuda a estructurar el código de manera visual, haciendo que la jerarquía y el flujo del código
+sean más claros y fáciles de seguir.
+
+Identación: Usar 4 espacios por nivel de identación.
+
+Espacios en Blanco: Dejar una línea en blanco entre métodos para mejorar la legibilidad.
+
+5. Nomenclatura de Variables:
+-Nombres Descriptivos: Se utilizan nombres descriptivos en minusculas para las variables dentro del handler, por ejemplo:
+protected $id = null;
+protected $nombre = null;
+
+-Nombres Significativos: Los nombres de variables indican claramente su propósito, por ejemplo:
+protected $precio = null;
+protected $estado = null;
+protected $cantidad = null;

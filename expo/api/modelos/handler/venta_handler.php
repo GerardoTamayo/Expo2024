@@ -1,4 +1,8 @@
 <?php
+
+use Phpml\Regression\LeastSquares;
+
+require('C:/xampp/htdocs/Expo2024/vendor/autoload.php');
 // Se incluye la clase para trabajar con la base de datos.
 require_once('../../ayudantes/base_datos.php');
 /*
@@ -242,5 +246,62 @@ class VentaHandler
         WHERE id_venta = ?;';
         $params = array($this->id_venta);
         return Database::getRows($sql, $params);
+    }
+
+
+    // Función para predecir las ganancias
+    public function predictEarnings()
+    {
+        // Consulta para obtener las ganancias diarias
+        $sql = 'SELECT v.fecha_venta AS FECHA, ROUND(SUM(dv.cantidad_venta * dv.precio_venta),2) AS GANANCIAS 
+            FROM tb_ventas v
+            INNER JOIN tb_detalle_ventas dv ON v.id_venta = dv.id_venta
+            WHERE v.estado_venta = 1
+            GROUP BY v.fecha_venta
+            ORDER BY v.fecha_venta ASC;';
+        $rows = Database::getRows($sql);
+
+        if (empty($rows)) {
+            return [];
+        }
+
+        // Preparar datos para la regresión
+        $dates = [];
+        $earnings = [];
+
+        foreach ($rows as $row) {
+            $date = new DateTime($row['FECHA']);
+            $dates[] = $date->getTimestamp(); // Convertir fecha a timestamp
+            $earnings[] = $row['GANANCIAS'];
+        }
+
+        $predictions = [];
+        // Calcular la regresión para cada día de la próxima semana
+        for ($i = 1; $i <= 7; $i++) {
+            $X = array_slice($dates, 0, count($dates));
+            $y = array_slice($earnings, 0, count($earnings));
+
+            // Crear el modelo de regresión lineal
+            $regression = new LeastSquares();
+            $regression->train(array_map(function ($timestamp) {
+                return [$timestamp];
+            }, $X), $y);
+
+            // Predecir las ganancias para el día
+            $timestamp = end($dates) + $i * 24 * 60 * 60; // Sumar días en segundos
+            $predictedEarnings = $regression->predict([$timestamp]);
+
+            // Redondear el resultado a 2 decimales
+            $predictedEarnings = round($predictedEarnings, 2);
+            // Convertir timestamp a fecha
+            $date = (new DateTime())->setTimestamp($timestamp)->format('d F Y');
+
+            $predictions[] = [
+                'fecha' => $date,
+                'ganancias' => $predictedEarnings
+            ];
+        }
+
+        return $predictions;
     }
 }

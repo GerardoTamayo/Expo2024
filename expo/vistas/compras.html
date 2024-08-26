@@ -38,6 +38,10 @@
                                 <button type="reset" class="btn btn-secondary" onclick="fillTable()">
                                     <i class="bi bi-x-square-fill"></i>
                                 </button>
+                                <button type="button" class="btn btn-outline-dark"
+                                    onclick="openModalGraphicPredictive()">
+                                    <i class="bi bi-bar-chart-fill"></i>
+                                </button>
                             </div>
                         </div>
                     </form>
@@ -210,6 +214,29 @@
                         </div>
                     </div>
                 </div>
+                <!-- Componente Modal para mostrar un gráfico predictivo -->
+                <div class="modal fade" id="chartModal2" data-bs-backdrop="static" data-bs-keyboard="false"
+                    tabindex="-1" aria-labelledby="chartTitlepredictive" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered modal-xl">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="chartTitlepredictive">Gráfico de Compras</h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <button type="button" class="btn btn-warning" onclick="openReportPredictive()">
+                                <i class="bi bi-filetype-pdf"></i>
+                            </button>
+                            <!-- Contenedor para mostrar el gráfico -->
+                            <div class="modal-body" id="chartContainer">
+                                <canvas id="chart3"></canvas>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Aceptar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -218,6 +245,8 @@
     <!-- Llamada al framework y librería de mensajes -->
     <script type="text/javascript" src="../recursos/js/bootstrap.bundle.min.js"></script>
     <script type="text/javascript" src="../recursos/js/sweetalert.min.js"></script>
+    <!-- Llamada a la libreria de los gráficos -->
+    <script type="text/javascript" src="../recursos/js/chart.umd.min.js"></script>
     <!-- Llamada al controlador general de la aplicación -->
     <script type="text/javascript" src="../controladores/utilidades/componentes.js"></script>
     <!-- Llamada de la plantilla de la pagina -->

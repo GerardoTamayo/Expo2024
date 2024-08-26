@@ -1,7 +1,7 @@
 // Constante para completar la ruta de la API.
 const VENTA_API = 'servicios/administrador/venta.php';
-const  CLIENTE_API = 'servicios/administrador/cliente.php';
-const  PRODUCTO_API = 'servicios/administrador/producto.php';
+const CLIENTE_API = 'servicios/administrador/cliente.php';
+const PRODUCTO_API = 'servicios/administrador/producto.php';
 // Constante para establecer el formulario de buscar.
 const SEARCH_FORM = document.getElementById('searchForm');
 // Constantes para establecer los elementos de la tabla.
@@ -19,21 +19,23 @@ const SAVE_FORM = document.getElementById('formulario_guardar'),
     VENDEDOR_VENTA = document.getElementById('id_vendedor'),
     ID_CLIENTE = document.getElementById('id_cliente'),
     FECHA_VENTA = document.getElementById('fecha_venta');
-    
 
-    // Constantes para establecer los elementos del formulario de guardar detalle compra.
+
+// Constantes para establecer los elementos del formulario de guardar detalle compra.
 const SAVE_FORM_DETALLE = document.getElementById('formulario_detalle'),
-ID_DETALLE_VENTA = document.getElementById('id_detalle_venta'),
-CANTIDAD_DETALLE = document.getElementById('cantidad'),
-PRECIO_DETALLE = document.getElementById('precio'),
-PRODUCTO_DETALLE = document.getElementById('producto'),
-VENTA_DETALLE = document.getElementById('venta');
+    ID_DETALLE_VENTA = document.getElementById('id_detalle_venta'),
+    CANTIDAD_DETALLE = document.getElementById('cantidad'),
+    PRECIO_DETALLE = document.getElementById('precio'),
+    PRODUCTO_DETALLE = document.getElementById('producto'),
+    VENTA_DETALLE = document.getElementById('venta');
 // Constantes para establecer los elementos de la tabla.
 const TABLE_BODY_DETALLE = document.getElementById('tableBodyDetalle'),
-ROWS_FOUND_DETALLE = document.getElementById('rowsFoundDetalle');
+    ROWS_FOUND_DETALLE = document.getElementById('rowsFoundDetalle');
 const REPORT_MODAL = new bootstrap.Modal('#reportModal'),
     REPORT_MODAL_TITLE = document.getElementById('reportModalTitle');
-    CHART_MODAL = new bootstrap.Modal('#chartModal');
+CHART_MODAL = new bootstrap.Modal('#chartModal'),
+    CHART_MODAL_2 = new bootstrap.Modal('#chartModal2'),
+    CHART_MODAL_TITLE2 = document.getElementById('chartTitlepredictive');
 
 let idventa = null;
 document.addEventListener('DOMContentLoaded', () => {
@@ -241,8 +243,8 @@ const fillTableDetalle = async (form) => {
                         <button type="button" class="btn btn-outline-danger" onclick="openDeleteDetalle(${row.ID})">
                             <i class="bi bi-trash-fill"></i>
                         </button>
-                        <button type="button" class="btn btn-outline-danger" onclick="openChart(${row.id_producto})">
-                            <i class="bi bi-trash-fill"></i>
+                        <button type="button" class="btn btn-outline-dark" onclick="openChart(${row.id_producto})">
+                            <i class="bi bi-bar-chart-fill"></i>
                         </button>
                     </td>
                 </tr>
@@ -269,7 +271,7 @@ const openDetalle = async (id) => {
         fillTableDetalle(FORM);
         id_venta_global = id;
         console.log(id_venta_global);
-    }else{
+    } else {
         sweetAlert(2, DATA.error, false);
     }
 }
@@ -278,27 +280,27 @@ const openUpdateDetalle = async (id) => {
     // Se define una constante tipo objeto con los datos del registro seleccionado.
     const FORM = new FormData();
     FORM.append('id_detalle_venta', id);
-    
+
     // Petición para obtener los datos del registro solicitado.
     const DATA = await fetchData(VENTA_API, 'readOne1', FORM);
-    
+
     // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
     if (DATA.status) {
-        
+
         // Cambiar al tab del formulario
         const formularioTab = new bootstrap.Tab(document.getElementById('formulario-tab'));
         formularioTab.show();
-        
+
         // Se prepara el formulario.
         SAVE_FORM.reset();
-        
+
         // Se inicializan los campos con los datos.
         const ROW = DATA.dataset;
         document.getElementById('id_detalle_venta').value = ROW.ID;
         document.getElementById('cantidad').value = ROW.CANTIDAD;
         document.getElementById('precio').value = ROW.PRECIO;
         document.getElementById('producto').value = ROW.PRODUCTO;
-        
+
         // Llenar el select si es necesario
         fillSelect(PRODUCTO_API, 'readAll', 'producto', ROW.ID_PRODUCTO);
     } else {
@@ -340,6 +342,46 @@ async function openModalGraphic() {
 
     } catch (error) {
         console.log(error);
+    }
+}
+
+
+async function openModalGraphicPredictive() {
+    // Se muestra la caja de diálogo con su título.
+    CHART_MODAL_2.show();
+    CHART_MODAL_TITLE2.textContent = 'Gráfica lineal  de ventas por ganancias';
+    try {
+        graficoLinealPredictivo();
+
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+
+const graficoLinealPredictivo = async () => {
+    try {
+        // Petición para obtener los datos del gráfico.
+        const DATA = await fetchData(VENTA_API, 'predictiva');
+        // Se comprueba si la respuesta es satisfactoria, de lo contrario se remueve la etiqueta canvas.
+        if (DATA.status) {
+            // Se declaran los arreglos para guardar los datos a gráficar.
+            let fecha = [];
+            let ganancias = [];
+            // Se recorre el conjunto de registros fila por fila a través del objeto row.
+            DATA.dataset.forEach(row => {
+                // Se agregan los datos a los arreglos.
+                fecha.push(row.fecha);
+                ganancias.push(row.ganancias);
+            });
+            // Llamada a la función para generar y mostrar un gráfico de pastel. Se encuentra en el archivo components.js
+            lineGraph('chart3', fecha, ganancias, 'Ganancias por día $', 'Gráfica predicitiva de ganancias de la siguiente semana');
+        } else {
+            document.getElementById('chart3').remove();
+            console.log(DATA.error);
+        }
+    } catch (error) {
+        console.log('error:', error);
     }
 }
 
@@ -402,6 +444,13 @@ const openChart = async (id) => {
 const openReport = () => {
     // Se declara una constante tipo objeto con la ruta específica del reporte en el servidor.
     const PATH = new URL(`${SERVER_URL}reportes/administrador/historial_ventas.php`);
+    // Se abre el reporte en una nueva pestaña.
+    window.open(PATH.href);
+}
+
+const openReportPredictive = () => {
+    // Se declara una constante tipo objeto con la ruta específica del reporte en el servidor.
+    const PATH = new URL(`${SERVER_URL}reportes/administrador/prediccion_ventas.php`);
     // Se abre el reporte en una nueva pestaña.
     window.open(PATH.href);
 }

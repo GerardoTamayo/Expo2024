@@ -180,7 +180,10 @@ const lineGraph = (canvas, xAxis, yAxis, legend, title) => {
             datasets: [{
                 label: legend,
                 data: yAxis,
-                backgroundColor: colors
+                borderColor: 'rgba(0, 120, 183, 1)',
+                backgroundColor: 'rgba(0, 120, 183, 0.4)',
+                fill: true,
+                tension: 0.4
             }]
         },
         options: {
@@ -191,7 +194,7 @@ const lineGraph = (canvas, xAxis, yAxis, legend, title) => {
                 },
                 legend: {
                     display: false
-                }
+                },
             }
         }
     });

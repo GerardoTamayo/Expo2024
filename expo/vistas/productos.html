@@ -47,11 +47,13 @@
                                 class="bi bi-file-earmark-plus-fill"></i>
                             Agregar</button>
                         <!-- Botón para abrir un reporte en formato PDF -->
-                        <button type="button" class="btn btn-warning" onclick="openReport()">
+                        <button type="button" class="btn btn-outline-warning" onclick="openReport()">
                             <i class="bi bi-filetype-pdf"></i>
+                            <span>Inventario por marcas</span>
                         </button>
                         <button type="button" class="btn btn-outline-dark" onclick="openModalGraphic()">
                             <i class="bi bi-bar-chart-fill"></i>
+                            <span>Gráfica de barra de productos por marcas</span>
                         </button>
                     </div>
                 </div>
@@ -175,7 +177,7 @@
                             <div class="modal-body">
                                 <!-- Formulario para crear o actualizar un registro -->
                                 <div class="modal-body row g-3">
-                                    <h4>Gráfico de clientes por estado</h4>
+                                    <h4>Gráfico de proudctos por marcas</h4>
                                 </div>
                                 <!-- Identificador del contenedor de las gráficas -->
                                 <canvas id="chart2"></canvas>

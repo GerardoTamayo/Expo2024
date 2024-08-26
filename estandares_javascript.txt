@@ -1,0 +1,92 @@
+Estándares de programación utilizados en JavaScript
+
+Desarrolladores: 
+-Gerardo Javier Tamayo Menéndez.
+-Ricardo José Pérez Hernéndez. 
+-Andy Alejandro Pineda Hernéndez.
+-Denis Adiel Castillo Vasquez.
+
+1. Nomenclatura de Variables y Funciones:
+-Nombres Descriptivos: Se utilizan nombres descriptivos en mayúsculas con guiones bajos para las constantes
+y en camelCase para las funciones.
+
+Ejemplo:
+const SAVE_MODAL;
+const SAVE_FORM, ID_ADMINISTRADOR, NOMBRE_ADMINISTRADOR;
+const ADMINISTRADOR_API = 'servicios/administrador/usuario.php';
+
+-Nombres Significativos: Los nombres de variables y funciones indican claramente su propósito.
+
+Ejemplo:
+async function loadComponent(path) {
+    const response = await fetch(path);
+    const text = await response.text();
+    return text;
+}
+const openCreate = () => {
+    SAVE_MODAL.show();
+    MODAL_TITLE.textContent = 'Crear administrador';
+}
+
+2.Indentación:
+La indentación en programación se refiere al espacio en blanco que se inserta al comienzo de una línea de código. 
+Este espacio en blanco ayuda a estructurar el código de manera visual, haciendo que la jerarquía y el flujo del código
+sean más claros y fáciles de seguir.
+
+-Consistente: Se usa una indentación consistente de 4 espacios por nivel para mejorar la legibilidad del código.
+Ejemplo: 
+const openCreate = () => {
+    SAVE_MODAL.show();
+    MODAL_TITLE.textContent = 'Crear administrador';
+    SAVE_FORM.reset();
+}
+
+3.Punto y Coma:
+-Inclusión de Puntos y Comas: Se incluyen puntos y comas al final de las líneas para evitar problemas potenciales.
+Ejemplo:
+const USUARIO_API = 'servicios/administrador/usuario.php';
+
+4.Declaración de Variables:
+-Const y Let: Se utiliza const para declarar variables cuyo valor no cambiará y let para aquellas que pueden cambiar. 
+Se evita el uso de var.
+Ejemplo:
+const USUARIO_API = 'servicios/administrador/usuario.php';
+let tipo_presentacion;
+
+5.Comentarios:
+-Comentarios Descriptivos: Se documenta el código utilizando comentarios descriptivos para explicar la lógica detrás 
+del código.
+Ejemplo:
+/*
+*   Función para preparar el formulario al momento de insertar un registro.
+*   Parámetros: ninguno.
+*   Retorno: ninguno.
+*/
+
+6. Evitar la Escritura en Línea:
+-Legibilidad: Se evita escribir múltiples declaraciones en una sola línea para mejorar la legibilidad del código.
+Ejemplo:
+if (form) {
+    action = 'searchRows';
+} else {
+    action = 'readAll';
+}
+
+7.Manejo de Errores:
+-Uso de try catch: Se utilizan bloques try catch para manejar errores de manera adecuada y proporcionar mensajes significativos.
+Ejemplo:
+const openUpdate = async (id) => {
+    try {
+        const FORM = new FormData();
+        FORM.append('idAdministrador', id);
+        const DATA = await fetchData(ADMINISTRADOR_API, 'readOne', FORM);
+        if (DATA.status) {
+            SAVE_MODAL.show();
+        } else {
+            sweetAlert(2, DATA.error, false);
+        }
+    } catch (Error) {
+        console.log(Error);
+        SAVE_MODAL.show();
+    }
+}
