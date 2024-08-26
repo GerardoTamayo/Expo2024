@@ -4,7 +4,7 @@ Desarrolladores:
 -Gerardo Javier Tamayo Menéndez.
 -Ricardo José Pérez Hernéndez. 
 -Andy Alejandro Pineda Hernéndez.
--Denis Adiel Castillo Vasquez.
+-Denis Adiel Castillo Vásquez.
 
 1. Nomenclatura de Variables y Funciones:
 -Nombres Descriptivos: Se utilizan nombres descriptivos en mayúsculas con guiones bajos para las constantes

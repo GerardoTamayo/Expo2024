@@ -3,8 +3,8 @@ Estándares de programación utilizados del lado del servidor (PHP)
 Desarrolladores: 
 -Gerardo Javier Tamayo Menéndez.
 -Ricardo José Pérez Hernéndez. 
--Andy Alejandro Pineda Hernéndez.
--Denis Adiel Castillo Vasquez.
+-Andy Alejandro Pineda Hernández.
+-Denis Adiel Castillo Vásquez.
 
 Estructura del Código:
 1. Organización de Archivos y Directorios:
