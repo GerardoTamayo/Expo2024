@@ -194,3 +194,4 @@ const openChart = async (id) => {
         sweetAlert(4, DATA.error, true);
     }
 }
+

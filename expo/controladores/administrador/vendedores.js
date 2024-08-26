@@ -184,3 +184,4 @@ vanillaTextMask.maskInput({
     inputElement: document.getElementById('telefono_proveedor'),
     mask: [/\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/]
 });
+
