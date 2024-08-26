@@ -1,7 +1,7 @@
 # Expo2024
 Repositorio para el PTC
 Integrantes: 
-- Gerardo Javier Tamayo Menendez
-- Ricardo Jose Perez Hernandez
-- Andy Alejandro Pineda Hernandez
-- Denis Adiel Castillo Vasquez
+- Gerardo Javier Tamayo Menendez 20220669
+- Ricardo Jose Perez Hernandez 20220194
+- Andy Alejandro Pineda Hernandez 20190453
+- Denis Adiel Castillo Vasquez 20220365
