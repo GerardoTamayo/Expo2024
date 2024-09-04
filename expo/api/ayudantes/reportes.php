@@ -52,7 +52,7 @@ class Report extends FPDF
             // Se establecen los margenes del documento (izquierdo, superior y derecho).
             $this->setMargins(15, 15, 15);
             // Se añade una nueva página al documento con orientación vertical y formato carta, llamando implícitamente al método header()
-            $this->addPage('l', 'A4');
+            $this->addPage('l', 'letter');
             // Se define un alias para el número total de páginas que se muestra en el pie del documento.
             $this->aliasNbPages();
         } else {
@@ -99,7 +99,7 @@ class Report extends FPDF
         // Se establece la posición para el número de página (a 15 milímetros del final).
         $this->setY(-18);
         // Se establece la fuente para el número de página.
-        $this->setFont('Arial', 'I', 8);
+        $this->setFont('Arial', '', 10);
         // Se imprime una celda con el número de página.
         $this->Cell(0, 10, $this->encodeString('Reporte generado por: ' .$_SESSION['nombre_usuario']), 0, 0,'C');
         $this->cell(0, 10, $this->encodeString('Página ') . $this->pageNo() . '/{nb}', 0, 1, 'C');

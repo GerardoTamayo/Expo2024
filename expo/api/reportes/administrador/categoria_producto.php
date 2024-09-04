@@ -22,8 +22,8 @@ if (isset($_GET['id_categoria'])) {
             // Se verifica si existen registros para mostrar, de lo contrario se imprime un mensaje.
             if ($dataProductos = $producto->productosCategoria()) {
                 // Colores para el encabezado
-                $pdf->setFillColor(0, 128, 0); // Verde oscuro
-                $pdf->setTextColor(255, 255, 255); // Blanco
+                $pdf->setFillColor(128, 211, 126); // Verde oscuro
+                $pdf->setTextColor(0, 0, 0); // Blanco
                 $pdf->setDrawColor(0, 0, 0); // Negro
                 // Se establece la fuente para los encabezados.
                 $pdf->setFont('Arial', 'B', 12);
@@ -50,7 +50,8 @@ if (isset($_GET['id_categoria'])) {
                     $fill = !$fill;
                 }
             } else {
-                $pdf->cell(0, 8, $pdf->encodeString('No hay productos registrados en esta categoría'), 1, 1);
+                $pdf->setFillColor(128, 211, 126);
+                $pdf->cell(0, 8, $pdf->encodeString('No hay productos registrados en esta categoría'), 1, 1, 'C', 1);
             }
             // Se llama implícitamente al método footer() y se envía el documento al navegador web.
             $pdf->output('I', 'categorias.pdf');

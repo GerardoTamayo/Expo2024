@@ -19,8 +19,8 @@ $pdf->startReport2('Historial de ventas');
 // Se verifica si existen registros para mostrar, de lo contrario se imprime un mensaje.
 if ($data = $venta->ventaReports()) {
     // Colores para el encabezado
-    $pdf->setFillColor(0, 128, 0); // Verde oscuro
-    $pdf->setTextColor(255, 255, 255); // Blanco
+    $pdf->setFillColor(128, 211, 126); // Verde oscuro
+    $pdf->setTextColor(0, 0, 0); // Blanco
     $pdf->setDrawColor(0, 0, 0); // Negro
 
     // Se establece la fuente para los encabezados.
@@ -52,7 +52,8 @@ if ($data = $venta->ventaReports()) {
         $fill = !$fill;
     }
 } else {
-    $pdf->cell(0, 10, $pdf->encodeString('No hay productos registrados'), 1, 1);
+    $pdf->setFillColor(128, 211, 126);
+    $pdf->cell(0, 10, $pdf->encodeString('No hay productos registrados'), 1, 1, 'C');
 }
 
 // Se llama implícitamente al método footer() y se envía el documento al navegador web.

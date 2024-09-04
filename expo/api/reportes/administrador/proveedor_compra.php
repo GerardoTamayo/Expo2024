@@ -23,8 +23,8 @@ if (isset($_GET['id_proveedor'])) {
             // Se verifica si existen registros para mostrar, de lo contrario se imprime un mensaje.
             if ($data = $compra->vendedorCompra()) {
                 // Colores para el encabezado
-                $pdf->setFillColor(0, 128, 0); // Verde oscuro
-                $pdf->setTextColor(255, 255, 255); // Blanco
+                $pdf->setFillColor(128, 211, 126); // Verde oscuro
+                $pdf->setTextColor(0, 0, 0); // Blanco
                 $pdf->setDrawColor(0, 0, 0); // Negro
 
                 // Se establece la fuente para los encabezados.
@@ -32,9 +32,9 @@ if (isset($_GET['id_proveedor'])) {
 
                 // Se imprimen las celdas con los encabezados.
                 $pdf->cell(40, 10, 'Fecha de compra', 1, 0, 'C', 1);
-                $pdf->cell(40, 10, 'Cantidad comprada', 1, 0, 'C', 1);
+                $pdf->cell(45, 10, 'Cantidad comprada', 1, 0, 'C', 1);
                 $pdf->cell(40, 10, 'Precio de compra', 1, 0, 'C', 1);
-                $pdf->cell(55, 10, 'Producto', 1, 1, 'C', 1);
+                $pdf->cell(60, 10, 'Producto', 1, 1, 'C', 1);
 
                 // Se establece la fuente para los datos de los productos.
                 $pdf->setFont('Arial', '', 11);
@@ -46,13 +46,14 @@ if (isset($_GET['id_proveedor'])) {
                     // Alternar color de fondo
                     $pdf->setFillColor($fill ? 230 : 255); // Gris claro y blanco
                     $pdf->cell(40, 10, $rowProducto['fecha_compra'], 1, 0, 'C', $fill);
-                    $pdf->cell(40, 10, $rowProducto['cantidad_compra'], 1, 0, 'C', $fill);
-                    $pdf->cell(40, 10, $rowProducto['precio_compra'], 1, 0, 'C', $fill);
-                    $pdf->cell(55, 10, $rowProducto['nombre_producto'], 1, 1, 'C', $fill);
+                    $pdf->cell(45, 10, $rowProducto['cantidad_compra'], 1, 0, 'C', $fill);
+                    $pdf->cell(40, 10, '$' . $rowProducto['precio_compra'], 1, 0, 'C', $fill);
+                    $pdf->cell(60, 10, $rowProducto['nombre_producto'], 1, 1, 'C', $fill);
                     $fill = !$fill;
                 }
             } else {
-                $pdf->cell(0, 10, $pdf->encodeString('No hay productos registrados'), 1, 1);
+                $pdf->setFillColor(128, 211, 126);
+                $pdf->cell(190, 10, $pdf->encodeString('No hay productos registrados'), 1, 1, 'C', 1);
             }
 
             // Se llama implícitamente al método footer() y se envía el documento al navegador web.

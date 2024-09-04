@@ -15,8 +15,8 @@ $marca = new MarcaData;
 // Se verifica si existen registros para mostrar, de lo contrario se imprime un mensaje.
 if ($datamarca = $marca->readAll()) {                
     // Colores para el encabezado
-    $pdf->setFillColor(0, 128, 0); // Verde oscuro
-    $pdf->setTextColor(255, 255, 255); // Blanco
+    $pdf->setFillColor(128, 211, 126); // Verde oscuro
+    $pdf->setTextColor(0, 0, 0); // Blanco
     $pdf->setDrawColor(0, 0, 0); // Negro
 
     // Se establece la fuente para los encabezados.
@@ -54,7 +54,8 @@ if ($datamarca = $marca->readAll()) {
                     $pdf->cell(40, 10, $rowProducto['nombre_categoria'], 1, 1, 'C', 1);
                 }
             } else {
-                $pdf->cell(190, 10, $pdf->encodeString('No hay productos registrados en esta marca'), 1, 1);
+                $pdf->setFillColor(128, 211, 126);
+                $pdf->cell(190, 10, $pdf->encodeString('No hay productos registrados en esta marca'), 1, 1, 'C', 1);
             }
         } else {
             $pdf->cell(190, 10, $pdf->encodeString('Marca incorrecta o inexistente'), 1, 1);

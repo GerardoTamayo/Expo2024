@@ -31,8 +31,8 @@ foreach ($dataUsuarios as $usuario) {
 }
 
 // Colores para el encabezado
-$pdf->setFillColor(0, 128, 0); // Verde oscuro
-$pdf->setTextColor(255, 255, 255); // Blanco
+$pdf->setFillColor(128, 211, 126); // Verde oscuro
+$pdf->setTextColor(0, 0, 0); // Blanco
 $pdf->setDrawColor(0, 0, 0); // Negro
 
 // Se establece la fuente para los encabezados.
@@ -60,6 +60,7 @@ function imprimirUsuarios($pdf, $usuarios, $estado) {
             $pdf->cell(45, 10, $pdf->encodeString($usuario['tipo_usuario']), 1, 1, 'C', 1);
         }
     } else {
+        $pdf->setFillColor(128, 211, 126);
         $pdf->cell(190, 10, $pdf->encodeString('No hay usuarios registrados con estado ' . $estado), 1, 1, 'C', 1);
     }
 }
