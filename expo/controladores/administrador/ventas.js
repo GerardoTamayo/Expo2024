@@ -102,7 +102,7 @@ const fillTable = async (form = null) => {
                 <tr>
                     <td>${row.FECHA}</td>
                     <td>${row.OBSERVACION}</td>
-                    <td>${row.ESTADO_FINAL}</td>
+                    <td>${row.ESTADO}</td>
                     <td>${row.CLIENTE}</td>
                     <td>
                         <button type="button" class="btn btn-outline-info" onclick="openUpdate(${row.ID})">

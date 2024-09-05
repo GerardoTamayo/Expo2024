@@ -32,13 +32,14 @@ class CompraHandler
     public function searchRows1()
     {
         $value = '%' . Validator::getSearchValue() . '%';
-        $sql = 'SELECT id_compra AS ID, fecha_compra AS FECHA, numero_correlativo AS CORRELATIVO, estado_compra as ESTADO, id_proveedor as PROVEEDOR, CASE 
+        $sql = 'SELECT id_compra AS ID, fecha_compra AS FECHA, numero_correlativo AS CORRELATIVO, estado_compra as ESTADO, id_proveedor, nombre_proveedor as PROVEEDOR, CASE 
         WHEN estado_compra = 1 THEN "Cancelada"
         WHEN estado_compra = 0 THEN "No cancelada"
         END AS ESTADO FROM tb_compras
-                WHERE numero_correlativo LIKE ? or estado_compra like ?
+                    INNER JOIN tb_proveedores USING(id_proveedor)
+                WHERE numero_correlativo LIKE ?
                 ORDER BY FECHA;';
-        $params = array($value, $value);
+        $params = array($value);
         return Database::getRows($sql, $params);
     }
     // Función para leer todos los pedido
@@ -49,7 +50,7 @@ class CompraHandler
 		WHEN estado_compra = 1 THEN "Cancelada"
         WHEN estado_compra = 0 THEN "No cancelada"
         ELSE "Otro estado"
-        END AS ESTADO_DESC
+        END AS ESTADO
             FROM tb_compras
             INNER JOIN tb_proveedores USING(id_proveedor)
             ORDER BY FECHA;';

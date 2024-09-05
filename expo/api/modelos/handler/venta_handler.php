@@ -32,11 +32,12 @@ class VentaHandler
     public function searchRows1()
     {
         $value = '%' . Validator::getSearchValue() . '%';
-        $sql = 'SELECT id_venta AS ID, fecha_venta AS FECHA, observacion_venta  AS OBSERVACIÓN VENTA, estado_venta as ESTADO, id_cliente as CLIENTE, CASE 
+        $sql = 'SELECT id_venta AS ID, fecha_venta AS FECHA, observacion_venta  AS OBSERVACION, estado_venta as ESTADO, id_cliente, nombre_cliente as CLIENTE, CASE 
         WHEN estado_venta = 1 THEN "Cancelada"
         WHEN estado_venta = 0 THEN "No cancelada"
         END AS ESTADO FROM tb_ventas
-                WHERE fecha_venta LIKE ?
+                INNER JOIN tb_clientes USING(id_cliente)
+                WHERE nombre_cliente like ?
                 ORDER BY FECHA;';
         $params = array($value);
         return Database::getRows($sql, $params);
@@ -54,7 +55,7 @@ class VentaHandler
                     WHEN estado_venta = 1 THEN "Cancelado"
                     WHEN estado_venta = 0 THEN "No cancelado"
                     ELSE "Otro estado"
-                    END AS ESTADO_FINAL
+                    END AS ESTADO
                         FROM tb_ventas
                         INNER JOIN tb_clientes USING(id_cliente)
                         ORDER BY FECHA;';

@@ -8,6 +8,7 @@
     <!-- Metadatos de la página web -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link type="image/png" rel="icon" href="../recursos/imagenes/logo_web.png">
     <!-- Llamada a las hojas de estilos del framework e iconos -->
     <link type="text/css" rel="stylesheet" href="../recursos/css/bootstrap.min.css">
     <link type="text/css" rel="stylesheet"
@@ -47,23 +48,24 @@
                             Agregar</button>
                     </div>
                 </div>
-
-                <!-- Tabla para mostrar los registros existentes -->
-                <table class="table table-bordered" id="footer">
-                    <!-- Cabeza de la tabla para mostrar la cantidad de registros y los títulos de las columnas -->
-                    <thead>
-                        <tr>
-                            <td colspan="7" id="rowsFound"></td>
-                        </tr>
-                        <tr>
-                            <th>#</th>
-                            <th>Tipo de usuario</th>
-                            <th>ACCIONES</th>
-                        </tr>
-                    </thead>
-                    <!-- Cuerpo de la tabla para mostrar un registro por fila -->
-                    <tbody id="tableBody"></tbody>
-                </table>
+                <div class="table-responsive" style="max-height: 600px; overflow-y: auto;">
+                    <!-- Tabla para mostrar los registros existentes -->
+                    <table class="table table-bordered" id="footer">
+                        <!-- Cabeza de la tabla para mostrar la cantidad de registros y los títulos de las columnas -->
+                        <thead>
+                            <tr>
+                                <td colspan="7" id="rowsFound"></td>
+                            </tr>
+                            <tr>
+                                <th>#</th>
+                                <th>Tipo de usuario</th>
+                                <th>ACCIONES</th>
+                            </tr>
+                        </thead>
+                        <!-- Cuerpo de la tabla para mostrar un registro por fila -->
+                        <tbody id="tableBody"></tbody>
+                    </table>
+                </div>
                 <div class="modal fade" id="guardar_tipo" data-bs-backdrop="static" data-bs-keyboard="false"
                     tabindex="-1" aria-labelledby="titulo_modal1" aria-hidden="true">
                     <div class="modal-dialog modal-md modal-dialog-centered">
