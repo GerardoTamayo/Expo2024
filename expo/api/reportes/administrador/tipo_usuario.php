@@ -9,13 +9,15 @@ require_once('../../modelos/data/tipo_usuario_data.php');
 $pdf = new Report;
 // Se inicia el reporte con el encabezado del documento.
 $pdf->startReport('Inventario de usuarios por niveles');
-// Se instancia el módelo Categoría para obtener los datos.
+
+// Se instancia el modelo TipoUsuariosData para obtener los datos.
 $tipo_usuario = new TipoUsuariosData;
+
 // Se verifica si existen registros para mostrar, de lo contrario se imprime un mensaje.
-if ($datatipo = $tipo_usuario->readAll()) {                
+if ($datatipo = $tipo_usuario->readAll()) {
     // Colores para el encabezado
     $pdf->setFillColor(128, 211, 126); // Verde oscuro
-    $pdf->setTextColor(0, 0, 0); // Blanco
+    $pdf->setTextColor(0, 0, 0); // Negro
     $pdf->setDrawColor(0, 0, 0); // Negro
 
     // Se establece la fuente para los encabezados.
@@ -24,40 +26,42 @@ if ($datatipo = $tipo_usuario->readAll()) {
     // Se imprimen las celdas con los encabezados.
     $pdf->cell(60, 10, 'Nombres', 1, 0, 'C', 1);
     $pdf->cell(60, 10, 'Apellidos', 1, 0, 'C', 1);
-    $pdf->cell(70, 10, 'Correo electronico', 1, 1, 'C', 1); // Cambiado el valor de la última columna a 1 para saltar línea
+    $pdf->cell(70, 10, 'Correo electronico', 1, 1, 'C', 1); // Saltar línea al final
 
-    // Se establece la fuente para los datos de los productos.
-    $pdf->setFillColor(255, 255, 255);
+    // Se establece la fuente para los datos de los usuarios.
     $pdf->setFont('Arial', '', 11);
-    $pdf->setTextColor(0, 0, 0); // Negro
 
     // Se recorren los registros fila por fila.
     foreach ($datatipo as $rowtipo) {
-        // Se imprime una celda con el nombre de la categoría.
-        $pdf->cell(190, 10, $pdf->encodeString('Rol: ' . $rowtipo['tipo_usuario']), 1, 1, 'C', 1);
-        // Se instancia el módelo Producto para procesar los datos.
+        // Imprimir el rol
+        $pdf->cell(190, 10, $pdf->encodeString('Rol: ' . $rowtipo['tipo_usuario']), 1, 1, 'C', 0);
+
+        // Se instancia el modelo UsuarioData para obtener los usuarios del rol.
         $administrador = new UsuarioData;
-        // Se establece la categoría para obtener sus productos, de lo contrario se imprime un mensaje de error.
+
+        // Se establece el tipo de usuario para obtener los registros.
         if ($administrador->setTipo($rowtipo['id_tipo'])) {
-            // Se verifica si existen registros para mostrar, de lo contrario se imprime un mensaje.
             if ($dataAdministrador = $administrador->readAllTipo()) {
-                // Se recorren los registros fila por fila.
+                // Se recorren los registros de usuarios.
                 foreach ($dataAdministrador as $rowAdministrador) {
-                    // Se imprimen las celdas con los datos de los productos.
-                    $pdf->cell(60, 10, $rowAdministrador['nombre_usuario'], 1, 0, 'C', 1);
-                    $pdf->cell(60, 10, $pdf->encodeString($rowAdministrador['apellido_usuario']), 1, 0, 'C', 1);
-                    $pdf->cell(70, 10, $rowAdministrador['correo_usuario'], 1, 1, 'C', 1); // Cambiado el valor de la última columna a 1 para saltar línea
+                    // Imprimir los datos de cada usuario.
+                    $pdf->cell(60, 10, $rowAdministrador['nombre_usuario'], 1, 0, 'C', 0);
+                    $pdf->cell(60, 10, $pdf->encodeString($rowAdministrador['apellido_usuario']), 1, 0, 'C', 0);
+                    $pdf->cell(70, 10, $rowAdministrador['correo_usuario'], 1, 1, 'C', 0); // Saltar línea al final
                 }
             } else {
-                $pdf->setFillColor(128, 211, 126);
-                $pdf->cell(190, 10, $pdf->encodeString('No hay usuarios registrados con este rol'), 1, 0, 'C', 1);
+                // Mensaje si no hay usuarios en el rol.
+                $pdf->cell(190, 10, 'No hay usuarios registrados con este rol', 1, 1, 'C', 0);
             }
         } else {
-            $pdf->cell(190, 10, $pdf->encodeString('Usuario incorrecto o inexistente'), 1, 0, 'C', 1);
+            // Mensaje de error si no se pudo establecer el tipo de usuario.
+            $pdf->cell(190, 10, 'Usuario incorrecto o inexistente', 1, 1, 'C', 0);
         }
     }
 } else {
-    $pdf->cell(190, 10, $pdf->encodeString('No hay usuarios para mostrar'), 1, 0, 'C', 1);
+    // Mensaje si no hay registros de tipo de usuario.
+    $pdf->cell(190, 10, 'No hay usuarios para mostrar', 1, 1, 'C', 0);
 }
-// Se llama implícitamente al método footer() y se envía el documento al navegador web.
+
+// Se envía el documento al navegador.
 $pdf->output('I', 'Usuarios.pdf');
