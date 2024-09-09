@@ -88,11 +88,12 @@
             </form>
         </div>
         <!-- Modal para enviar codigo -->
-        <div class="modal fade" id="recuperar" tabindex="-1" aria-labelledby="recuperarLabel" aria-hidden="true">
+        <div class="modal fade" id="recuperar" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
             <div class="modal-dialog modal-lg modal-dialog-centered"> <!-- Cambiar modal-xl según tu necesidad -->
-                <div class="modal-content py-5">
+                <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title mx-auto" id="recuperarLabel">Recuperación de Contraseña</h5>
+                        <h5 class="modal-title" id="recuperarLabel">Recuperación de Contraseña</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
                         <div class="card mb-3 d-flex">
@@ -127,11 +128,12 @@
             </div>
         </div>
         <!-- Modal para reestablecer contraseña-->
-        <div class="modal fade" id="reestablecer" tabindex="-1" aria-labelledby="reestablecerLabel" aria-hidden="true">
+        <div class="modal fade" id="reestablecer" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
             <div class="modal-dialog modal-lg modal-dialog-centered">
                 <div class="modal-content">
-                    <div class="modal-header mx-auto">
-                        <img src="../recursos/imagenes/login.png" class="mx-auto d-block" width="150" height="150">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="recuperarLabel">Ingresar nueva contraseña</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
                         <div class="card mb-3 d-flex">
