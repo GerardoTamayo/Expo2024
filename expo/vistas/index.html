@@ -100,64 +100,15 @@
                             <div class="row g-0">
                                 <div class="col-md-8">
                                     <div class="card-body">
-                                        <div>
-                                            <input type="email" class="form-control" name="email" autocomplete="off"
-                                                placeholder="Correo Electrónico">
-                                        </div>
-                                        <div class="py-4"></div>
-                                        <div>
-                                            <input type="text" class="form-control" name="text" autocomplete="off"
-                                                placeholder="Codigo">
-                                        </div>
+                                            <div>
+                                                <input type="email" class="form-control" name="correo" id="email" autocomplete="off"
+                                                    placeholder="Correo Electrónico">
+                                            </div>
                                     </div>
                                 </div>
                                 <div class="col-md-4 card-body">
                                     <div>
-                                        <button type="submit" class="btn btn-success">Enviar</button>
-                                    </div>
-                                    <div class="py-4"></div>
-                                    <div>
-                                        <button type="submit" class="btn btn-success" data-bs-toggle="modal"
-                                            data-bs-target="#reestablecer">Confirmar</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Modal para reestablecer contraseña-->
-        <div class="modal fade" id="reestablecer" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-            <div class="modal-dialog modal-lg modal-dialog-centered">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="recuperarLabel">Ingresar nueva contraseña</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="card mb-3 d-flex">
-                            <div class="row g-0">
-                                <div class="col-md-8">
-                                    <div class="card-body">
-                                        <div>
-                                            <input type="password" class="form-control" name="password"
-                                                autocomplete="off" placeholder="Ingresar Contraseña">
-                                        </div>
-                                        <div class="py-4"></div>
-                                        <div>
-                                            <input type="password" class="form-control" name="password"
-                                                autocomplete="off" placeholder="Confirmar contraseña">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-4 card-body">
-                                    <div>
-                                        <h5 class="modal-title" id="recuperarLabel">Reestablecer contraseña</h5>
-                                    </div>
-                                    <div class="py-4"></div>
-                                    <div>
-                                        <button type="submit" class="btn btn-success">Confirmar</button>
+                                        <button type="submit" id="enviar" class="btn btn-success">Enviar</button>
                                     </div>
                                 </div>
                             </div>

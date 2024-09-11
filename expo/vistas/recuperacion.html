@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <!-- Titulo del documento -->
+    <title></title>
+    <!-- Metadatos de la página web -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link type="image/png" rel="icon" href="../recursos/imagenes/logo_web.png">
+    <!-- Llamada a las hojas de estilos del framework e iconos -->
+    <link type="text/css" rel="stylesheet" href="../recursos/css/bootstrap.min.css">
+    <link type="text/css" rel="stylesheet" href="../recursos/css/estilos.css">
+
+</head>
+
+<body>
+    <main>
+        <div class="bg-white p-5 rounded ">
+            <h2 class="fw-bold text-center py-5 titulo" id="mainTitle"></h2>
+            <div class="text-end">
+                <img src="../recursos/imagenes/logo_web.png" class="mx-auto d-block" width="150" height="150">
+            </div>
+            <!--LOGIN-->
+            <form class="d-none" id="loginForm">
+                <div class="contenedor">
+                    <div action="#">
+                        <div class="mb-4"></div>
+                        <div class="col-sm-12 col-md-6 offset-md-3 col-lg-4 offset-lg-4"></div>
+                        <input type="password" class="form-control" name="nuevaContra" placeholder="Nueva contraseña"
+                            autocomplete="off" required>
+                        <div class="mb-4"></div>
+                        <div class="col-sm-12 col-md-6 offset-md-3 col-lg-4 offset-lg-4"></div>
+                        <input type="password" class="form-control" name="contra" placeholder="Confirmar contraseña"
+                            autocomplete="off" required>
+                        <div class="mb-4" h></div>
+                        <div class="d-grip">
+                            <button type="submit" class="btn btn-outline-success" id="enviar">Cambiar contraseña</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+    </main>
+
+    <!-- IMPORTACIÓN DE ARCHIVOS JAVASCRIPT -->
+    <!-- Llamada al framework y librería de mensajes -->
+    <script type="text/javascript" src="../recursos/js/bootstrap.bundle.min.js"></script>
+    <script type="text/javascript" src="../recursos/js/sweetalert.min.js"></script>
+    <!-- Llamada al controlador general de la aplicación -->
+    <script type="text/javascript" src="../controladores/utilidades/componentes.js"></script>
+    <!-- llamada al controlador de la pagina -->
+    <script type="text/javascript" src="../controladores/administrador/recuperacion.js"></script>
+</body>
+
+</html>

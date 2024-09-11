@@ -3,6 +3,7 @@ const MAIN = document.querySelector('main');
 MAIN.style.paddingTop = '20px';
 MAIN.style.paddingBottom = '100px';
 MAIN.classList.add('container');
+const RECUPERACION_API = 'servicios/administrador/recuperacion.php';
 
 const MAIN_TITLE = document.getElementById('mainTitle');
 MAIN_TITLE.classList.add('text-center', 'py-3');
@@ -10,6 +11,8 @@ MAIN_TITLE.classList.add('text-center', 'py-3');
 const SIGNUP_FORM = document.getElementById('registrarse');
 // Constante para establecer el formulario de inicio de sesión.
 const LOGIN_FORM = document.getElementById('loginForm');
+const ENVIAR = document.getElementById('enviar');
+const INPUT1 = document.getElementById('email');
 
 // Método del evento para cuando el documento ha cargado.
 document.addEventListener('DOMContentLoaded', async () => {
@@ -35,6 +38,27 @@ document.addEventListener('DOMContentLoaded', async () => {
         SIGNUP_FORM.classList.remove('d-none');
         sweetAlert(4, DATA.error, true);
     }
+    
+    ENVIAR.addEventListener('click', async (event) => {
+        if (INPUT1.value === '') {
+                sweetAlert(2, 'El campo del correo no puede estar vacío.', false);
+                return false;
+        }
+        event.preventDefault();
+
+        const fechaActualUTC = new Date();
+        const FORM = new FormData();
+        FORM.append('correo', INPUT1.value);
+        FORM.append('nivel', 1);
+        FORM.append('fecha', fechaActualUTC);
+        const DATA = await fetchData(RECUPERACION_API, 'envioCorreo', FORM);
+        if (DATA.status) {
+                sweetAlert(1, DATA.message, true);
+        } else {
+                sweetAlert(2, DATA.error, false);
+                console.log(DATA.exception);
+        }
+});
 });
 
 // Método del evento para cuando se envía el formulario de registro del primer usuario.
