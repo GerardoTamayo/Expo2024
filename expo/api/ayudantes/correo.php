@@ -33,9 +33,6 @@ class Props
             $mail->isHTML(true);
             $mail->Subject = $subject;
             $mail->Body = $message;
-            // Añadir imágenes embebidas
-            $mail->addEmbeddedImage('../../recursos/imagenes/logo_web.png', 'logo');
-            // $mail->addEmbeddedImage('../../../recursos/img/background.png', 'background');
 
             // Añadir adjunto
             if ($attachmentPath) {
@@ -45,7 +42,6 @@ class Props
             $mail->send();
             return true;
         } catch (Exception $e) {
-
             return false;
         }
     }
