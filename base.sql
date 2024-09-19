@@ -181,6 +181,9 @@ ADD
 INSERT INTO tb_tipousuarios (tipo_usuario)
 VALUES ('Administrador');
 
+ALTER TABLE tb_usuarios
+ADD COLUMN recovery_code VARCHAR(80) DEFAULT '0000';
+
 -- procedimiento para cambiar estado al usuario
 
 DELIMITER $$
@@ -478,4 +481,4 @@ SELECT id_venta AS ID, fecha_venta AS FECHA, observacion_venta AS OBSERVACION, e
 */
 
 SELECT * FROM tb_detalle_ventas;
-SELECT * FROM tb_ventas;
+SELECT * FROM tb_usuarios;
