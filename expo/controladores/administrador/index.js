@@ -4,7 +4,7 @@ MAIN.style.paddingTop = '20px';
 MAIN.style.paddingBottom = '100px';
 MAIN.classList.add('container');
 const RECUPERACION_API = 'servicios/administrador/recuperacion.php';
-
+const SAVE_MODAL = new bootstrap.Modal('#recuperar');
 const MAIN_TITLE = document.getElementById('mainTitle');
 MAIN_TITLE.classList.add('text-center', 'py-3');
 // Constante para establecer el formulario de registro del primer usuario.
@@ -54,9 +54,11 @@ document.addEventListener('DOMContentLoaded', async () => {
         const DATA = await fetchData(RECUPERACION_API, 'envioCorreo', FORM);
         if (DATA.status) {
                 sweetAlert(1, DATA.message, true);
+                INPUT1.value = '';
+                SAVE_MODAL.hide()
         } else {
                 sweetAlert(2, DATA.error, false);
-                console.log(DATA.exception);
+                console.log(DATA.error);
         }
 });
 });
