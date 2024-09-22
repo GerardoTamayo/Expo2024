@@ -60,7 +60,7 @@ const loadTemplate = async () => {
 								</a>
 							</li>
 							<li>
-								<a href="clientes.html" class="nav-link px-0 align-middle text-dark">
+								<a href="Clientes.html" class="nav-link px-0 align-middle text-dark">
 									<i class="fs-4 bi-people"></i> <span class="ms-1 d-none d-sm-inline">Clientes</span>
 								</a>
 							</li>

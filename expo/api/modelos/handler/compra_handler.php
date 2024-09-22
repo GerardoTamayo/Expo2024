@@ -2,7 +2,7 @@
 
 use Phpml\Regression\LeastSquares;
 
-require('https://quickstock.store/Expo2024/vendor/autoload.php');
+require_once('/var/www/html/Expo2024/vendor/autoload.php');
 // Se incluye la clase para trabajar con la base de datos.
 require_once('../../ayudantes/base_datos.php');
 /*
