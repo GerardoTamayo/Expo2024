@@ -36,7 +36,7 @@ class RecuperacionHandler
         $titulo = '¡Bienvenid@ ' . $this->nombre . ', estamos aquí para ayudarte!';
         $mailSubject = 'Recuperación de contraseña';	
         $mailAltBody = 'Cambia tu contraseña con un solo click';
-        $link = 'http://localhost/Expo2024/expo/vistas/recuperacion.html?c=' . urlencode($this->hash) . '&id=' . urlencode($this->idUsuario) . '&n=' . urlencode($this->nivel);
+        $link = 'https://quickstock.store/Expo2024/expo/vistas/recuperacion.html?c=' . urlencode($this->hash) . '&id=' . urlencode($this->idUsuario) . '&n=' . urlencode($this->nivel);
         $bodytwo = '¡ingresa aquí!';
         $message = 'Si no has solicitado este cambio, por favor ignora este mensaje. Este link solo estará habilitado durante los siguientes 15 minutos, después de este tiempo deberás solicitar un nuevo cambio de contraseña. Recuerda que tu seguridad es nuestra prioridad.';
         $footer = 'Copyright &copy; ' . date("Y") . ' Distribuidora TMG. Todos los derechos reservados.';
