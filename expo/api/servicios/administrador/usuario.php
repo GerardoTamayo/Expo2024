@@ -158,7 +158,9 @@ if (isset($_GET['action'])) {
                     $result['error'] = 'Contraseña actual incorrecta';
                 } elseif ($_POST['contra_reciente'] != $_POST['repetir_contra']) {
                     $result['error'] = 'Confirmación de contraseña diferente';
-                } elseif (!$administrador->setClave($_POST['contra_reciente'])) {
+                } elseif (!$administrador->setClave($_POST['contra_reciente'])
+                
+                ) {
                     $result['error'] = $administrador->getDataError();
                 } elseif ($administrador->changePassword()) {
                     $result['status'] = 1;
@@ -206,6 +208,7 @@ if (isset($_GET['action'])) {
                 } elseif ($administrador->checkStatus()) {
                     $result['status'] = 1;
                     $result['message'] = 'Autenticación correcta';
+                    $_SESSION['tiempo'] = time();
                 } else {
                     $result['error'] = 'Su cuenta ha sido desactivada';
                 }

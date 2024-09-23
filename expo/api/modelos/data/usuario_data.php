@@ -31,7 +31,7 @@ class UsuarioData extends UsuarioHandler
             $this->tipo = $value;
             return true;
         } else {
-            $this->data_error = 'El identificador del administrador es incorrecto';
+            $this->data_error = 'El identificador del tipo de administrador es incorrecto';
             return false;
         }
     }

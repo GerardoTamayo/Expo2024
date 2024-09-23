@@ -170,3 +170,7 @@ main {
     background-color: green;
     color: white;
 }
+
+input[type="password"]::-ms-reveal {
+    display: none;
+}

@@ -72,34 +72,34 @@ class Validator
         }
     }
 
-        /*
+    /*
          *   Método para validar un archivo de imagen.
          *   Parámetros: $file (archivo de un formulario) y $dimension (medida mínima para la imagen).
          *   Retorno: booleano (true si el archivo es correcto o false en caso contrario).
          */
-        public static function validateImageFile($file, $dimension)
-        {
-            if (is_uploaded_file($file['tmp_name'])) {
-                // Se obtienen los datos de la imagen.
-                $image = getimagesize($file['tmp_name']);
-                // Se comprueba si el archivo tiene un tamaño mayor a 2MB.
-                if ($file['size'] > 2097152) {
-                    self::$file_error = 'El tamaño de la imagen debe ser menor a 2MB';
-                    return false;
-                } elseif ($image['mime'] == 'image/jpeg' || $image['mime'] == 'image/png') {
-                    // Se obtiene la extensión del archivo (.jpg o .png) y se convierte a minúsculas.
-                    $extension = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
-                    // Se establece un nombre único para el archivo.
-                    self::$filename = uniqid() . '.' . $extension;
-                    return true;
-                } else {
-                    self::$file_error = 'El tipo de imagen debe ser jpg o png';
-                    return false;
-                }
+    public static function validateImageFile($file, $dimension)
+    {
+        if (is_uploaded_file($file['tmp_name'])) {
+            // Se obtienen los datos de la imagen.
+            $image = getimagesize($file['tmp_name']);
+            // Se comprueba si el archivo tiene un tamaño mayor a 2MB.
+            if ($file['size'] > 2097152) {
+                self::$file_error = 'El tamaño de la imagen debe ser menor a 2MB';
+                return false;
+            } elseif ($image['mime'] == 'image/jpeg' || $image['mime'] == 'image/png') {
+                // Se obtiene la extensión del archivo (.jpg o .png) y se convierte a minúsculas.
+                $extension = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
+                // Se establece un nombre único para el archivo.
+                self::$filename = uniqid() . '.' . $extension;
+                return true;
             } else {
+                self::$file_error = 'El tipo de imagen debe ser jpg o png';
                 return false;
             }
+        } else {
+            return false;
         }
+    }
 
     /*
     *   Método para validar un correo electrónico.
@@ -206,22 +206,38 @@ class Validator
 
     /*
     *   Método para validar una contraseña.
-    *   Parámetros: $value (dato a validar).
-    *   Retorno: booleano (true si el valor es correcto o false en caso contrario).
-    */
+   *   Parámetros: $value (dato a validar).
+   *   Retorno: booleano (true si el valor es correcto o false en caso contrario).
+   */
     public static function validatePassword($value)
     {
         // Se verifica la longitud mínima.
         if (strlen($value) < 8) {
-            self::$password_error = 'La contraseña es menor a 8 caracteres';
+            self::$password_error = 'Clave menor a 8 caracteres';
             return false;
-        } elseif (strlen($value) <= 72) {
-            return true;
+        } elseif (strlen($value) > 15) {
+            self::$password_error = 'Clave mayor a 15 caracteres';
+            return false;
+        } elseif (preg_match('/\s/', $value)) {
+            self::$password_error = 'Clave contiene espacios en blanco';
+            return false;
+        } elseif (!preg_match('/\W/', $value)) {
+            self::$password_error = 'Clave debe contener al menos un caracter especial';
+            return false;
+        } elseif (!preg_match('/\d/', $value)) {
+            self::$password_error = 'Clave debe contener al menos un dígito';
+            return false;
+        } elseif (!preg_match('/[a-z]/', $value)) {
+            self::$password_error = 'Clave debe contener al menos una letra en minúsculas';
+            return false;
+        } elseif (!preg_match('/[A-Z]/', $value)) {
+            self::$password_error = 'Clave debe contener al menos una letra en mayúsculas';
+            return false;
         } else {
-            self::$password_error = 'La contraseña es mayor a 72 caracteres';
-            return false;
+            return true;
         }
     }
+
 
     /*
     *   Método para validar el formato del DUI (Documento Único de Identidad).
@@ -279,7 +295,7 @@ class Validator
         if (trim($value) == '') {
             self::$search_error = 'Ingrese un valor para buscar';
             return false;
-        } elseif(str_word_count($value) > 3) {
+        } elseif (str_word_count($value) > 3) {
             self::$search_error = 'La búsqueda contiene más de 3 palabras';
             return false;
         } elseif (self::validateString($value)) {
@@ -338,4 +354,25 @@ class Validator
             return false;
         }
     }
+
+    
+    public static function validateSessionTime()
+    {
+        //Tiempo en segundos para dar vida a la sesión.
+        $inactivo = 300; //Tiempo en segundos. poner en 300 después 
+
+        //Calculamos tiempo de vida inactivo.
+        $vida_session = time() - $_SESSION['tiempo'];
+
+        //Compraración para redirigir página, si la vida de sesión sea mayor a el tiempo insertado en inactivo.
+        if ($vida_session > $inactivo) {
+            //Destruimos sesión.
+            session_destroy();
+            return false;
+        } else { // si no ha caducado la sesion, actualizamos
+            $_SESSION['tiempo'] = time();
+            return true;
+        }
+    }
 }
+

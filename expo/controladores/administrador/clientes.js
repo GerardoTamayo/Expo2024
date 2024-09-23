@@ -56,8 +56,10 @@ SAVE_FORM.addEventListener('submit', async (event) => {
         sweetAlert(1, DATA.message, true);
         // Se carga nuevamente la tabla para visualizar los cambios.
         fillTable();
-    } else {
+    } else if(!DATA.exception){
         sweetAlert(2, DATA.error, false);
+    } else {
+        sweetAlert(2, DATA.exception, false);
     }
 });
 

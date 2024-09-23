@@ -4,7 +4,7 @@
 // Constante para establecer la ruta base del servidor.
 // const SERVER_URL = 'http://34.160.7.8/Expo2024/expo/api/';
 // const SERVER_URL = 'http://quickstock.store/Expo2024/expo/api/';
-// const SERVER_URL = 'https://quickstock.store/Expo2024/expo/api/';
+// const SERVER_URL = 'http://localhost/Expo2024/expo/api/';
 const SERVER_URL = 'https://quickstock.store/Expo2024/expo/api/';
 const USER_API = 'servicios/administrador/usuario.php';
 /*
