@@ -83,6 +83,7 @@ AddDefaultCharset utf-8
 # Bloquear el acceso directo a archivos JavaScript desde la URL
 <FilesMatch "\.(js)$">
     RewriteCond %{HTTP_REFERER} !^https://quickstock.store [NC]
+    # RewriteCond %{HTTP_REFERER} !^http://localhost [NC]
     RewriteCond %{HTTP_REFERER} !^http://127.0.0.1 [NC]
     RewriteRule .* - [F,L]
 </FilesMatch>
