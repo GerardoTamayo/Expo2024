@@ -1,0 +1,132 @@
+//PASO 1: Instalar en extenciones de vscode Live Sass Compiler para compilar el codigo de SASS
+//Paso 2: Luego de haber escrito el codigo para modificar un componente nos ubicamos en la parte de abajo
+// y podremos ver un ojito, al darle clic se comenzara a compilar nuestro codigo SASS.
+
+
+// Importacion de todos los components de boostrap para poder cambiarlos
+@import "../bootstrap/scss/scss/functions";
+@import "../bootstrap/scss/scss/variables";
+@import "../bootstrap/scss/scss/variables-dark";
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+//Escribir aquí el codigo para modificar los components de boostrap o agregar colores, etc.
+$font-family-sans-serif: "Poppins", sans-serif;
+
+// PALETA DE COLORES
+// Declaración de variables para asignación de colores
+$skyBlue-pastel-color: (
+  "skyBlue-pastel-color": rgb(242, 247, 255)
+);
+
+$red-cream-color: (
+  "red-cream-color": rgb(235, 88, 88)
+);
+
+$blue-principal-color: (
+  "blue-principal-color": rgb(51, 65, 149)
+);
+
+$blue-secondary-color: (
+  "blue-secondary-color": rgb(1, 5, 90)
+);
+
+$green-w-color: (
+  "green-w-color": rgb(12, 186, 82)
+);
+
+$yellow-principal-color: (
+  "yellow-principal-color": rgb(235, 173, 13)
+);
+
+// Colores usados en la pantalla de ingresos - admin
+
+//Colores pasteles
+$blue-light-color: (
+  "blue-light-color": rgb(218, 237, 255)
+);
+
+$yellow-light-color: (
+  "yellow-light-color": rgb(255, 251, 218)
+);
+
+$green-light-color: (
+  "green-light-color": rgb(218, 255, 224)
+);
+
+$orange-light-color: (
+  "orange-light-color": rgb(255, 245, 218)
+);
+
+$beige-color: (
+  "beige-color": rgb(247, 249, 245)
+);
+
+//Colores fuertes
+$orange-color: (
+  "orange-color": rgb(244, 157, 56)
+);
+
+$blue-color: (
+  "blue-color": rgb(119, 159, 229)
+);
+
+$green-color: (
+  "green-color": rgb(117, 249, 76)
+);
+
+$yellow-color: (
+  "yellow-color": rgb(249, 242, 76)
+);
+
+
+
+// Agregar variables al tema de colores de boostrap, mergearlas
+$theme-colors: map-merge($theme-colors, $yellow-principal-color);
+$theme-colors: map-merge($theme-colors, $skyBlue-pastel-color);
+$theme-colors: map-merge($theme-colors, $red-cream-color);
+$theme-colors: map-merge($theme-colors, $blue-principal-color);
+$theme-colors: map-merge($theme-colors, $blue-secondary-color);
+$theme-colors: map-merge($theme-colors, $green-w-color);
+
+
+//Colores de la pantalla de ingresos
+$theme-colors: map-merge($theme-colors, $blue-light-color);
+$theme-colors: map-merge($theme-colors, $yellow-light-color);
+$theme-colors: map-merge($theme-colors, $green-light-color);
+$theme-colors: map-merge($theme-colors, $orange-light-color);
+$theme-colors: map-merge($theme-colors, $orange-color);
+$theme-colors: map-merge($theme-colors, $blue-color);
+$theme-colors: map-merge($theme-colors, $green-color);
+$theme-colors: map-merge($theme-colors, $yellow-color);
+$theme-colors: map-merge($theme-colors, $beige-color);
+
+// Cambiar el color del estilo de la tabla
+$table-striped-bg: rgb(242, 247, 255);
+
+
+@import "../bootstrap/scss/bootstrap";
+
+body {
+  font-family: $font-family-sans-serif;
+  background-color: map-get($blue-secondary-color, "blue-secondary-color");
+  color: white;
+}
+
+h1 {
+  color: map-get($yellow-principal-color, "yellow-principal-color");
+}
+
+.card {
+  background-color: map-get($blue-principal-color, "blue-principal-color");
+  border: none;
+}
+
+button {
+  font-size: 1.5rem;
+  border-width: 2px;
+
+  &:hover {
+      background-color: map-get($blue-principal-color, "blue-principal-color");
+      color: white;
+  }
+}

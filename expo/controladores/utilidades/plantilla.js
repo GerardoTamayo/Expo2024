@@ -84,6 +84,11 @@ const loadTemplate = async () => {
 									<i class="fs-4 bi-person-circle"></i> <span class="ms-1 d-none d-sm-inline">Perfil</span>
 								</a>
 							</li>
+							<li>
+								<a href="manuales.html" class="nav-link px-0 align-middle text-dark">
+									<i class="fs-4 bi bi-file-earmark-pdf"></i> <span class="ms-1 d-none d-sm-inline">Manuales</span>
+								</a>
+							</li>
 						</ul>
 						<hr>
 						<div>
