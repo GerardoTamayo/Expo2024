@@ -154,6 +154,10 @@
   --bs-form-valid-border-color: #198754;
   --bs-form-invalid-color: #dc3545;
   --bs-form-invalid-border-color: #dc3545;
+  --bs-brown-light-color: rgb(210, 180, 140); /* Marrón claro */
+  --bs-brown-medium-color: rgb(139, 69, 19);  /* Marrón medio */
+  --bs-brown-dark-color: rgb(101, 67, 33);    /* Marrón oscuro */
+  --bs-brown-cream-color: rgb(245, 222, 179); /* Color crema */
 }
 
 [data-bs-theme=dark] {
@@ -222,6 +226,22 @@
   :root {
     scroll-behavior: smooth;
   }
+}
+
+.bg-brown-light-color {
+  background-color: var(--bs-brown-light-color) !important;
+}
+
+.bg-brown-medium-color {
+  background-color: var(--bs-brown-medium-color) !important;
+}
+
+.bg-brown-dark-color {
+  background-color: var(--bs-brown-dark-color) !important;
+}
+
+.bg-brown-cream-color {
+  background-color: var(--bs-brown-cream-color) !important;
 }
 
 body {

@@ -78,6 +78,21 @@ $yellow-color: (
   "yellow-color": rgb(249, 242, 76)
 );
 
+$brown-light-color: (
+  "brown-light-color": rgb(205, 175, 149) 
+);
+
+$brown-medium-color: (
+  "brown-medium-color": rgb(139, 69, 19) 
+);
+
+$brown-dark-color: (
+  "brown-dark-color": rgb(92, 64, 51) 
+);
+
+$brown-cream-color: (
+  "brown-cream-color": rgb(210, 180, 140) 
+);
 
 
 // Agregar variables al tema de colores de boostrap, mergearlas
@@ -99,6 +114,12 @@ $theme-colors: map-merge($theme-colors, $blue-color);
 $theme-colors: map-merge($theme-colors, $green-color);
 $theme-colors: map-merge($theme-colors, $yellow-color);
 $theme-colors: map-merge($theme-colors, $beige-color);
+
+// Agregar colores cafés al tema
+$theme-colors: map-merge($theme-colors, $brown-light-color);
+$theme-colors: map-merge($theme-colors, $brown-medium-color);
+$theme-colors: map-merge($theme-colors, $brown-dark-color);
+$theme-colors: map-merge($theme-colors, $brown-cream-color);
 
 // Cambiar el color del estilo de la tabla
 $table-striped-bg: rgb(242, 247, 255);

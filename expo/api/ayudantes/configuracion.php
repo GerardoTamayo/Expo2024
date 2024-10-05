@@ -6,6 +6,6 @@ date_default_timezone_set('America/El_Salvador');
 // Constantes para establecer las credenciales de conexión con el servidor de bases de datos.
 define('SERVER', 'localhost');
 define('DATABASE', 'quickstock');
-define('USERNAME', 'root');  //distribuidora_tmg root
-define('PASSWORD', '12345678'); //expo_2024_tmg 12345678
+define('USERNAME', 'distribuidora_tmg');  //distribuidora_tmg root
+define('PASSWORD', 'expo_2024_tmg'); //expo_2024_tmg 12345678
 ?>
