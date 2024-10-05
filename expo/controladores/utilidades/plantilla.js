@@ -92,7 +92,7 @@ const loadTemplate = async () => {
 						</ul>
 						<hr>
 						<div>
-							<button type="button" class="btn bg-brown-light-color" onclick="logOut()">Cerrar sesión <i
+							<button type="button" class="btn bg-brown-cream-color" onclick="logOut()">Cerrar sesión <i
 									class="bi bi-box-arrow-left"></i></button>
 						</div>
 					</div>
