@@ -29,7 +29,7 @@
                     <form class="col-sm-12 col-md-6" id="searchForm">
                         <div class="row">
                             <a class="text-black text-decoration-none p-2"><span>Buscar por número
-                                    correlativo o estado de compra:</span></a>
+                                    correlativo:</span></a>
                             <div class="col-6 w-50 input-group">
                                 <div class="input-group-text"><i class="bi bi-search"></i></div>
                                 <input type="search" class="form-control" name="search" placeholder="Buscar" required>
@@ -195,7 +195,7 @@
                                             </div>
                                             <div class="col-md-6 mb-3">
                                                 <label for="precio" class="form-label">Precio</label>
-                                                <input type="number" class="form-control" id="precio" name="precio"
+                                                <input type="number" class="form-control" id="precio" name="precio" step=".01"
                                                     required>
                                             </div>
                                             <div class="col-md-6 mb-3">
@@ -203,11 +203,6 @@
                                                 <select id="producto" type="text" name="producto" class="form-select"
                                                     required></select>
                                             </div>
-                                            <!-- <div class="col-md-6 mb-3">
-                                                <label for="correlativo" class="form-label">Correlativo</label>
-                                                <select id="correlativo" type="text" name="correlativo"
-                                                    class="form-select"></select>
-                                            </div> -->
                                             <div class="col-4 mt-5">
                                                 <button type="submit" class="btn btn-primary">Guardar</button>
                                             </div>

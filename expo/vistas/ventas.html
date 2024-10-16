@@ -28,7 +28,7 @@
                 <div class="row py-5">
                     <form class="col-sm-12 col-md-6" id="searchForm">
                         <div class="row">
-                            <a class="text-black text-decoration-none p-2"><span>Buscar fecha o venta:</span></a>
+                            <a class="text-black text-decoration-none p-2"><span>Buscar nombre del Cliente:</span></a>
                             <div class="col-6 w-50 input-group">
                                 <div class="input-group-text"><i class="bi bi-search"></i></div>
                                 <input type="search" class="form-control" name="search" placeholder="Buscar" required>
@@ -38,7 +38,7 @@
                                     <i class="bi bi-search"></i>
                                 </button>
                                 <button type="reset" class="btn btn-secondary" onclick="fillTable()">
-                                    <i class="bi bi-x-square-fill"></i>
+                                    <i class="bi bi-arrow-clockwise"></i>
                                 </button>
                                 <button type="button" class="btn btn-outline-dark" onclick="openModalGraphic()">
                                     <i class="bi bi-bar-chart-fill"></i>
@@ -201,7 +201,7 @@
                                             </div>
                                             <div class="col-md-6 mb-3">
                                                 <label for="precio" class="form-label">Precio</label>
-                                                <input type="number" class="form-control" id="precio" name="precio"
+                                                <input type="number" class="form-control" id="precio" name="precio" step=".01"
                                                     required>
                                             </div>
                                             <div class="col-md-6 mb-3">
@@ -209,11 +209,6 @@
                                                 <select id="producto" type="text" name="producto" class="form-select"
                                                     required></select>
                                             </div>
-                                            <!-- <div class="col-md-6 mb-3">
-                                                <label for="venta" class="form-label">Venta</label>
-                                                <select id="venta" type="text" name="venta" class="form-select"
-                                                    required></select>
-                                            </div> -->
                                             <div class="col-4 mt-5">
                                                 <button type="submit" class="btn btn-primary">Guardar</button>
                                             </div>

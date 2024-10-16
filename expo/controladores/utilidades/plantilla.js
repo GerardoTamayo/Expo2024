@@ -53,12 +53,12 @@ const loadTemplate = async () => {
 									<i class="fs-4 bi-people"></i> <span class="ms-1 d-none d-sm-inline">Usuarios</span>
 								</a>
 							</li>
-							<li>
-								<a href="tipos_de_usuarios.html" class="nav-link px-0 align-middle text-dark">
-									<i class="fs-4 bi-people"></i> <span class="ms-1 d-none d-sm-inline">Tipos de
-										usuarios</span>
-								</a>
-							</li>
+							// <li>
+							// 	<a href="tipos_de_usuarios.html" class="nav-link px-0 align-middle text-dark">
+							// 		<i class="fs-4 bi-people"></i> <span class="ms-1 d-none d-sm-inline">Tipos de
+							// 			usuarios</span>
+							// 	</a>
+							// </li>
 							<li>
 								<a href="Clientes.html" class="nav-link px-0 align-middle text-dark">
 									<i class="fs-4 bi-people"></i> <span class="ms-1 d-none d-sm-inline">Clientes</span>
